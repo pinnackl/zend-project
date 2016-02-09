@@ -1,0 +1,23 @@
+<?php
+$title = 'Liste des Catégories';
+$this->headTitle($title);
+?>
+<h1><?=$this->escapeHtml($title)?></h1>
+
+<a href="<?=$this->url('category', array('action'=>'add'))?>">Ajouter une catégorie</a> |
+<a href="<?=$this->url('page', array('action'=>'index'))?>">Gérer les pages</a>
+<table class="table">
+    <tr>
+        <th>Nom</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($categories as $category):?>
+        <tr>
+            <td><?=$this->escapeHtml($category->name)?>
+            </td>
+            <td>
+                <a href="<?=$this->url('category', array('action'=>'delete', 'id' => $category->id))?>">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach?>
+</table>
