@@ -7,7 +7,7 @@ return array(
             'page' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/page[/:action][/:id]',
+                    'route'    => '/admin/page[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -22,13 +22,29 @@ return array(
             'category' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/category[/:action][/:id]',
+                    'route'    => '/admin/category[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
                         'controller' => 'cms/category',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+
+            //User Controller
+            'user' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/admin/user[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'cms/user',
                         'action'     => 'index',
                     ),
                 ),
@@ -41,6 +57,7 @@ return array(
         'invokables' => array(
             'cms/page' => 'Cms\Controller\PageController',
             'cms/category' => 'Cms\Controller\CategoryController',
+            'cms/user' => 'Cms\Controller\UserController',
         ),
     ),
 

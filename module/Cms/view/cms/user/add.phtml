@@ -1,0 +1,32 @@
+<?php
+$title = 'Ajouter un User';
+$this->headTitle($title);
+$form = $this->form;
+$form->setAttribute('action', $this->url('user', array('action' => 'add', 'id'=>$this->id)));
+?>
+
+<h1><?=$this->escapeHtml($title)?></h1>
+
+<form class="form-horizontal">
+    <?=$this->form()->openTag($form)?>
+    <?=$this->formRow($form->get('id'))?>
+    <div class="form-group">
+        <?=$this->formRow($form->get('email'))?>
+    </div>
+    <div class="form-group">
+        <?=$this->formRow($form->get('first_name'))?>
+    </div>
+    <div class="form-group">
+        <?=$this->formRow($form->get('last_name'))?>
+    </div>
+    <div class="form-group">
+        <?=$this->formRow($form->get('role'))?>
+    </div>
+    <div class="form-group">
+        <?=$this->formRow($form->get('password'))?>
+    </div>
+    <div class="form-group">
+        <?=$this->formRow($form->get('submit'))?>
+    </div>
+        <?=$this->form()->closeTag($form)?>
+</form>

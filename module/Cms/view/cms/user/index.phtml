@@ -1,0 +1,31 @@
+<?php
+$title = 'Liste des Users';
+$this->headTitle($title);
+?>
+<h1><?=$this->escapeHtml($title)?></h1>
+
+<a href="<?=$this->url('user', array('action'=>'add'))?>">Créer un utilisateur</a>
+
+<table class="table">
+    <tr>
+        <th>Email</th>
+        <th>Nom</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($users as $user):?>
+        <tr>
+            <td><a href="<?=$this->url('page', array('action'=>'view', 'id' => $user->id))?>">
+                   User <?=$this->escapeHtml($user->name)?>
+                </a>
+
+            </td>
+            <td>
+
+            </td>
+            <td>
+                <a href="<?=$this->url('user', array('action'=>'edit', 'id' => $user->id))?>">Modifier</a>
+                <a href="<?=$this->url('user', array('action'=>'delete', 'id' => $user->id))?>">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach?>
+</table>
