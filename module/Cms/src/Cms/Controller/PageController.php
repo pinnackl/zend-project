@@ -34,6 +34,12 @@ class PageController extends AbstractActionController
      */
     public function indexAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Page')->findAll();
 
         return new ViewModel(array(
@@ -43,6 +49,12 @@ class PageController extends AbstractActionController
 
     public function addAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $form = new PageForm();
         $form->get('submit')->setAttribute('label', 'Add');
 
@@ -89,6 +101,12 @@ class PageController extends AbstractActionController
 
     public function editAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
+
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         //Si l'Id est vie on redirige vers l'ajout
         if (!$id) {
@@ -140,6 +158,11 @@ class PageController extends AbstractActionController
 
     public function deleteAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         if (!$id) {
             return $this->redirect()->toRoute('page');
@@ -168,6 +191,7 @@ class PageController extends AbstractActionController
 
     public function viewAction()
     {
+
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         //Si l'Id est vie on redirige vers la liste
         if (!$id) {

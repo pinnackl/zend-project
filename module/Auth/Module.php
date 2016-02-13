@@ -2,10 +2,9 @@
 
 namespace Auth;
 
-use Zend\Mail\Protocol\Smtp;
-
-
+use Zend\Mail\Transport\Smtp;
 use Zend\Mail\Transport\SmtpOptions;
+
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 
 use Zend\Authentication\AuthenticationService;
@@ -54,8 +53,14 @@ class Module implements AutoloaderProviderInterface
                 // ToDo move it ot a separate module CsnMail
                 'mail.transport' => function (ServiceManager $serviceManager) {
                     $config = $serviceManager->get('Config');
-                   $transport = new Smtp();
-                   $transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));
+                    $transport = new Smtp();
+                    $options   = new SmtpOptions(array(
+                        'name' => 'localhost.localdomain',
+                        'host' => '127.0.0.1',
+                        'port' => 25,
+                    ));
+                    $transport->setOptions($options);
+                    //$transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));
                     return $transport;
                 },
             )

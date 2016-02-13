@@ -50,7 +50,7 @@ class RegistrationController extends AbstractActionController
                 $this->flashMessenger()->addMessage($user->getUsrEmail());
                 $entityManager->persist($user);
                 $entityManager->flush();
-                return $this->redirect()->toRoute('auth-doctrine/default', array('controller'=>'registration', 'action'=>'registration-success'));
+                return $this->redirect()->toRoute('auth/default', array('controller'=>'registration', 'action'=>'registration-success'));
             }
         }
         return new ViewModel(array('form' => $form));
@@ -81,7 +81,7 @@ class RegistrationController extends AbstractActionController
             $entityManager->flush();
         }
         catch(\Exception $e) {
-            $viewModel->setTemplate('auth-doctrine/registration/confirm-email-error.phtml');
+            $viewModel->setTemplate('auth/registration/confirm-email-error.phtml');
         }
         return $viewModel;
     }
@@ -106,7 +106,7 @@ class RegistrationController extends AbstractActionController
                 $user->setUsrPassword($passwordHash);
                 $entityManager->persist($user);
                 $entityManager->flush();
-                return $this->redirect()->toRoute('auth-doctrine/default', array('controller'=>'registration', 'action'=>'password-change-success'));
+                return $this->redirect()->toRoute('auth/default', array('controller'=>'registration', 'action'=>'password-change-success'));
             }
         }
         return new ViewModel(array('form' => $form));
@@ -257,7 +257,7 @@ class RegistrationController extends AbstractActionController
             ->setSubject('Please, confirm your registration!')
             ->setBody("Please, click the link to confirm your registration => " .
                 $this->getRequest()->getServer('HTTP_ORIGIN') .
-                $this->url()->fromRoute('auth-doctrine/default', array(
+                $this->url()->fromRoute('auth/default', array(
                     'controller' => 'registration',
                     'action' => 'confirm-email',
                     'id' => $user->getUsrRegistrationToken())));

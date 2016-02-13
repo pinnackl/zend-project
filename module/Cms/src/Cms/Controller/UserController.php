@@ -37,15 +37,28 @@ class UserController extends AbstractActionController
      */
     public function indexAction()
     {
-        $resultSet = $this->getEntityManager()->getRepository('Auth\Entity\User')->findAll();
 
-        return new ViewModel(array(
-            'users' => $resultSet,
-        ));
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if($auth->hasIdentity()) {
+            $resultSet = $this->getEntityManager()->getRepository('Auth\Entity\User')->findAll();
+
+            return new ViewModel(array(
+                'users' => $resultSet,
+            ));
+        }else {
+            return $this->redirect()->toRoute('home');
+        }
+
     }
 
     public function addAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
         $form = new UserForm();
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -65,6 +78,11 @@ class UserController extends AbstractActionController
 
     public function editAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         //Si l'Id est vie on redirige vers l'ajout
         if (!$id) {
@@ -109,6 +127,11 @@ class UserController extends AbstractActionController
 
     public function deleteAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         if (!$id) {
             return $this->redirect()->toRoute('page');
@@ -137,6 +160,11 @@ class UserController extends AbstractActionController
 
     public function viewAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         //Si l'Id est vie on redirige vers la liste
         if (!$id) {

@@ -4,11 +4,15 @@ use Zend\ModuleManager\Feature\ServiceProviderInterface,
     Zend\ModuleManager\Feature\ConfigProviderInterface,
     Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 
+
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
+use Zend\ServiceManager\ServiceManager;
 /**
  * Classe de configuration du Module CMS
  * On implemente les interfaces des fonctionnalités de module que nous allons utiliser
  */
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface
+class Module implements AutoloaderProviderInterface
 {
     public function getAutoloaderConfig()
     {
@@ -36,6 +40,15 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     {
         return array(
             'factories' => array(
+
+                'Zend\Authentication\AuthenticationService' => function($serviceManager) {
+//-				'doctrine_authenticationservice'  => function($serviceManager) {
+                    // If you are using DoctrineORMModule:
+                    return $serviceManager->get('doctrine.authenticationservice.orm_default');
+                    // If you are using DoctrineODMModule:
+                    //- return $serviceManager->get('doctrine.authenticationservice.odm_default');
+                },
+
             ),
         );
     }

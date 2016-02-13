@@ -29,6 +29,11 @@ class CategoryController extends AbstractActionController
      */
     public function indexAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
         $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findAll();
         return new ViewModel(array(
             'categories' => $resultSet,
@@ -36,6 +41,11 @@ class CategoryController extends AbstractActionController
     }
     public function addAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
         $form = new CategoryForm();
         $form->get('submit')->setAttribute('label', 'Add');
         $request = $this->getRequest();
@@ -60,6 +70,11 @@ class CategoryController extends AbstractActionController
     }
     public function deleteAction()
     {
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        if(!$auth->hasIdentity()) {
+            return $this->redirect()->toRoute('home');
+        }
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         if (!$id) {
             return $this->redirect()->toRoute('category');
