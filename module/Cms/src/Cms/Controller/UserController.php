@@ -1,8 +1,9 @@
 <?php
 namespace Cms\Controller;
 
-use Cms\Entity\User;
-use Cms\Form\UserForm;
+use Auth\Entity\User;
+use Auth\Form\UserFilter;
+use Auth\Form\UserForm;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     Zend\Form\FormInterface,
@@ -36,7 +37,7 @@ class UserController extends AbstractActionController
      */
     public function indexAction()
     {
-        $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\User')->findAll();
+        $resultSet = $this->getEntityManager()->getRepository('Auth\Entity\User')->findAll();
 
         return new ViewModel(array(
             'users' => $resultSet,
@@ -46,45 +47,20 @@ class UserController extends AbstractActionController
     public function addAction()
     {
         $form = new UserForm();
-        $form->get('submit')->setAttribute('label', 'Add');
-
-        $roles = ["nimda"=>"admin",
-            "user"=>"user"
-            ];
-        $options = [];
-        foreach($roles as $key => $cat) {
-            $options[$key] = $cat;
-        }
-        $form->setRoles($options);
-
         $request = $this->getRequest();
         if ($request->isPost()) {
-
-            $user = new User();
-
-            //Initialisation du formulaire à partir des données reçues
+            $form->setInputFilter(new UserFilter());
             $form->setData($request->getPost());
-
-            //Ajout des filtres de validation basés sur l'objet Page
-            $form->setInputFilter($user->getInputFilter());
-
-            //Contrôle les champs
             if ($form->isValid()) {
-                $user->exchangeArray($form->getData(FormInterface::VALUES_AS_ARRAY));
-
-                $role = $form->get('role')->getValue();
-                $form->bindValues();
-
-                $user->setRole($role);
-                $this->getEntityManager()->persist($user);
-                $this->getEntityManager()->flush();
-
-                //Redirection vers la liste des pages
-                return $this->redirect()->toRoute('user');
+                $data = $form->getData();
+                unset($data['submit']);
+                if (empty($data['usr_registration_date'])) $data['usr_registration_date'] = '2013-07-19 12:00:00';
+                $this->getUsersTable()->insert($data);
+                return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
             }
         }
+        return new ViewModel(array('form' => $form));
 
-        return array('form' => $form);
     }
 
     public function editAction()

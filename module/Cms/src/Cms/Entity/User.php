@@ -43,7 +43,8 @@ class User implements ArraySerializableInterface, InputFilterAwareInterface
     protected $last_name;
 
     /**
-     * @ORM\Column(type="string")
+     * @var string L'email
+     * @ORM\Column(type="string", unique=true,  length=255, name="email")
      */
     protected $email;
 
@@ -126,7 +127,9 @@ class User implements ArraySerializableInterface, InputFilterAwareInterface
      */
     public function exchangeArray(array $data) {
         $this->id = (isset($data['id'])) ? $data['id'] : null;
-        $this->name = (isset($data['name'])) ? $data['name'] : null;
+        $this->email = (isset($data['email'])) ? $data['email'] : null;
+        $this->first_name = (isset($data['first_name'])) ? $data['first_name'] : null;
+        $this->last_name = (isset($data['last_name'])) ? $data['last_name'] : null;
     }
 
     /**
@@ -144,7 +147,7 @@ class User implements ArraySerializableInterface, InputFilterAwareInterface
             //Vérifie que le nom est de type text avec une
             //longueur de moins de 100 caractère
             //Retire aussi les espaces inutiles et les balises html
-            $inputFilter -> add($factory -> createInput(array('name' => 'name', 'required' => true, 'filters' => array( array('name' => 'StripTags'), array('name' => 'StringTrim'), ), 'validators' => array( array('name' => 'StringLength', 'options' => array('encoding' => 'UTF-8', 'min' => 1, 'max' => 100, ), ), ), )));
+            $inputFilter -> add($factory -> createInput(array('name' => 'email', 'required' => true, 'filters' => array( array('name' => 'StripTags'), array('name' => 'StringTrim'), ), 'validators' => array( array('name' => 'StringLength', 'options' => array('encoding' => 'UTF-8', 'min' => 1, 'max' => 100, ), ), ), )));
 
             $this -> inputFilter = $inputFilter;
         }

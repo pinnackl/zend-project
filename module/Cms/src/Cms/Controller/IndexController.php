@@ -14,16 +14,6 @@ use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController
 {
-    public function indexAction()
-    {
-        var_dump('kikoo');
-        $message = $this->params()->fromQuery('name', 'world');
-        return ['message' => ''.$message] ;
-    }
 
-    public function helloAction()
-    {
-        $message = $this->params()->fromQuery('name', 'world');
-        return ['message' => 'hello'.$message];
-    }
+
 }

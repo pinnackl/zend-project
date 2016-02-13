@@ -8,10 +8,10 @@
 return array(
     'modules' => array(
         'Application',
-        'Guestbook',
         'DoctrineModule',
         'DoctrineORMModule',
         'Cms',
+        'Auth',
     ),
     'module_listener_options' => array(
         'module_paths' => array(

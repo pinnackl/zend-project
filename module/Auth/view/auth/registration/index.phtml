@@ -1,12 +1,4 @@
-<?php
-$title = 'Ajouter un User';
-$this->headTitle($title);
-$form = $this->form;
-$form->setAttribute('action', $this->url('user', array('action' => 'add', 'id'=>$this->id)));
-?>
-
-<h1><?=$this->escapeHtml($title)?></h1>
-    <h1>Registration</h1>
+<h1>Registration</h1>
 <?php
 $form = $this->form;
 $form->setAttribute('action', $this->url('auth/default', array('controller' => 'registration', 'action' => 'index')));
