@@ -1,22 +1,22 @@
 <?php
 namespace Cms\Controller;
 
-use Auth\Entity\User;
 use Auth\Form\UserFilter;
 use Auth\Form\UserForm;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
-    Zend\Form\FormInterface,
-    Cms\Form\PageForm,
-    Cms\Entity\Page,
     Doctrine\ORM\EntityManager,
     Doctrine\ORM\Query;
+
+
+use Zend\Db\TableGateway\TableGateway;
 
 /**
  * Controller des Pages
  */
 class UserController extends AbstractActionController
 {
+    protected $usersTable = null;
 
     /**
      * @var Doctrine\ORM\EntityManager
@@ -59,6 +59,28 @@ class UserController extends AbstractActionController
         if(!$auth->hasIdentity()) {
             return $this->redirect()->toRoute('home');
         }
+
+        $form = new UserForm();
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            $form->setInputFilter(new UserFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $data = $form->getData();
+                unset($data['submit']);
+                if (empty($data['usr_registration_date'])) $data['usr_registration_date'] = '2013-07-19 12:00:00';
+                $this->getUsersTable()->insert($data);
+                return $this->redirect()->toRoute('user', array('controller' => 'user', 'action' => 'index'));
+            }
+        }
+        return new ViewModel(array('form' => $form));
+    }
+
+    public function updateAction()
+    {
+        $id = $this->params()->fromRoute('id');
+        if (!$id) return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
         $form = new UserForm();
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -68,94 +90,26 @@ class UserController extends AbstractActionController
                 $data = $form->getData();
                 unset($data['submit']);
                 if (empty($data['usr_registration_date'])) $data['usr_registration_date'] = '2013-07-19 12:00:00';
-                $this->getUsersTable()->insert($data);
+                $this->getUsersTable()->update($data, array('usr_id' => $id));
                 return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
             }
         }
-        return new ViewModel(array('form' => $form));
+        else {
+            $form->setData($this->getUsersTable()->select(array('usr_id' => $id))->current());
+        }
 
+        return new ViewModel(array('form' => $form, 'id' => $id));
     }
 
-    public function editAction()
-    {
-        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-
-        if(!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('home');
-        }
-        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
-        //Si l'Id est vie on redirige vers l'ajout
-        if (!$id) {
-            return $this->redirect()->toRoute('page', array('action'=>'add'));
-        }
-        //Sinon on charge la page correspondant à l'Id
-        $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
-        $form = new PageForm();
-
-
-        //On charge ces données dans le formulaire initialise aussi les InputFilter
-        $form->setBindOnValidate(false);
-        $form->bind($page);
-
-        $form->get('category_id')->setValue($page->getCategory() != null ? $page->getCategory()->getId() : '');
-        $form->get('submit')->setAttribute('label', 'Edit');
-        $request = $this->getRequest();
-
-        //Vérifie le type de la requête
-        if ($request->isPost()) {
-            $form->setData($request->getPost());
-            //Contrôle les champs
-            if ($form->isValid()) {
-                $categoryId = $form->get('category_id')->getValue();
-                $form->bindValues();
-                $category = null;
-                if (!empty($categoryId)) {
-                    $category = $this->getEntityManager()->find('Cms\Entity\Category', $categoryId);
-                }
-                $page->setCategory($category);
-                $this->getEntityManager()->flush();
-
-                //Redirection vers la liste des pages
-                return $this->redirect()->toRoute('page');
-            }
-        }
-        return array(
-            'id' => $id,
-            'form' => $form,
-        );
-    }
-
+    // D - delete
     public function deleteAction()
     {
-        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-
-        if(!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('home');
-        }
-        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
-        if (!$id) {
-            return $this->redirect()->toRoute('page');
+        $id = $this->params()->fromRoute('id');
+        if ($id) {
+            $this->getUsersTable()->delete(array('usr_id' => $id));
         }
 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $del = $request->getPost('del', 'Non');
-            if ($del == 'Oui') {
-                $id = (int)$request->getPost('id');
-                $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
-                if ($page) {
-                    $this->getEntityManager()->remove($page);
-                    $this->getEntityManager()->flush();
-                }
-            }
-
-            //Redirection vers la liste des pages
-            return $this->redirect()->toRoute('page');
-        }
-        return array(
-            'id' => $id,
-            'page' => $this->getEntityManager()->find('Cms\Entity\Page', $id)
-        );
+        return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
     }
 
     public function viewAction()
@@ -188,4 +142,20 @@ class UserController extends AbstractActionController
             'page' => $page
         ));
     }
+
+
+    public function getUsersTable()
+    {
+        // I have a Table data Gateway ready to go right out of the box
+        if (!$this->usersTable) {
+            $this->usersTable = new TableGateway(
+                'users',
+                $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+//				new \Zend\Db\TableGateway\Feature\RowGatewayFeature('usr_id') // Zend\Db\RowGateway\RowGateway Object
+//				ResultSetPrototype
+            );
+        }
+        return $this->usersTable;
+    }
+
 }

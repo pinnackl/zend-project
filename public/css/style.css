@@ -34,3 +34,8 @@ body {
     width: 90%;
   }
 }
+
+
+select {
+  min-height: 200px !important;
+}

@@ -1,5 +1,5 @@
 <?php
-namespace Auth\Form;
+namespace Cms\Form;
 
 use Zend\Form\Form;
 
@@ -7,11 +7,11 @@ class UserForm extends Form
 {
     public function __construct($name = null)
     {
-        parent::__construct('registration');
+        parent::__construct('user');
         $this->setAttribute('method', 'post');
 
         $this->add(array(
-            'name' => 'usrName',
+            'name' => 'usr_name',
             'attributes' => array(
                 'type'  => 'text',
             ),
@@ -21,7 +21,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usrPassword',
+            'name' => 'usr_password',
             'attributes' => array(
                 'type'  => 'password',
             ),
@@ -31,17 +31,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usrPasswordConfirm',
-            'attributes' => array(
-                'type'  => 'password',
-            ),
-            'options' => array(
-                'label' => 'Password',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'usrEmail',
+            'name' => 'usr_email',
             'attributes' => array(
                 'type'  => 'email',
             ),
@@ -89,7 +79,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'captcha',
+            'name' => 'usr_question',
             'attributes' => array(
                 'type'  => 'text',
             ),

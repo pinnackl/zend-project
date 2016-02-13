@@ -76,7 +76,7 @@ return array(
                 'identity_class' => 'Auth\Entity\User', //'Application\Entity\User',
                 'identity_property' => 'usrName', // 'username', // 'email',
                 'credential_property' => 'usrPassword', // 'password',
-                'credential_callable' => function(Entity\User $user, $passwordGiven) { // not only User
+                'credential_callable' => function(\Auth\Entity\User $user, $passwordGiven) { // not only User
                     // return my_awesome_check_test($user->getPassword(), $passwordGiven);
                     // echo '<h1>callback user->getPassword = ' .$user->getPassword() . ' passwordGiven = ' . $passwordGiven . '</h1>';
                     //- if ($user->getPassword() == md5($passwordGiven)) { // original

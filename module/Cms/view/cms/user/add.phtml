@@ -1,22 +1,12 @@
 <?php
-$title = 'Ajouter un User';
-$this->headTitle($title);
-$form = $this->form;
-$form->setAttribute('action', $this->url('user', array('action' => 'add', 'id'=>$this->id)));
-?>
-
-<h1><?=$this->escapeHtml($title)?></h1>
-    <h1>Registration</h1>
-<?php
-$form = $this->form;
-$form->setAttribute('action', $this->url('auth/default', array('controller' => 'registration', 'action' => 'index')));
+echo '<h1>Créer un utilisateur</h1>';
+// $form = $this->form;
 $form->prepare();
+
+$form->setAttribute('action', $this->url('user', array('controller' => 'user', 'action' => 'add'))); //'contact/process'));
+// Set the method attribute for the form
+$form->setAttribute('method', 'post');
 echo $this->form()->openTag($form);
-echo $this->formRow($form->get('usrName'));
-echo $this->formRow($form->get('usrEmail'));
-echo $this->formRow($form->get('usrPassword'));
-echo $this->formRow($form->get('usrPasswordConfirm'));
-echo $this->formRow($form->get('captcha'));
-echo $this->formSubmit($form->get('submit'));
+echo $this->formCollection($form);
 echo $this->form()->closeTag();
-?>
+

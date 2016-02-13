@@ -87,7 +87,7 @@ return array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
                 'paths' => array(
-                    // __DIR__ . '/../module/AuthDoctrine/src/AuthDoctrine/Entity' // 'path/to/my/entities',
+//                    __DIR__ . '/../module/AuthDoctrine/src/Auth/Entity' // 'path/to/my/entities',
                     __DIR__ . '/../src/' . __NAMESPACE__ . '/Entity',
                     // 'H:\PortableApps\PortableGit\projects\btk\module\Auth\src\Auth\Entity' // Stoyan added to use doctrine in Auth module
 //-					__DIR__ . '/../../Auth/src/Auth/Entity', // Stoyan added to use doctrine in Auth module

@@ -40,15 +40,6 @@ class Module implements AutoloaderProviderInterface
     {
         return array(
             'factories' => array(
-
-                'Zend\Authentication\AuthenticationService' => function($serviceManager) {
-//-				'doctrine_authenticationservice'  => function($serviceManager) {
-                    // If you are using DoctrineORMModule:
-                    return $serviceManager->get('doctrine.authenticationservice.orm_default');
-                    // If you are using DoctrineODMModule:
-                    //- return $serviceManager->get('doctrine.authenticationservice.odm_default');
-                },
-
             ),
         );
     }
