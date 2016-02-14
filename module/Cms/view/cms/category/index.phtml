@@ -9,14 +9,18 @@ $this->headTitle($title);
 <table class="striped">
     <tr>
         <th>Nom</th>
-        <th>&nbsp;</th>
+        <th>Nb Articles</th>
+        <th></th>
     </tr>
     <?php foreach($categories as $category):?>
         <tr>
             <td><?=$this->escapeHtml($category->getCtgrName())?>
             </td>
             <td>
-                <a href="<?=$this->url('category', array('action'=>'delete', 'id' => $category->getCtgrId()))?>">Supprimer</a>
+                <?= $this->escapeHtml(count($category->getArticles())) ?>
+            </td>
+            <td>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action' => 'delete','id' => $category->getCtgrId() )) ?>">Supprimer</a>
             </td>
         </tr>
     <?php endforeach?>

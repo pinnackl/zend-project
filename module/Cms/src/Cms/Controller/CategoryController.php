@@ -1,18 +1,14 @@
 <?php
 namespace Cms\Controller;
+
+
 use Cms\Form\CategoryFilter;
 use Cms\Form\CategoryForm;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
-    Zend\Form\FormInterface,
-    Cms\Entity\Category,
     Doctrine\ORM\EntityManager,
     Doctrine\ORM\Query;
-
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
-use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
 /**
  * Controller des Categories
  */
@@ -63,8 +59,9 @@ class CategoryController extends AbstractActionController
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $data = $form->getData();
+                var_dump($data);
+                die();
                 unset($data['submit']);
-
                 $this->getCategoriesTable()->insert($data);
                 return $this->redirect()->toRoute('category', array('controller' => 'category', 'action' => 'index'));
             }
@@ -73,33 +70,22 @@ class CategoryController extends AbstractActionController
     }
     public function deleteAction()
     {
-        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        $id = $this->params()->fromRoute('id');
+        if (!$id) return $this->redirect()->toRoute('cms/default', array('controller' => 'category', 'action' => 'index'));
 
-        if(!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('home');
+        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+
+        try {
+            $repository = $entityManager->getRepository('Cms\Entity\Category');
+            $category = $repository->find($id);
+            $entityManager->remove($category);
+            $entityManager->flush();
         }
-        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
-        if (!$id) {
-            return $this->redirect()->toRoute('category');
+        catch (\Exception $ex) {
+            echo $ex->getMessage(); // this never will be seen fi you don't comment the redirect
+            return $this->redirect()->toRoute('cms/default', array('controller' => 'category', 'action' => 'index'));
         }
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            $del = $request->getPost('del', 'Non');
-            if ($del == 'Oui') {
-                $id = (int)$request->getPost('id');
-                $category = $this->getEntityManager()->find('Cms\Entity\Category', $id);
-                if ($category) {
-                    $this->getEntityManager()->remove($category);
-                    $this->getEntityManager()->flush();
-                }
-            }
-            //Redirection vers la liste des Categories
-            return $this->redirect()->toRoute('category');
-        }
-        return array(
-            'id' => $id,
-            'category' => $this->getEntityManager()->find('Cms\Entity\Category', $id)
-        );
+        return $this->redirect()->toRoute('cms/default', array('controller' => 'category', 'action' => 'index'));
     }
 
     public function getCategoriesTable()
@@ -109,8 +95,6 @@ class CategoryController extends AbstractActionController
             $this->categoriesTable = new TableGateway(
                 'categories',
                 $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
-//				new \Zend\Db\TableGateway\Feature\RowGatewayFeature('user_id') // Zend\Db\RowGateway\RowGateway Object
-//				ResultSetPrototype
             );
         }
         return $this->categoriesTable;

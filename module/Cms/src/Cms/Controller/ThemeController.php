@@ -1,19 +1,11 @@
 <?php
 namespace Cms\Controller;
 
-use Cms\Form\PageFilter;
-use Cms\Form\ThemeFilter;
-use Cms\Form\ThemeForm;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
-    Zend\Form\FormInterface,
-    Cms\Form\PageForm,
-    Cms\Entity\Page,
-    Doctrine\ORM\EntityManager,
     Doctrine\ORM\Query;
 
-use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
 
 /**
  * Controller des Pages

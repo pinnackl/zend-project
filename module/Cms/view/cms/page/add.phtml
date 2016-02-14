@@ -2,10 +2,8 @@
 echo '<h1>Add Page</h1>';
 $form = $this->form;
 $form->prepare();
-// Assuming the "contact/process" route exists...
-$form->setAttribute('action', $this->url('cms/default', array('controller' => 'page', 'action' => 'add'), true)); //'contact/process'));
-// or
-// $form->setAttribute('action', $this->url('grace-drops/default', array('controller' => 'translation', 'action' => 'add', 'id' => $this->id))); //'contact/process'));
+
+$form->setAttribute('action', $this->url('cms/default', array('controller' => 'page', 'action' => 'add'), true));
 
 // Set the method attribute for the form
 $form->setAttribute('method', 'post');

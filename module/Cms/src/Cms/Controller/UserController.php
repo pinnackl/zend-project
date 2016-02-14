@@ -37,15 +37,11 @@ class UserController extends AbstractActionController
      */
     public function indexAction()
     {
-        //var_dump('coucou');
+        $resultSet = $this->getEntityManager()->getRepository('Auth\Entity\User')->findAll();
 
-            $resultSet = $this->getEntityManager()->getRepository('Auth\Entity\User')->findAll();
-
-            return new ViewModel(array(
-                'users' => $resultSet,
-            ));
-
-
+        return new ViewModel(array(
+            'users' => $resultSet,
+        ));
     }
 
     public function addAction()
@@ -122,7 +118,7 @@ class UserController extends AbstractActionController
         }
         try{
             //Sinon on charge la page correspondant à l'Id
-            $page = $this->getEntityManager()->find('Cms-old\Entity\Page', $id);
+            $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
         }
         catch(\Exception $e){
             //Si la page n'existe pas en base on génère une erreur 404

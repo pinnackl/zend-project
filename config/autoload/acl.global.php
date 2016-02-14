@@ -109,12 +109,11 @@ return array(
                 ),
 
                 'Cms\Controller\Category'=> array(
-                    'all'   => 'guest'
-//                    'view'	=> 'guest',
-//                    'index' => 'admin',
-//                    'add'	=> 'admin',
-//                    'edit'  => 'admin',
-//                    'del
+                    'view'	=> 'guest',
+                    'index' => 'admin',
+                    'add'	=> 'admin',
+                    'edit'  => 'admin',
+                    'delete'=> 'admin',
                 ),
                 'Cms\Controller\Page'=> array(
     //       'all'   => 'guest'
