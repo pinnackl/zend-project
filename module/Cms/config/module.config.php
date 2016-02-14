@@ -19,7 +19,7 @@ return array(
 			'cms' => array(
 				'type'    => 'Literal',
 				'options' => array(
-					'route'    => '/cms',
+					'route'    => '/admin',
 					'defaults' => array(
 						'__NAMESPACE__' => 'Cms\Controller',
 						'controller'    => 'Index',

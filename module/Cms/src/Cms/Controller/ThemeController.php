@@ -4,6 +4,7 @@ namespace Cms\Controller;
 use Cms\Form\PageFilter;
 use Cms\Form\ThemeFilter;
 use Cms\Form\ThemeForm;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     Zend\Form\FormInterface,
@@ -19,6 +20,7 @@ use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBui
  */
 class ThemeController extends AbstractActionController
 {
+    protected $usersTable = null;
 
     /**
      * @var Doctrine\ORM\EntityManager
@@ -46,26 +48,42 @@ class ThemeController extends AbstractActionController
         ));
     }
 
-    public function addAction()
+    public function activeAction()
     {
-        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $id = $this->params()->fromRoute('id');
 
-        //Vérifie le type de la requête
-        $form = new ThemeForm();
-        $request = $this->getRequest();
+        $user_id = $this->identity()->getUsrId();
 
-        if ($request->isPost()) {
-            $form->setInputFilter(new ThemeFilter());
-            $form->setData($request->getPost());
-            if ($form->isValid()) {
-                $data = $form->getData();
-                unset($data['submit']);
+        $data = ['user_theme_id' => $id];
 
-                $this->getCategoriesTable()->insert($data);
-                return $this->redirect()->toRoute('theme', array('controller' => 'theme', 'action' => 'index'));
-            }
+        $this->getUsersTable()->update($data, array('user_id' => $user_id));
+
+        return $this->redirect()->toRoute('cms/default', array('controller' => 'theme', 'action' => 'index'));
+    }
+
+    public function desactiveAction()
+    {
+        $id = $this->params()->fromRoute('id');
+
+        $user_id = $this->identity()->getUsrId();
+
+        $data = ['user_theme_id' => $id];
+
+        $this->getUsersTable()->update($data, array('user_id' => $user_id));
+
+        return $this->redirect()->toRoute('cms/default', array('controller' => 'theme', 'action' => 'index'));
+    }
+
+
+    public function getUsersTable()
+    {
+        if (!$this->usersTable) {
+            $this->usersTable = new TableGateway(
+                'users',
+                $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+            );
         }
-        return array('form' => $form);
+        return $this->usersTable;
     }
 
 }

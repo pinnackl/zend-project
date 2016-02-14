@@ -3,7 +3,6 @@ $title = 'Liste des Themes';
 $this->headTitle($title);
 ?>
 <h1><?=$this->escapeHtml($title)?></h1>
-<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'theme', 'action'=>'add'), false);?>">Ajouter un theme </a>
 <table class="striped">
     <tr>
         <th>Name</th>
@@ -12,17 +11,17 @@ $this->headTitle($title);
     <?php foreach($themes as $theme):?>
         <tr>
             <td><?php echo $theme->getThemeName()?></td>
-
             <td>
-                <div class="switch">
-                    <label>
-                        Off
-                        <input type="checkbox">
-                        <span class="lever"></span>
-                        On
-                    </label>
-                </div>
+
+                <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+                    array('controller' => 'theme', 'action'=>'active', 'id' => $theme->getThemeId()));?>">Active</a>
+
+                <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+                    array('controller' => 'theme', 'action'=>'desactive', 'id' => $theme->getThemeId()));?>">Desactive</a>
+
             </td>
         </tr>
-    <?php endforeach?>
+    <?php endforeach ?>
 </table>
+
+

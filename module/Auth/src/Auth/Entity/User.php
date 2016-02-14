@@ -65,6 +65,19 @@ class User
     /**
      * @var integer
      *
+     * @ORM\Column(name="user_theme_id", type="integer", nullable=true)
+     * @ORM\OneToOne(targetEntity="user_themes")
+     * @ORM\JoinColumn(name="theme_id", referencedColumnName="theme_id")
+     * @Annotation\Type("Zend\Form\Element\Select")
+     * @Annotation\Options({
+     * "label":"User Role:",
+     * "value_options":{ "0":"Theme 1", "1":"Theme 2 ", "2": "theme 3"}})
+     */
+    private $usrthId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="lang_id", type="integer", nullable=true)
      * @Annotation\Attributes({"type":"text"})
      * @Annotation\Options({"label":"Language Id:"})
@@ -252,6 +265,29 @@ class User
     public function getUsrlId()
     {
         return $this->usrlId;
+    }
+
+    /**
+     * Set usrlId
+     *
+     * @param integer $usrthId
+     * @return Users
+     */
+    public function setUsrthId($usrthId)
+    {
+        $this->usrlId = $usrthId;
+
+        return $this;
+    }
+
+    /**
+     * Get usrthId
+     *
+     * @return integer
+     */
+    public function getUsrthId()
+    {
+        return $this->usrthId;
     }
 
     /**
