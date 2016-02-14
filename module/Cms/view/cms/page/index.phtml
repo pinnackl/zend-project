@@ -3,7 +3,7 @@ $title = 'Liste des Pages';
 $this->headTitle($title);
 ?>
 <h1><?=$this->escapeHtml($title)?></h1>
-<a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'add'), false);?>">Ajouter une page | </a> |
+<a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'add'), false);?>">Ajouter une page </a> |
 <a href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'), false);?>">Gérer les catégories</a>
 <table class="striped">
     <tr>

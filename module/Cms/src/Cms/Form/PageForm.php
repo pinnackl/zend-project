@@ -32,6 +32,7 @@ class PageForm extends Form {
 
         //Page Category
         $idField = new Element\Select('category_id');
+        $idField->setAttribute('class', 'browser-default');
         $idField->setLabel('Category');
         $this->add($idField);
 

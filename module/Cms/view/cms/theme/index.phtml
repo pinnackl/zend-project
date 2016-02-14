@@ -1,0 +1,23 @@
+<?php
+$title = 'Liste des Themes';
+$this->headTitle($title);
+?>
+<h1><?=$this->escapeHtml($title)?></h1>
+<a href="<?php echo $this->url('cms/default', array('controller' => 'theme', 'action'=>'add'), false);?>">Ajouter un theme </a>
+<table class="striped">
+    <tr>
+        <th>Name</th>
+        <th>Active</th>
+        <th></th>
+    </tr>
+    <?php foreach($themes as $theme):?>
+        <tr>
+            <td><?php echo $theme->getThemeName()?></td>
+            <td></td>
+            <td>
+                <a href="<?=$this->url('theme', array('action'=>'edit', 'id' => $theme->getThemeId()))?>">Modifier</a>
+                <a href="<?=$this->url('theme', array('action'=>'delete', 'id' => $theme->getThemeId()))?>">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach?>
+</table>

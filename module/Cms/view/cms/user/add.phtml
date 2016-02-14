@@ -1,9 +1,9 @@
 <?php
 echo '<h1>Créer un utilisateur</h1>';
-// $form = $this->form;
+
 $form->prepare();
 
-$form->setAttribute('action', $this->url('user', array('controller' => 'user', 'action' => 'add'))); //'contact/process'));
+$form->setAttribute('action', $this->url('user', array('controller' => 'user', 'action' => 'add')));
 // Set the method attribute for the form
 $form->setAttribute('method', 'post');
 echo $this->form()->openTag($form);

@@ -11,6 +11,7 @@ return array(
 			'Cms\Controller\User' => 'Cms\Controller\UserController',
 			'Cms\Controller\Page' => 'Cms\Controller\PageController',
 			'Cms\Controller\Category' => 'Cms\Controller\CategoryController',
+			'Cms\Controller\Theme' => 'Cms\Controller\ThemeController',
         ),
     ),	
     'router' => array(
@@ -99,6 +100,34 @@ return array(
 			),
 
 			'page' => array(
+				'type'    => 'Literal',
+				'options' => array(
+					'route'    => '/page',
+					'defaults' => array(
+						'__NAMESPACE__' => 'Cms\Controller',
+						'controller'    => 'Index',
+						'action'        => 'index',
+					),
+				),
+				'may_terminate' => true,
+				'child_routes' => array(
+					'default' => array(
+						'type'    => 'Segment',
+						'options' => array(
+							// 'route'    => '/[:controller[/:action[/:id]]]',
+							'route'    => '/[:controller[/:action[/:id[/:id2]]]]',
+							'constraints' => array(
+								'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+								'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+							),
+							'defaults' => array(
+							),
+						),
+					),
+				),
+			),
+
+			'theme' => array(
 				'type'    => 'Literal',
 				'options' => array(
 					'route'    => '/page',

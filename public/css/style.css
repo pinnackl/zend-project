@@ -37,6 +37,6 @@ body {
 }
 
 
-select {
-  min-height: 200px !important;
+textarea {
+  min-height: 200px;
 }

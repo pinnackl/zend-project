@@ -50,6 +50,7 @@ class UserForm extends Form
                     '2' => 'Member',
                     '3' => 'Admin',
                 ),
+                'class' => 'browser-default'
             ),
         ));
 
@@ -62,6 +63,9 @@ class UserForm extends Form
                     '1' => 'English',
                     '2' => 'French',
                     '3' => 'German',
+                ),
+                'attribute' => array(
+                    'class' => 'browser-default'
                 ),
             ),
         ));

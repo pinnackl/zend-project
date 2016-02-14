@@ -7,11 +7,11 @@ class UserForm extends Form
 {
     public function __construct($name = null)
     {
-        parent::__construct('registration');
+        parent::__construct('user');
         $this->setAttribute('method', 'post');
 
         $this->add(array(
-            'name' => 'usrName',
+            'name' => 'user_name',
             'attributes' => array(
                 'type'  => 'text',
             ),
@@ -30,15 +30,7 @@ class UserForm extends Form
             ),
         ));
 
-        $this->add(array(
-            'name' => 'usrPasswordConfirm',
-            'attributes' => array(
-                'type'  => 'password',
-            ),
-            'options' => array(
-                'label' => 'Password',
-            ),
-        ));
+
 
         $this->add(array(
             'name' => 'usrEmail',
@@ -60,6 +52,9 @@ class UserForm extends Form
                     '2' => 'Member',
                     '3' => 'Admin',
                 ),
+                'attribute' => array(
+                    'class' => 'browser-default'
+                ),
             ),
         ));
 
@@ -73,6 +68,7 @@ class UserForm extends Form
                     '2' => 'French',
                     '3' => 'German',
                 ),
+                'class' => 'browser-default',
             ),
         ));
 
@@ -85,6 +81,7 @@ class UserForm extends Form
                     '0' => 'No',
                     '1' => 'Yes',
                 ),
+                'class' => 'browser-default'
             ),
         ));
 
@@ -119,16 +116,6 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'user_password_salt',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'Password Salt',
-            ),
-        ));
-
-        $this->add(array(
             'name' => 'user_registration_date',
             'attributes' => array(
                 'type'  => 'Zend\Form\Element\DateTime', // 'text'
@@ -157,6 +144,7 @@ class UserForm extends Form
                     '0' => 'No',
                     '1' => 'Yes',
                 ),
+                'class' => 'browser-default',
             ),
         ));
 
@@ -164,7 +152,7 @@ class UserForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'Go',
+                'value' => 'Save',
                 'id' => 'submitbutton',
             ),
         ));

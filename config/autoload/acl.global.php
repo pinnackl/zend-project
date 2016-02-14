@@ -124,6 +124,14 @@ return array(
                     'edit'  => 'admin',
                     'delete'=> 'admin',
                 ),
+                'Cms\Controller\Theme'=> array(
+                    //       'all'   => 'guest'
+                    'view'	=> 'guest',
+                    'index' => 'admin',
+                    'add'	=> 'admin',
+                    'edit'  => 'admin',
+                    'delete'=> 'admin',
+                ),
                 'Auth\Controller\Admin' => array(
                     'all'	=> 'admin',
                 ),
