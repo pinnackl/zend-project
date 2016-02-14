@@ -41,119 +41,60 @@ return array(
 							),
 						),
 					),
-				),
-			),
-			'user' => array(
-				'type'    => 'Literal',
-				'options' => array(
-					'route'    => '/user',
-					'defaults' => array(
-						'__NAMESPACE__' => 'Cms\Controller',
-						'controller'    => 'Index',
-						'action'        => 'index',
-					),
-				),
-				'may_terminate' => true,
-				'child_routes' => array(
-					'default' => array(
-						'type'    => 'Segment',
+					'user' => array(
+						'type'    => 'Literal',
 						'options' => array(
-							// 'route'    => '/[:controller[/:action[/:id]]]',
-							'route'    => '/[:controller[/:action[/:id[/:id2]]]]',
-							'constraints' => array(
-								'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-								'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-							),
+							'route'    => '/user',
 							'defaults' => array(
+								'__NAMESPACE__' => 'Cms\Controller',
+								'controller'    => 'Index',
+								'action'        => 'index',
 							),
 						),
+						'may_terminate' => true,
+					),
+
+					'category' => array(
+						'type'    => 'Literal',
+						'options' => array(
+							'route'    => '/category',
+							'defaults' => array(
+								'__NAMESPACE__' => 'Cms\Controller',
+								'controller'    => 'Index',
+								'action'        => 'index',
+							),
+						),
+						'may_terminate' => true,
+					),
+
+					'page' => array(
+						'type'    => 'Literal',
+						'options' => array(
+							'route'    => '/page',
+							'defaults' => array(
+								'__NAMESPACE__' => 'Cms\Controller',
+								'controller'    => 'Index',
+								'action'        => 'index',
+							),
+						),
+						'may_terminate' => true,
+					),
+
+					'theme' => array(
+						'type'    => 'Literal',
+						'options' => array(
+							'route'    => '/page',
+							'defaults' => array(
+								'__NAMESPACE__' => 'Cms\Controller',
+								'controller'    => 'Index',
+								'action'        => 'index',
+							),
+						),
+						'may_terminate' => true,
 					),
 				),
 			),
 
-			'category' => array(
-				'type'    => 'Literal',
-				'options' => array(
-					'route'    => '/category',
-					'defaults' => array(
-						'__NAMESPACE__' => 'Cms\Controller',
-						'controller'    => 'Index',
-						'action'        => 'index',
-					),
-				),
-				'may_terminate' => true,
-				'child_routes' => array(
-					'default' => array(
-						'type'    => 'Segment',
-						'options' => array(
-							// 'route'    => '/[:controller[/:action[/:id]]]',
-							'route'    => '/[:controller[/:action[/:id[/:id2]]]]',
-							'constraints' => array(
-								'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-								'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-							),
-							'defaults' => array(
-							),
-						),
-					),
-				),
-			),
-
-			'page' => array(
-				'type'    => 'Literal',
-				'options' => array(
-					'route'    => '/page',
-					'defaults' => array(
-						'__NAMESPACE__' => 'Cms\Controller',
-						'controller'    => 'Index',
-						'action'        => 'index',
-					),
-				),
-				'may_terminate' => true,
-				'child_routes' => array(
-					'default' => array(
-						'type'    => 'Segment',
-						'options' => array(
-							// 'route'    => '/[:controller[/:action[/:id]]]',
-							'route'    => '/[:controller[/:action[/:id[/:id2]]]]',
-							'constraints' => array(
-								'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-								'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-							),
-							'defaults' => array(
-							),
-						),
-					),
-				),
-			),
-
-			'theme' => array(
-				'type'    => 'Literal',
-				'options' => array(
-					'route'    => '/page',
-					'defaults' => array(
-						'__NAMESPACE__' => 'Cms\Controller',
-						'controller'    => 'Index',
-						'action'        => 'index',
-					),
-				),
-				'may_terminate' => true,
-				'child_routes' => array(
-					'default' => array(
-						'type'    => 'Segment',
-						'options' => array(
-							// 'route'    => '/[:controller[/:action[/:id]]]',
-							'route'    => '/[:controller[/:action[/:id[/:id2]]]]',
-							'constraints' => array(
-								'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-								'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-							),
-							'defaults' => array(
-							),
-						),
-					),
-				),
-			),
 		),
 	),
 

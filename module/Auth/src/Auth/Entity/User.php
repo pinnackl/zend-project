@@ -506,4 +506,6 @@ class User
     {
         return $this->usrId;
     }
+
+
 }
