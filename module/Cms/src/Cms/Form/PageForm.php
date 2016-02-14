@@ -38,7 +38,7 @@ class PageForm extends Form {
 
         $submitField = new Element\Submit('submit');
         $submitField->setValue('Envoyer');
-        $submitField->setAttributes(array('id' => 'submitbutton'));
+        $submitField->setAttributes(array('id' => 'submitbutton', 'class' => 'btn waves-effect waves-light'));
         $this->add($submitField);
     }
 

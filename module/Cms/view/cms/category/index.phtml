@@ -4,8 +4,8 @@ $this->headTitle($title);
 ?>
 <h1><?=$this->escapeHtml($title)?></h1>
 
-<a href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'add'));?>">Ajouter une catégorie</a> |
-<a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Gérer les pages</a>
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'add'));?>">Ajouter une catégorie</a>
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Gérer les pages</a>
 <table class="striped">
     <tr>
         <th>Nom</th>

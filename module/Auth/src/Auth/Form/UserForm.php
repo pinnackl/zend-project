@@ -52,10 +52,11 @@ class UserForm extends Form
                     '2' => 'Member',
                     '3' => 'Admin',
                 ),
-                'attribute' => array(
-                    'class' => 'browser-default'
-                ),
             ),
+            'attributes' => array(
+                'class' => 'browser-default',
+            ),
+
         ));
 
         $this->add(array(
@@ -68,8 +69,11 @@ class UserForm extends Form
                     '2' => 'French',
                     '3' => 'German',
                 ),
+            ),
+            'attributes' => array(
                 'class' => 'browser-default',
             ),
+
         ));
 
         $this->add(array(
@@ -81,7 +85,9 @@ class UserForm extends Form
                     '0' => 'No',
                     '1' => 'Yes',
                 ),
-                'class' => 'browser-default'
+            ),
+            'attributes' => array(
+                'class' => 'browser-default',
             ),
         ));
 
@@ -118,7 +124,8 @@ class UserForm extends Form
         $this->add(array(
             'name' => 'user_registration_date',
             'attributes' => array(
-                'type'  => 'Zend\Form\Element\DateTime', // 'text'
+                'type'  => 'Zend\Form\Element\Date',
+                 'class' => 'datepicker'// 'text'
             ),
             'options' => array(
                 'label' => 'Registration Date',
@@ -144,7 +151,9 @@ class UserForm extends Form
                     '0' => 'No',
                     '1' => 'Yes',
                 ),
-                'class' => 'browser-default',
+            ),
+            'attributes' => array(
+                'class' => 'browser-default'
             ),
         ));
 
@@ -154,6 +163,7 @@ class UserForm extends Form
                 'type'  => 'submit',
                 'value' => 'Save',
                 'id' => 'submitbutton',
+                'class' => 'btn waves-effect waves-light'
             ),
         ));
     }

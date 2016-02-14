@@ -15,7 +15,7 @@ $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <p>
-    <a href="<?php echo $this->url('cms/default', array('controller' => 'index', 'action'=>'add'));?>">Add new article</a>
+    <a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'index', 'action'=>'add'));?>">Add new article</a>
 </p>
 
 <table class="table">
