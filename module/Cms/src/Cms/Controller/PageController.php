@@ -1,6 +1,7 @@
 <?php
 namespace Cms\Controller;
 
+use Cms\Form\PageFilter;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     Zend\Form\FormInterface,
@@ -8,6 +9,8 @@ use Zend\Mvc\Controller\AbstractActionController,
     Cms\Entity\Page,
     Doctrine\ORM\EntityManager,
     Doctrine\ORM\Query;
+
+use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
 
 /**
  * Controller des Pages
@@ -43,14 +46,11 @@ class PageController extends AbstractActionController
 
     public function addAction()
     {
-        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
 
-        if(!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('home');
-        }
-
+        //Vérifie le type de la requête
         $form = new PageForm();
-        $form->get('submit')->setAttribute('label', 'Add');
+        $request = $this->getRequest();
 
         //Initialise la liste des categories
         $categories = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findAll();
@@ -60,34 +60,15 @@ class PageController extends AbstractActionController
         }
         $form->setCategories($options);
 
-        $request = $this->getRequest();
-        //Vérifie le type de la requête
         if ($request->isPost()) {
-
-            $page = new Page();
-
-            //Initialisation du formulaire à partir des données reçues
+            $form->setInputFilter(new PageFilter());
             $form->setData($request->getPost());
-
-            //Ajout des filtres de validation basés sur l'objet Page
-            $form->setInputFilter($page->getInputFilter());
-
-            //Contrôle les champs
             if ($form->isValid()) {
-                $page->exchangeArray($form->getData(FormInterface::VALUES_AS_ARRAY));
+                $data = $form->getData();
+                unset($data['submit']);
 
-                $categoryId = $form->get('category_id')->getValue();
-                $form->bindValues();
-                $category = null;
-                if (!empty($categoryId)) {
-                    $category = $this->getEntityManager()->find('Cms\Entity\Category', $categoryId);
-                }
-                $page->setCategory($category);
-                $this->getEntityManager()->persist($page);
-                $this->getEntityManager()->flush();
-
-                //Redirection vers la liste des pages
-                return $this->redirect()->toRoute('page');
+                $this->getCategoriesTable()->insert($data);
+                return $this->redirect()->toRoute('page', array('controller' => 'page', 'action' => 'index'));
             }
         }
         return array('form' => $form);

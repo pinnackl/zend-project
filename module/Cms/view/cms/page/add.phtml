@@ -1,14 +1,16 @@
 <?php
-$title = 'Ajouter une Page';
-$this->headTitle($title);
+echo '<h1>Add Page</h1>';
 $form = $this->form;
-$form->setAttribute('action', $this->url('page', array('action' => 'add', 'id'=>$this->id)));
-?>
-    <h1><?=$this->escapeHtml($title)?></h1>
-<?=$this->form()->openTag($form)?>
-<?=$this->formRow($form->get('id'))?>
-<?=$this->formRow($form->get('title'))?>
-<?=$this->formRow($form->get('content'))?>
-<?=$this->formRow($form->get('category_id'))?>
-<?=$this->formRow($form->get('submit'))?>
-<?=$this->form()->closeTag($form)?>
+$form->prepare();
+// Assuming the "contact/process" route exists...
+$form->setAttribute('action', $this->url('cms/default', array('controller' => 'page', 'action' => 'add'), true)); //'contact/process'));
+// or
+// $form->setAttribute('action', $this->url('grace-drops/default', array('controller' => 'translation', 'action' => 'add', 'id' => $this->id))); //'contact/process'));
+
+// Set the method attribute for the form
+$form->setAttribute('method', 'post');
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->formRow($form->get('submit'));
+echo $this->form()->closeTag();

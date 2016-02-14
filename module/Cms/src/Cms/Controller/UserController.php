@@ -37,7 +37,7 @@ class UserController extends AbstractActionController
      */
     public function indexAction()
     {
-        var_dump('coucou');
+        //var_dump('coucou');
 
             $resultSet = $this->getEntityManager()->getRepository('Auth\Entity\User')->findAll();
 

@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <?php echo $this->headTitle('CMS '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+    <?php echo $this->headTitle('CMS')->setSeparator(' - ')->setAutoEscape(false) ?>
 
     <?php echo $this->headMeta()
         ->appendName('viewport', 'width=device-width, initial-scale=1.0')
@@ -12,7 +12,6 @@
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 
@@ -45,10 +44,10 @@
                 <?php if ($user = $this->identity()) {
                     echo 'Bonjour,  ' . $this->escapeHtml($user->getUsrName());
                     ?>
-                    | <a href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a>
-                    <?php
-                } else {
-                    echo 'Not logged in';
+                    | </li> <li> <a href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a></li>
+
+              <?php  } else { ?>
+               <li>  <?php   echo 'Not logged in';
                 }?>
             </li>
             <li><a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'index'));?>">Users</a></li>

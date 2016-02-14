@@ -23,8 +23,8 @@ $this->headTitle($title);
                 <?= $this->escapeHtml($user->getUsrName())?>
             </td>
             <td>
-                <a href="">Modifier</a>
-                <a href="">Supprimer</a>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'edit'));?>">Modifier</a>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'delete'));?>">Supprimer</a>
             </td>
         </tr>
     <?php endforeach?>

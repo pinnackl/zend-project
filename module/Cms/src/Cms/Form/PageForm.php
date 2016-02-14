@@ -11,24 +11,22 @@ class PageForm extends Form {
 
     public function __construct() {
         parent::__construct('page');
-        $this->setHydrator(new ClassMethodsHydrator(false))
-            ->setObject(new Page());
 
         //Méthode d'envoie (GET,POST)
         $this->setAttribute('method', 'post');
         //Définition des champs
 
         //Page Id
-        $idField = new Element\Hidden('id');
+        $idField = new Element\Hidden('page_id');
         $this->add($idField);
 
         //Page Title
-        $titleField = new Element\Text('title');
+        $titleField = new Element\Text('page_title');
         $titleField->setLabel('Titre');
         $this->add($titleField);
 
         //Page Content
-        $contentField = new Element\Textarea('content');
+        $contentField = new Element\Textarea('page_content');
         $contentField->setLabel('Contenu');
         $this->add($contentField);
 

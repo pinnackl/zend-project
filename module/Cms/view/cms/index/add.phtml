@@ -17,7 +17,7 @@ $this->headScript()->prependFile('http://ajax.googleapis.com/ajax/libs/jquery/1.
 $this->headScript()->appendFile($this->basePath('js/jquery.datetimeentry.min.js'));
 
 $script = '$(function(e){$("#artcCreated").datetimeEntry();})';
-$this->headScript()->appendScript($script); 
+$this->headScript()->appendScript($script);
 
 $this->headScript()->appendFile('//tinymce.cachefly.net/4.0/tinymce.min.js');
-$this->headScript()->appendScript("tinymce.init({selector:'textarea'});"); 
+$this->headScript()->appendScript("tinymce.init({selector:'textarea'});");

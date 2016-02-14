@@ -42,27 +42,6 @@ class Module
 		$acl = new Acl($config);
 		// everyone is guest untill it gets logged in
 		$role = Acl::DEFAULT_ROLE; // The default role is guest $acl
-/* Without Doctrine
-		if ($auth->hasIdentity()) {
-			$usr = $auth->getIdentity();
-			$user_role_id = $usr->user_role_id; // Use a view to get the name of the role
-			// TODO we don't need that if the names of the roles are comming from the DB
-			switch ($user_role_id) {
-				case 1 :
-					$role = Acl::DEFAULT_ROLE; // guest
-					break;
-				case 2 :
-					$role = 'member';
-					break;
-				case 3 :
-					$role = 'admin';
-					break;
-				default :
-					$role = Acl::DEFAULT_ROLE; // guest
-					break;
-			}
-		}
-*/
 		// with Doctrine
 		if ($auth->hasIdentity()) {
 			$user = $auth->getIdentity();
