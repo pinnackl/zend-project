@@ -22,6 +22,7 @@ class AdminController extends AbstractActionController
     // C - Create
     public function createAction()
     {
+        var_dump('dans create');
         $form = new UserForm();
         $request = $this->getRequest();
         if ($request->isPost()) {

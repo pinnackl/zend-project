@@ -51,7 +51,7 @@
                     echo 'Not logged in';
                 }?>
             </li>
-            <li><a href="<?php echo $this->url('user') ?>"><?php echo $this->translate('Users') ?></a></li>
+            <li><a href="<?php echo $this->url('auth') ?>"><?php echo $this->translate('Users') ?></a></li>
             <li><a href="<?php echo $this->url('category') ?>"><?php echo $this->translate('Categories') ?></a></li>
             <li><a href="<?php echo $this->url('page') ?>"><?php echo $this->translate('Pages') ?></a></li>
 
@@ -80,7 +80,7 @@
 
     <hr>
     <footer>
-        <!--                <p>&copy; 2005 - --><?php //echo date('Y') ?><!-- by Zend Technologies Ltd. --><?php //echo $this->translate('All rights reserved.') ?><!--</p>-->
+
     </footer>
 </div> <!-- /container -->
 <?php echo $this->inlineScript() ?>
