@@ -15,6 +15,14 @@ return array(
 //-                    'all'   => 'member'
 //-                )
 
+                'cms/page' => array(
+                    'all' =>'guest'
+                ),
+
+                'cms/category' => array(
+                    'all' =>'guest'
+                ),
+
                 'Application\Controller\Index' => array(
                     'all'   => 'guest'
                 ),
@@ -25,9 +33,13 @@ return array(
                     'all'   => 'guest'
                 ),
 
-                'Auth\Controller\Hello' => array(
+
+                'Cms\Controller\Page' => array(
+                    // 'index' => 'guest',
+                    // 'all'   => 'member',
                     'all'   => 'guest'
                 ),
+
                 'Auth\Controller\FormTests' => array(
                     'all'   => 'guest'
                 ),

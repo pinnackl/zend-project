@@ -3,24 +3,28 @@
 
 <div class="row">
 
-    <?php foreach($articles as $article) :?>
-        <div class="card small col s12 m4">
-                <div class="card-image">
-                    <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
-                    <span class="card-title" ><?php echo $this->escapeHtml($article->getArtcTitle());?></span>
-                </div>
-                <div class="card-content">
-                    <p><?php echo $this->escapeHtml($article->getArtcIntrotext());?></p>
-                </div>
-                <div class="card-action">
-                    <?php if (is_object($article->getAuthor())):?>
-                    <div class="chip">
-                        <?php echo $this->escapeHtml($article->getAuthor()->getUsrName());?>
-                    </div>
-                    <?php endif ?>
-                    <a href="#">Voir plus</a>
-                </div>
 
-        </div>
+    <?php foreach($articles as $article) :?>
+
+            <div class="col s12 m4">
+                <div class="card small">
+                    <div class="card-image">
+                        <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
+                        <span class="card-title" ><?php echo $this->escapeHtml($article->getArtcTitle());?></span>
+                    </div>
+                    <div class="card-content">
+                        <p><?php echo $this->escapeHtml($article->getArtcIntrotext());?></p>
+                    </div>
+                    <div class="card-action">
+                        <?php if (is_object($article->getAuthor())):?>
+                            <div class="chip">
+                                <?php echo $this->escapeHtml($article->getAuthor()->getUsrName());?>
+                            </div>
+                        <?php endif ?>
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+
     <?php endforeach ?>
 </div>

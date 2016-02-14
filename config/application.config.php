@@ -14,7 +14,7 @@ return array(
         'Auth',
         'Navigation',
         'CsnCms',
-        //'CsnAuthorize',
+        'CsnAuthorize',
     ),
     'module_listener_options' => array(
         'module_paths' => array(
