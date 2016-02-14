@@ -10,11 +10,11 @@ return array(
         'Application',
         'DoctrineModule',
         'DoctrineORMModule',
-        'Cms',
+        //'Cms-old',
         'Auth',
         'Navigation',
-        'CsnCms',
-        'CsnAuthorize',
+        'Cms',
+        'Authorize',
     ),
     'module_listener_options' => array(
         'module_paths' => array(

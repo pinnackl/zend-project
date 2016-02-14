@@ -4,8 +4,8 @@ $this->headTitle($title);
 ?>
 <h1><?=$this->escapeHtml($title)?></h1>
 
-<a href="<?=$this->url('category', array('action'=>'add'))?>">Ajouter une catégorie</a> |
-<a href="<?=$this->url('page', array('action'=>'index'))?>">Gérer les pages</a>
+<a href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'add'));?>">Ajouter une catégorie</a>
+<a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Gérer les pages</a>
 <table class="striped">
     <tr>
         <th>Nom</th>
@@ -13,10 +13,10 @@ $this->headTitle($title);
     </tr>
     <?php foreach($categories as $category):?>
         <tr>
-            <td><?=$this->escapeHtml($category->name)?>
+            <td><?=$this->escapeHtml($category->getCtgrName())?>
             </td>
             <td>
-                <a href="<?=$this->url('category', array('action'=>'delete', 'id' => $category->id))?>">Supprimer</a>
+                <a href="<?=$this->url('category', array('action'=>'delete', 'id' => $category->getCtgrId()))?>">Supprimer</a>
             </td>
         </tr>
     <?php endforeach?>

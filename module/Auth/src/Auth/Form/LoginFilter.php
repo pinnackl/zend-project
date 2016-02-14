@@ -10,7 +10,7 @@ class LoginFilter extends InputFilter
     {
         // self::__construct(); // parnt::__construct(); - trows and error
         $this->add(array(
-            'name'     => 'username', // 'usr_name'
+            'name'     => 'username', // 'user_name'
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
@@ -37,7 +37,7 @@ class LoginFilter extends InputFilter
         ));
 
         $this->add(array(
-            'name'     => 'password', // usr_password
+            'name'     => 'password', // user_password
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),

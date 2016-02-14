@@ -51,11 +51,12 @@
                     echo 'Not logged in';
                 }?>
             </li>
-            <li><a href="<?php echo $this->url('auth') ?>"><?php echo $this->translate('Users') ?></a></li>
-            <li><a href="<?php echo $this->url('category') ?>"><?php echo $this->translate('Categories') ?></a></li>
-            <li><a href="<?php echo $this->url('page') ?>"><?php echo $this->translate('Pages') ?></a></li>
+            <li><a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'index'));?>">Users</a></li>
+            <li><a href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'));?>">Catégories</a></li>
+            <li><a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Pages</a></li>
 
-           <li><a href="<?php echo $this->url('csn-cms') ?>"><?php echo $this->translate('Articles') ?></a></li>
+
+           <li><a href="<?php echo $this->url('cms') ?>"><?php echo $this->translate('Articles') ?></a></li>
             <?php } ?>
         </ul>
 

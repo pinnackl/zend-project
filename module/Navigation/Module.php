@@ -54,7 +54,7 @@ class Module
 					
 					// Setup ACL:
 					// We have our own class.
-					// ToDo think for better place for it maybe in CsnBase. I have it in CsnAuthorize and here \CsnNavigation\Acl\Acl
+					// ToDo think for better place for it maybe in CsnBase. I have it in Authorize and here \CsnNavigation\Acl\Acl
 					$acl = new \CsnNavigation\Acl\Acl($config);
 					
 //					$acl = new Acl($config);
@@ -74,9 +74,9 @@ class Module
 /* Without Doctrine
 					if ($auth->hasIdentity()) {
 						$usr = $auth->getIdentity();
-						$usrl_id = $usr->usrl_id; // Use a view to get the name of the role
+						$user_role_id = $usr->user_role_id; // Use a view to get the name of the role
 						// TODO we don't need that if the names of the roles are comming from the DB
-						switch ($usrl_id) {
+						switch ($user_role_id) {
 							case 1 :
 								$role = \CsnNavigation\Acl\Acl::DEFAULT_ROLE; // guest
 								break;

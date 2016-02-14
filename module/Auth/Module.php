@@ -54,13 +54,13 @@ class Module implements AutoloaderProviderInterface
                 'mail.transport' => function (ServiceManager $serviceManager) {
                     $config = $serviceManager->get('Config');
                     $transport = new Smtp();
-                    $options   = new SmtpOptions(array(
-                        'name' => 'localhost.localdomain',
-                        'host' => '127.0.0.1',
-                        'port' => 25,
-                    ));
-                    $transport->setOptions($options);
-                    //$transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));
+//                    $options   = new SmtpOptions(array(
+//                        'name' => 'localhost.localdomain',
+//                        'host' => '127.0.0.1',
+//                        'port' => 25,
+//                    ));
+//                    $transport->setOptions($options);
+                    $transport->setOptions(new SmtpOptions($config['mail']['transport']['options']));
                     return $transport;
                 },
             )

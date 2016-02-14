@@ -3,8 +3,8 @@ namespace Cms\Controller;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     Zend\Form\FormInterface,
-    Cms\Form\CategoryForm,
     Cms\Entity\Category,
+    Cms\Form\CategoryForm,
     Doctrine\ORM\EntityManager,
     Doctrine\ORM\Query;
 /**

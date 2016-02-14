@@ -58,14 +58,14 @@ class RegistrationController extends AbstractActionController
 
     public function registrationSuccessAction()
     {
-        $usr_email = null;
+        $user_email = null;
         $flashMessenger = $this->flashMessenger();
         if ($flashMessenger->hasMessages()) {
             foreach($flashMessenger->getMessages() as $key => $value) {
-                $usr_email .=  $value;
+                $user_email .=  $value;
             }
         }
-        return new ViewModel(array('usr_email' => $usr_email));
+        return new ViewModel(array('user_email' => $user_email));
     }
 
     public function confirmEmailAction()
@@ -114,14 +114,14 @@ class RegistrationController extends AbstractActionController
 
     public function passwordChangeSuccessAction()
     {
-        $usr_email = null;
+        $user_email = null;
         $flashMessenger = $this->flashMessenger();
         if ($flashMessenger->hasMessages()) {
             foreach($flashMessenger->getMessages() as $key => $value) {
-                $usr_email .=  $value;
+                $user_email .=  $value;
             }
         }
-        return new ViewModel(array('usr_email' => $usr_email));
+        return new ViewModel(array('user_email' => $user_email));
     }
 
     public function prepareData($user)
@@ -264,12 +264,12 @@ class RegistrationController extends AbstractActionController
         $transport->send($message);
     }
 
-    public function sendPasswordByEmail($usr_email, $password)
+    public function sendPasswordByEmail($user_email, $password)
     {
         $transport = $this->getServiceLocator()->get('mail.transport');
         $message = new Message();
         $this->getRequest()->getServer();  //Server vars
-        $message->addTo($usr_email)
+        $message->addTo($user_email)
             ->addFrom('praktiki@coolcsn.com')
             ->setSubject('Your password has been changed!')
             ->setBody("Your password at  " .

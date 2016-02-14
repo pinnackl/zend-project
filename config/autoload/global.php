@@ -14,8 +14,8 @@
 return array(
     'db' => array(
         'driver'         => 'Pdo',
-        'dsn'            => 'mysql:dbname=cms_db;host=localhost;',
-        'username'       =>'root',
+        'dsn'            => 'mysql:dbname=pinnackl_cms_db;host=localhost;',
+        'username'       => 'root',
         'password'       => '',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''

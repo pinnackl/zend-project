@@ -22,7 +22,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="usr_name", type="string", length=100, nullable=false)
+     * @ORM\Column(name="user_name", type="string", length=100, nullable=false)
      * @Annotation\Filter({"name":"StringTrim"})
      * @Annotation\Validator({"name":"StringLength", "options":{"min":1, "max":30}})
      * @Annotation\Validator({"name":"Regex", "options":{"pattern":"/^[a-zA-Z][a-zA-Z0-9_-]{0,24}$/"}})
@@ -34,7 +34,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="usr_password", type="string", length=100, nullable=false)
+     * @ORM\Column(name="user_password", type="string", length=100, nullable=false)
      * @Annotation\Attributes({"type":"password"})
      * @Annotation\Options({"label":"Password:"})
      */
@@ -43,7 +43,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="usr_email", type="string", length=60, nullable=false)
+     * @ORM\Column(name="user_email", type="string", length=60, nullable=false)
      * @Annotation\Type("Zend\Form\Element\Email")
      * @Annotation\Options({"label":"Your email address:"})
      */
@@ -52,9 +52,9 @@ class User
     /**
      * @var integer
      *
-     * @ORM\Column(name="usrl_id", type="integer", nullable=true)
+     * @ORM\Column(name="user_role_id", type="integer", nullable=true)
      * @ORM\OneToMany(targetEntity="user_roles")
-     * @ORM\JoinColumn(name="usrl_id", referencedColumnName="usrl_id")
+     * @ORM\JoinColumn(name="user_role_id", referencedColumnName="user_role_id")
      * @Annotation\Type("Zend\Form\Element\Select")
      * @Annotation\Options({
      * "label":"User Role:",
@@ -65,7 +65,7 @@ class User
     /**
      * @var integer
      *
-     * @ORM\Column(name="lng_id", type="integer", nullable=true)
+     * @ORM\Column(name="lang_id", type="integer", nullable=true)
      * @Annotation\Attributes({"type":"text"})
      * @Annotation\Options({"label":"Language Id:"})
      */
@@ -74,7 +74,7 @@ class User
     /**
      * @var boolean
      *
-     * @ORM\Column(name="usr_active", type="boolean", nullable=false)
+     * @ORM\Column(name="user_active", type="boolean", nullable=false)
      * @Annotation\Type("Zend\Form\Element\Radio")
      * @Annotation\Options({
      * "label":"User Active:",
@@ -85,7 +85,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="usr_question", type="string", length=100, nullable=true)
+     * @ORM\Column(name="user_question", type="string", length=100, nullable=true)
      * @Annotation\Attributes({"type":"text"})
      * @Annotation\Options({"label":"User Question:"})
      */
@@ -94,7 +94,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="usr_answer", type="string", length=100, nullable=true)
+     * @ORM\Column(name="user_answer", type="string", length=100, nullable=true)
      * @Annotation\Attributes({"type":"text"})
      * @Annotation\Options({"label":"User Answer:"})
      */
@@ -103,7 +103,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="usr_picture", type="string", length=255, nullable=true)
+     * @ORM\Column(name="user_picture", type="string", length=255, nullable=true)
      * @Annotation\Attributes({"type":"text"})
      * @Annotation\Options({"label":"User Picture:"})
      */
@@ -112,7 +112,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="usr_password_salt", type="string", length=100, nullable=true)
+     * @ORM\Column(name="user_password_salt", type="string", length=100, nullable=true)
      * @Annotation\Attributes({"type":"text"})
      * @Annotation\Options({"label":"Password Salt:"})
      */
@@ -121,7 +121,7 @@ class User
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="usr_registration_date", type="datetime", nullable=true)
+     * @ORM\Column(name="user_registration_date", type="datetime", nullable=true)
      * @Annotation\Attributes({"type":"datetime","min":"2010-01-01T00:00:00Z","max":"2020-01-01T00:00:00Z","step":"1"})
      * @Annotation\Options({"label":"Registration Date:", "format":"Y-m-d\TH:iP"})
      */
@@ -130,7 +130,7 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="usr_registration_token", type="string", length=100, nullable=true)
+     * @ORM\Column(name="user_registration_token", type="string", length=100, nullable=true)
      * @Annotation\Attributes({"type":"text"})
      * @Annotation\Options({"label":"Registration Token:"})
      */
@@ -139,7 +139,7 @@ class User
     /**
      * @var boolean
      *
-     * @ORM\Column(name="usr_email_confirmed", type="boolean", nullable=false)
+     * @ORM\Column(name="user_email_confirmed", type="boolean", nullable=false)
      * @Annotation\Type("Zend\Form\Element\Radio")
      * @Annotation\Options({
      * "label":"User confirmed email:",
@@ -150,7 +150,7 @@ class User
     /**
      * @var integer
      *
-     * @ORM\Column(name="usr_id", type="integer")
+     * @ORM\Column(name="user_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @Annotation\Exclude()

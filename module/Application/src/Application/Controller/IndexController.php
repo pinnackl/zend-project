@@ -28,5 +28,15 @@ use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBui
 
 class IndexController extends AbstractActionController
 {
+    // R - retriev
+    public function indexAction()
+    {
+        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $dql = "SELECT a, u, l, c FROM Cms\Entity\Article a LEFT JOIN a.author u LEFT JOIN a.language l LEFT JOIN a.categories c WHERE a.parent IS NULL";
+        $query = $entityManager->createQuery($dql);
+        $query->setMaxResults(30);
+        $articles = $query->getResult();
 
+        return new ViewModel(array('articles' => $articles));
+    }
 }

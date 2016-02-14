@@ -51,7 +51,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usrl_id',
+            'name' => 'user_role_id',
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Role',
@@ -64,7 +64,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'lng_id',
+            'name' => 'lang_id',
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Language',
@@ -77,7 +77,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usr_active',
+            'name' => 'user_active',
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'Active',
@@ -99,7 +99,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usr_answer',
+            'name' => 'user_answer',
             'attributes' => array(
                 'type'  => 'text',
             ),
@@ -109,7 +109,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usr_picture',
+            'name' => 'user_picture',
             'attributes' => array(
                 'type'  => 'text',
             ),
@@ -119,7 +119,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usr_password_salt',
+            'name' => 'user_password_salt',
             'attributes' => array(
                 'type'  => 'text',
             ),
@@ -129,7 +129,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usr_registration_date',
+            'name' => 'user_registration_date',
             'attributes' => array(
                 'type'  => 'Zend\Form\Element\DateTime', // 'text'
             ),
@@ -139,7 +139,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usr_registration_token',
+            'name' => 'user_registration_token',
             'attributes' => array(
                 'type'  => 'text',
             ),
@@ -149,7 +149,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usr_email_confirmed',
+            'name' => 'user_email_confirmed',
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
                 'label' => 'E-mail was confirmed?',

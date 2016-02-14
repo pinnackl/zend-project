@@ -34,12 +34,6 @@ class PageController extends AbstractActionController
      */
     public function indexAction()
     {
-        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-
-        if(!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('home');
-        }
-
         $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Page')->findAll();
 
         return new ViewModel(array(
@@ -62,7 +56,7 @@ class PageController extends AbstractActionController
         $categories = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findAll();
         $options = array(""=>"");
         foreach($categories as $cat) {
-            $options[$cat->id] = $cat->name;
+            $options[$cat->getCtgrId()] = $cat->getCtgrName();
         }
         $form->setCategories($options);
 

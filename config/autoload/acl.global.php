@@ -19,6 +19,10 @@ return array(
                     'all' =>'guest'
                 ),
 
+                'cms/user' => array(
+                    'all' =>'guest'
+                ),
+
                 'cms/category' => array(
                     'all' =>'guest'
                 ),
@@ -34,7 +38,7 @@ return array(
                 ),
 
 
-                'Cms\Controller\Page' => array(
+                'Cms-old\Controller\Page' => array(
                     // 'index' => 'guest',
                     // 'all'   => 'member',
                     'all'   => 'guest'
@@ -52,7 +56,7 @@ return array(
                     'delete'=> 'admin',
                 ),
 
-                'Cms\Controller\Category' => array(
+                'Cms-old\Controller\Category' => array(
                     'view'	=> 'guest',
                     'index' => 'admin',
                     'add'	=> 'admin',
@@ -71,7 +75,7 @@ return array(
                 'Auth\Controller\Registration' => array(
                     'all' => 'guest'
                 ),
-                'CsnCms\Controller\Index' => array(
+                'Cms\Controller\Index' => array(
                     // 'all'   => 'guest'
                     'view'	=> 'guest',
                     'index' => 'admin',
@@ -79,7 +83,7 @@ return array(
                     'edit'  => 'admin',
                     'delete'=> 'admin',
                 ),
-                'CsnCms\Controller\Translation' => array(
+                'Cms\Controller\Translation' => array(
                     // 'all'   => 'guest'
                     'view'	=> 'guest',
                     'index' => 'admin',
@@ -87,8 +91,33 @@ return array(
                     'edit'  => 'admin',
                     'delete'=> 'admin',
                 ),
-                'CsnCms\Controller\Comment' => array(
+                'Cms\Controller\Comment' => array(
                     // 'all'   => 'guest'
+                    'view'	=> 'guest',
+                    'index' => 'admin',
+                    'add'	=> 'admin',
+                    'edit'  => 'admin',
+                    'delete'=> 'admin',
+                ),
+                'Cms\Controller\User'=> array(
+             //       'all'   => 'guest'
+                    'view'	=> 'guest',
+                    'index' => 'admin',
+                    'add'	=> 'admin',
+                    'edit'  => 'admin',
+                    'delete'=> 'admin',
+                ),
+
+                'Cms\Controller\Category'=> array(
+                    'all'   => 'guest'
+//                    'view'	=> 'guest',
+//                    'index' => 'admin',
+//                    'add'	=> 'admin',
+//                    'edit'  => 'admin',
+//                    'del
+                ),
+                'Cms\Controller\Page'=> array(
+    //       'all'   => 'guest'
                     'view'	=> 'guest',
                     'index' => 'admin',
                     'add'	=> 'admin',

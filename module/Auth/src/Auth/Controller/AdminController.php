@@ -31,7 +31,7 @@ class AdminController extends AbstractActionController
             if ($form->isValid()) {
                 $data = $form->getData();
                 unset($data['submit']);
-                if (empty($data['usr_registration_date'])) $data['usr_registration_date'] = '2013-07-19 12:00:00';
+                if (empty($data['user_registration_date'])) $data['user_registration_date'] = '2013-07-19 12:00:00';
                 $this->getUsersTable()->insert($data);
                 return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
             }
@@ -52,13 +52,13 @@ class AdminController extends AbstractActionController
             if ($form->isValid()) {
                 $data = $form->getData();
                 unset($data['submit']);
-                if (empty($data['usr_registration_date'])) $data['usr_registration_date'] = '2013-07-19 12:00:00';
-                $this->getUsersTable()->update($data, array('usr_id' => $id));
+                if (empty($data['user_registration_date'])) $data['user_registration_date'] = '2013-07-19 12:00:00';
+                $this->getUsersTable()->update($data, array('user_id' => $id));
                 return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
             }
         }
         else {
-            $form->setData($this->getUsersTable()->select(array('usr_id' => $id))->current());
+            $form->setData($this->getUsersTable()->select(array('user_id' => $id))->current());
         }
 
         return new ViewModel(array('form' => $form, 'id' => $id));
@@ -69,7 +69,7 @@ class AdminController extends AbstractActionController
     {
         $id = $this->params()->fromRoute('id');
         if ($id) {
-            $this->getUsersTable()->delete(array('usr_id' => $id));
+            $this->getUsersTable()->delete(array('user_id' => $id));
         }
 
         return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
@@ -82,7 +82,7 @@ class AdminController extends AbstractActionController
             $this->usersTable = new TableGateway(
                 'users',
                 $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
-//				new \Zend\Db\TableGateway\Feature\RowGatewayFeature('usr_id') // Zend\Db\RowGateway\RowGateway Object
+//				new \Zend\Db\TableGateway\Feature\RowGatewayFeature('user_id') // Zend\Db\RowGateway\RowGateway Object
 //				ResultSetPrototype
             );
         }

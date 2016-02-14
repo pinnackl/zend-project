@@ -13,14 +13,14 @@ class LoginForm extends Form
         $this->setAttribute('method', 'post');
         /*
 		$this->add(array(
-            'name' => 'usr_id',
+            'name' => 'user_id',
             'attributes' => array(
                 'type'  => 'hidden',
             ),
         ));
 		*/
         $this->add(array(
-            'name' => 'username', // 'usr_name',
+            'name' => 'username', // 'user_name',
             'attributes' => array(
                 'type'  => 'text',
             ),
@@ -29,7 +29,7 @@ class LoginForm extends Form
             ),
         ));
         $this->add(array(
-            'name' => 'password', // 'usr_password',
+            'name' => 'password', // 'user_password',
             'attributes' => array(
                 'type'  => 'password',
             ),

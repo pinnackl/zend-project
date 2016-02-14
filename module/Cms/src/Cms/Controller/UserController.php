@@ -12,7 +12,7 @@ use Zend\Mvc\Controller\AbstractActionController,
 use Zend\Db\TableGateway\TableGateway;
 
 /**
- * Controller des Pages
+ * Controller des User
  */
 class UserController extends AbstractActionController
 {
@@ -37,18 +37,14 @@ class UserController extends AbstractActionController
      */
     public function indexAction()
     {
+        var_dump('coucou');
 
-        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-
-        if($auth->hasIdentity()) {
             $resultSet = $this->getEntityManager()->getRepository('Auth\Entity\User')->findAll();
 
             return new ViewModel(array(
                 'users' => $resultSet,
             ));
-        }else {
-            return $this->redirect()->toRoute('home');
-        }
+
 
     }
 
@@ -69,7 +65,7 @@ class UserController extends AbstractActionController
             if ($form->isValid()) {
                 $data = $form->getData();
                 unset($data['submit']);
-                if (empty($data['usr_registration_date'])) $data['usr_registration_date'] = '2013-07-19 12:00:00';
+                if (empty($data['user_registration_date'])) $data['user_registration_date'] = '2013-07-19 12:00:00';
                 $this->getUsersTable()->insert($data);
                 return $this->redirect()->toRoute('user', array('controller' => 'user', 'action' => 'index'));
             }
@@ -89,13 +85,13 @@ class UserController extends AbstractActionController
             if ($form->isValid()) {
                 $data = $form->getData();
                 unset($data['submit']);
-                if (empty($data['usr_registration_date'])) $data['usr_registration_date'] = '2013-07-19 12:00:00';
-                $this->getUsersTable()->update($data, array('usr_id' => $id));
+                if (empty($data['user_registration_date'])) $data['user_registration_date'] = '2013-07-19 12:00:00';
+                $this->getUsersTable()->update($data, array('user_id' => $id));
                 return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
             }
         }
         else {
-            $form->setData($this->getUsersTable()->select(array('usr_id' => $id))->current());
+            $form->setData($this->getUsersTable()->select(array('user_id' => $id))->current());
         }
 
         return new ViewModel(array('form' => $form, 'id' => $id));
@@ -106,7 +102,7 @@ class UserController extends AbstractActionController
     {
         $id = $this->params()->fromRoute('id');
         if ($id) {
-            $this->getUsersTable()->delete(array('usr_id' => $id));
+            $this->getUsersTable()->delete(array('user_id' => $id));
         }
 
         return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
@@ -126,7 +122,7 @@ class UserController extends AbstractActionController
         }
         try{
             //Sinon on charge la page correspondant à l'Id
-            $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
+            $page = $this->getEntityManager()->find('Cms-old\Entity\Page', $id);
         }
         catch(\Exception $e){
             //Si la page n'existe pas en base on génère une erreur 404
@@ -151,7 +147,7 @@ class UserController extends AbstractActionController
             $this->usersTable = new TableGateway(
                 'users',
                 $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
-//				new \Zend\Db\TableGateway\Feature\RowGatewayFeature('usr_id') // Zend\Db\RowGateway\RowGateway Object
+//				new \Zend\Db\TableGateway\Feature\RowGatewayFeature('user_id') // Zend\Db\RowGateway\RowGateway Object
 //				ResultSetPrototype
             );
         }

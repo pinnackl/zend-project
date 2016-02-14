@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
  * Page Entity.
  *
  * @ORM\Entity
- * @ORM\Table(name="cms_page")
+ * @ORM\Table(name="pages")
  * @property int $id
  * @property string $title
  * @property string $content
@@ -37,7 +37,7 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
     protected $content;
     /**
      * @ManyToOne(targetEntity="Category")
-     * @JoinColumn(name="category_id", referencedColumnName="id")
+     * @JoinColumn(name="ctgr_id", referencedColumnName="ctgr_id")
      */
     protected $category;
     /**
@@ -141,22 +141,7 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
      * qui contrôle les différents attributs d'un objet de type Page
      */
     public function getInputFilter() {
-        if (!$this -> inputFilter) {
-            $inputFilter = new InputFilter();
-            $factory = new InputFactory();
-            //Vérifie que l'id est de type int
-            $inputFilter -> add($factory -> createInput(array('name' => 'id', 'required' => true, 'filters' => array( array('name' => 'Int'), ), )));
-            $inputFilter -> add($factory -> createInput(array('name' => 'category_id', 'required' => false, 'filters' => array( array('name' => 'Int'), ), )));
-            //Vérifie que le titre est de type text avec une
-            //longueur de moins de 100 caractère
-            //Retire aussi les espaces inutiles et les balises html
-            $inputFilter -> add($factory -> createInput(array('name' => 'title', 'required' => true, 'filters' => array( array('name' => 'StripTags'), array('name' => 'StringTrim'), ), 'validators' => array( array('name' => 'StringLength', 'options' => array('encoding' => 'UTF-8', 'min' => 1, 'max' => 100, ), ), ), )));
-            //Vérifie que le contenu est de type text avec une
-            //longueur de moins de 10000 caractère
-            //Retire aussi les espaces inutiles
-            $inputFilter -> add($factory -> createInput(array('name' => 'content', 'required' => true, 'filters' => array( array('name' => 'StringTrim'), ), 'validators' => array( array('name' => 'StringLength', 'options' => array('encoding' => 'UTF-8', 'min' => 1, 'max' => 10000, ), ), ), )));
-            $this -> inputFilter = $inputFilter;
-        }
+
         return $this -> inputFilter;
     }
     /**
