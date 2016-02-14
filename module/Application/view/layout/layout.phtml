@@ -68,18 +68,11 @@
 
     <div class="row">
 
-
-
-        <div class="col s12"> <!-- Note that "m8 l9" was added -->
-                <?php echo $this->content; ?>
-
-            </div>
-
-        </div>
+        <?php echo $this->content; ?>
 
     </div>
+</div> <!-- /container -->
 
-    <hr>
 <footer class="page-footer">
     <div class="container">
         <div class="row">
@@ -105,7 +98,12 @@
         </div>
     </div>
 </footer>
-</div> <!-- /container -->
 <?php echo $this->inlineScript() ?>
+<script>
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15 // Creates a dropdown of 15 years to control year
+    });
+</script>
 </body>
 </html>

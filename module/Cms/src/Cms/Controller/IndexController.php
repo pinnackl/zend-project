@@ -190,7 +190,7 @@ class IndexController extends AbstractActionController
 				}
 			}           
 		}
-/*  uncomment if you need to control the data and time		
+
 		 $form->add(array(
 			 'type' => 'Zend\Form\Element\Date',
 			 'name' => 'artcCreatedDate',
@@ -201,6 +201,7 @@ class IndexController extends AbstractActionController
 					 'min' => '2012-01-01',
 					 'max' => '2020-01-01',
 					 'step' => '1', // days; default step interval is 1 day
+				 		'class' => 'datepicker'
 			 )
 		 ));
 
@@ -216,7 +217,7 @@ class IndexController extends AbstractActionController
 					 'step' => '60', // seconds; default step interval is 60 seconds
 			 )
 		 ));
-*/
+
 		$form->remove('artcCreated');
 		$form->remove('parent');
 		$form->remove('author');
@@ -224,7 +225,8 @@ class IndexController extends AbstractActionController
 		$send = new Element('send');
 		$send->setValue($action); // submit
 		$send->setAttributes(array(
-			'type'  => 'submit'
+			'type'  => 'submit',
+			'class' => 'btn waves-effect waves-light'
 		));
 		$form->add($send);
 
