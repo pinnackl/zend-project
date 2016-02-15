@@ -54,7 +54,7 @@ textarea {
 }
 
 form {
-  border: none;
+  border: none !important;
 }
 
 label {

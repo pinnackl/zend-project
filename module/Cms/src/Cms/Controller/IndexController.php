@@ -81,6 +81,7 @@ class IndexController extends AbstractActionController
         }
 		
 		$form = $this->getForm($article, $entityManager, 'Update');
+		$form->get('language')->setAttribute('class', 'browser-default');
 		
 		$form->bind($article);
 		

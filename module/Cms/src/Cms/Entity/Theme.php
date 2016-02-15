@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-use Zend\Form\Annotation; // !!!! Absolutely neccessary
+use Zend\Form\Annotation;
 
 /**
  * Categories

@@ -63,6 +63,7 @@ class CommentController extends AbstractActionController
         }
 		$builder = new DoctrineAnnotationBuilder($entityManager);
 		$form = $builder->createForm( $comment );
+		$form->get('language')->setAttribute('class', 'browser-default');
 		
 		$form->remove('comCreated');
 		$form->remove('author');
@@ -81,6 +82,7 @@ class CommentController extends AbstractActionController
 		$send = new Element('send');
 		$send->setValue('Add'); // submit
 		$send->setAttributes(array(
+			'class' => 'btn waves-effect waves-light',
 			'type'  => 'submit'
 		));
 		$form->add($send);
@@ -127,6 +129,7 @@ class CommentController extends AbstractActionController
 		
 		$builder = new DoctrineAnnotationBuilder($entityManager);
 		$form = $builder->createForm( $comment );
+		$form->get('language')->setAttribute('class', 'browser-default');
 		$form->remove('comCreated');
 		$form->remove('author');
 		$form->remove('article');
@@ -144,6 +147,7 @@ class CommentController extends AbstractActionController
 		$send = new Element('send');
 		$send->setValue('Edit');
 		$send->setAttributes(array(
+			'class' => 'btn waves-effect waves-light',
 			'type'  => 'submit'
 		));
 		$form->add($send);

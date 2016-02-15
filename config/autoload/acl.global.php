@@ -98,6 +98,14 @@ return array(
                     'delete'=> 'admin',
                 ),
 
+                'Cms\Controller\Menu'=> array(
+                    'view'	=> 'guest',
+                    'index' => 'admin',
+                    'add'	=> 'admin',
+                    'edit'  => 'admin',
+                    'delete'=> 'admin',
+                ),
+
                 'Cms\Controller\Theme'=> array(
                     //       'all'   => 'guest'
                     'index' => 'admin',

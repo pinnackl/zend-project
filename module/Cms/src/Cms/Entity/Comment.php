@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-use Zend\Form\Annotation; // !!!! Absolutely neccessary
+use Zend\Form\Annotation;
 
 // SUPER important is to remove      @ORM\Column(name="rl_id", type="integer", nullable=true) from the role in order to make it work
 // http://stackoverflow.com/questions/6899335/doctrine-class-has-no-association-named

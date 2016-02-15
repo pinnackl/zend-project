@@ -12,6 +12,7 @@ return array(
 			'Cms\Controller\Page' => 'Cms\Controller\PageController',
 			'Cms\Controller\Category' => 'Cms\Controller\CategoryController',
 			'Cms\Controller\Theme' => 'Cms\Controller\ThemeController',
+			'Cms\Controller\Menu' => 'Cms\Controller\MenuController',
         ),
     ),	
     'router' => array(
@@ -100,6 +101,19 @@ return array(
 						'type'    => 'Literal',
 						'options' => array(
 							'route'    => '/page',
+							'defaults' => array(
+								'__NAMESPACE__' => 'Cms\Controller',
+								'controller'    => 'Index',
+								'action'        => 'index',
+							),
+						),
+						'may_terminate' => true,
+					),
+
+					'menu' => array(
+						'type'    => 'Literal',
+						'options' => array(
+							'route'    => '/menu',
 							'defaults' => array(
 								'__NAMESPACE__' => 'Cms\Controller',
 								'controller'    => 'Index',
