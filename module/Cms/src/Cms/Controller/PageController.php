@@ -103,7 +103,6 @@ class PageController extends AbstractActionController
         $form->bind($page);
         $form->get('ctgr_id')->setValue($page->getCategory() != null ? $page->getCategory()->getCtgrId() : '');
 
-
         $request = $this->getRequest();
         //Vérifie le type de la requête
         if ($request->isPost()) {

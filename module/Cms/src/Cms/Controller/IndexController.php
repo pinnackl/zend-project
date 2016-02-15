@@ -43,6 +43,9 @@ class IndexController extends AbstractActionController
 		$form = $this->getForm($article, $entityManager, 'Add');
 		
 		$form->bind($article);
+
+		$form->get('language')->setAttribute('class', 'browser-default');
+		$form->get('categories')->setAttributes(array('class'=> 'browser-default', 'style'=> 'height:100px'));
 		
         $request = $this->getRequest();
         if ($request->isPost()) {
