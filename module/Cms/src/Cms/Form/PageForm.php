@@ -17,21 +17,21 @@ class PageForm extends Form {
         //Définition des champs
 
         //Page Id
-        $idField = new Element\Hidden('page_id');
+        $idField = new Element\Hidden('id');
         $this->add($idField);
 
         //Page Title
-        $titleField = new Element\Text('page_title');
+        $titleField = new Element\Text('title');
         $titleField->setLabel('Titre');
         $this->add($titleField);
 
         //Page Content
-        $contentField = new Element\Textarea('page_content');
+        $contentField = new Element\Textarea('content');
         $contentField->setLabel('Contenu');
         $this->add($contentField);
 
         //Page Category
-        $idField = new Element\Select('category_id');
+        $idField = new Element\Select('ctgr_id');
         $idField->setAttribute('class', 'browser-default');
         $idField->setLabel('Category');
         $this->add($idField);
@@ -49,6 +49,6 @@ class PageForm extends Form {
      */
     public function setCategories($categories = array())
     {
-        $this->get('category_id')->setValueOptions($categories);
+        $this->get('ctgr_id')->setValueOptions($categories);
     }
 }

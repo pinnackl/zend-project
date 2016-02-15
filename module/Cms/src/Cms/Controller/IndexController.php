@@ -144,9 +144,9 @@ class IndexController extends AbstractActionController
 		if ($auth->hasIdentity()) {
 			$user = $auth->getIdentity();
 			// ToDo assign Role Onject instead of role id
-			// $role = $user->getRole()->getRlName();
 			$usrlId = $user->getUsrlId(); // Use a view to get the name of the role
 				// TODO we don't need that if the names of the roles are comming from the DB
+			var_dump($usrlId);
 				switch ($usrlId) {
 					case 1 :
 						$role = \Authorize\Acl\Acl::DEFAULT_ROLE; // guest
@@ -162,7 +162,7 @@ class IndexController extends AbstractActionController
 						break;
 			}			
 		}
-		
+
 		$resource = $article->getResource()->getRsName();
 		$privilege = 'view';
 		if (!$acl->hasResource($resource)) {

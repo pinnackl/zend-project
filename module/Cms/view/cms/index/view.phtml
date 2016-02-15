@@ -1,3 +1,18 @@
-<h1>View</h1>
-<h1><?php echo $article->getArtcTitle(); ?></h1>
-<?php echo $article->getArtcFullText(); ?>
+
+<div class="row">
+    <div class=" s12 m7">
+        <div class="card">
+            <div class="card-image">
+                <img style="max-height: 300px" src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
+                <span class="card-title"><h1><?php echo $article->getArtcTitle(); ?></h1>e</span>
+            </div>
+            <div class="card-content" style="min-height: 200px;">
+                <p><?php echo $article->getArtcFullText(); ?></p>
+            </div>
+            <div class="card-action">
+                <?php echo $this->escapeHtml($article->getArtcCreated()->format('Y-m-d H:i:s'));?>
+                <blockquote> by <?php if (is_object($article->getAuthor())) echo $this->escapeHtml($article->getAuthor()->getUsrName());?> </blockquote>
+            </div>
+        </div>
+    </div>
+</div>

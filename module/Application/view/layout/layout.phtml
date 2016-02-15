@@ -14,7 +14,7 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
 
     <!-- Le styles -->
     <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
@@ -29,6 +29,8 @@
         ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
     ; ?>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
 </head>
 <body>
 
@@ -36,54 +38,49 @@
     <div class="nav-wrapper">
         <a class="brand-logo right" href="<?php echo $this->url('home') ?>">CMS</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <?php if (!$user = $this->identity()) { ?>
-            <li><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                <li><a href="<?php echo $this->url('auth') ?>"><?php echo $this->translate('login') ?></a></li>
-            <?php }else { ?>
-
-
-            <li class="">
-                <?php if ($user = $this->identity()) {
-                    echo 'Bonjour,  ' . $this->escapeHtml($user->getUsrName());
-                    ?>
-                    | </li> <li> <a href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a></li>
-
-              <?php  } else { ?>
-               <li>  <?php   echo 'Not logged in';
-                }?>
-            </li>
-            <li><a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'index'));?>">Users</a></li>
-            <li><a href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'));?>">Catégories</a></li>
-            <li><a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Pages</a></li>
-            <li><a href="<?php echo $this->url('cms/default', array('controller' => 'theme', 'action'=>'index'));?>">Themes</a></li>
-
-           <li><a href="<?php echo $this->url('cms') ?>"><?php echo $this->translate('Articles') ?></a></li>
-            <?php } ?>
+            <?php if (!$user = $this->identity()) :?>
+                <li>
+                    <a href="<?php echo $this->url('home') ?>"> <?php echo $this->translate('Home') ?></a>
+                </li>
+                <li>
+                    <a href="<?php echo $this->url('auth') ?>"><?php echo $this->translate('login') ?></a>
+                </li>
+            <?php endif ?>
         </ul>
 
+        <?php if ($user) :?>
+
+                <a style="margin-left: 20px" href="<?php echo $this->url('home');?>"><?php echo ' Bonjour,  ' . $this->escapeHtml($user->getUsrName()); ?></a>
+
+                <a class="right" style="margin-right: 100px" href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a>
+
+
+        <?php endif ?>
 
     </div>
 </nav>
 
-
-
-
 <div class="row">
 
-    <div class="col s3 blue-grey lighten-5">
+    <div class="col s2 blue-grey lighten-5">
         <div class="collection">
-            <a href="#!" class="collection-item">Alan<span class="badge">1</span></a>
-            <a href="#!" class="collection-item">Alan<span class="new badge">4</span></a>
-            <a href="#!" class="collection-item">Alan</a>
-            <a href="#!" class="collection-item">Alan<span class="badge">14</span></a>
+            <?php if ($user = $this->identity()) :?>
+                <a class="collection-item" href="<?php echo $this->url('cms') ?>"><?php echo $this->translate('Articles') ?></a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'));?>">Catégories</a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Pages</a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'theme', 'action'=>'index'));?>">Themes</a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'index'));?>">Users</a>
+            <?php  else: ?>
+                <a class="collection-item" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Articles') ?></a>
+            <?php endif ?>
         </div>
     </div>
 
-    <div class="col s9">
+    <div class="col s10">
         <nav>
             <div class="nav-wrapper">
                 <div class="col s12">
-                    <h3>Section</h3>
+                    <h2><?php echo $this->headTitle('CMS')->setSeparator(' - ')->setAutoEscape(false) ?></h2>
                 </div>
             </div>
         </nav>

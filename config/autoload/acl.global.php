@@ -14,31 +14,11 @@ return array(
 //-                    'login' => 'guest',
 //-                    'all'   => 'member'
 //-                )
-
-                'cms/page' => array(
-                    'all' =>'guest'
-                ),
-
-                'cms/user' => array(
-                    'all' =>'guest'
-                ),
-
-                'cms/category' => array(
-                    'all' =>'guest'
-                ),
-
                 'Application\Controller\Index' => array(
                     'all'   => 'guest'
                 ),
 
                 'Auth\Controller\Index' => array(
-                    // 'index' => 'guest',
-                    // 'all'   => 'member',
-                    'all'   => 'guest'
-                ),
-
-
-                'Cms-old\Controller\Page' => array(
                     // 'index' => 'guest',
                     // 'all'   => 'member',
                     'all'   => 'guest'
@@ -64,7 +44,7 @@ return array(
                     'delete'=> 'admin',
                 ),
 
-                'Cms\Controller\PageController' => array(
+                'Cms\Controller\Page' => array(
                     'view'	=> 'guest',
                     'index' => 'admin',
                     'add'	=> 'admin',
@@ -115,14 +95,7 @@ return array(
                     'edit'  => 'admin',
                     'delete'=> 'admin',
                 ),
-                'Cms\Controller\Page'=> array(
-    //       'all'   => 'guest'
-                    'view'	=> 'guest',
-                    'index' => 'admin',
-                    'add'	=> 'admin',
-                    'edit'  => 'admin',
-                    'delete'=> 'admin',
-                ),
+
                 'Cms\Controller\Theme'=> array(
                     //       'all'   => 'guest'
                     'index' => 'admin',

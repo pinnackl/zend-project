@@ -41,6 +41,8 @@ return array(
 							),
 						),
 					),
+				),
+
 					'user' => array(
 						'type'    => 'Literal',
 						'options' => array(
@@ -52,7 +54,21 @@ return array(
 							),
 						),
 						'may_terminate' => true,
-					),
+						'child_routes' => array(
+							'default' => array(
+								'type'    => 'Segment',
+								'options' => array(
+									// 'route'    => '/[:controller[/:action[/:id]]]',
+									'route'    => '/[:controller[/:action[/:id[/:id2]]]]',
+									'constraints' => array(
+										'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+										'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+									),
+									'defaults' => array(
+									),
+								),
+							),
+						),
 
 					'category' => array(
 						'type'    => 'Literal',

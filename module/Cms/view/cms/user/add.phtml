@@ -3,7 +3,7 @@ echo '<h1>Créer un utilisateur</h1>';
 
 $form->prepare();
 
-$form->setAttribute('action', $this->url('user', array('controller' => 'user', 'action' => 'add')));
+$form->setAttribute('action', $this->url('cms/default', array('controller' => 'user', 'action' => 'add')));
 // Set the method attribute for the form
 $form->setAttribute('method', 'post');
 echo $this->form()->openTag($form);

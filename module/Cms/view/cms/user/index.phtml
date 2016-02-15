@@ -2,14 +2,16 @@
 $title = 'Liste des Users';
 $this->headTitle($title);
 ?>
-<h1><?=$this->escapeHtml($title)?></h1>
 
-<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'add'))?>">Créer un utilisateur</a>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'add'), false);?>">Créer un utilisateur</a>
 
 <table class="striped">
     <tr>
         <th>Email</th>
         <th>Nom</th>
+        <th>Role</th>
         <th>&nbsp;</th>
     </tr>
     <?php foreach($users as $user):?>
@@ -21,6 +23,15 @@ $this->headTitle($title);
             </td>
             <td>
                 <?= $this->escapeHtml($user->getUsrName())?>
+            </td>
+            <td>
+                <?php if ($user->getUsrlId() == 1): ?>
+                    Invité
+                <?php elseif ($user->getUsrlId() == 2) : ?>
+                    Membre
+                <?php elseif ($user->getUsrlId() == 3) : ?>
+                    Admin
+                <?php endif  ?>
             </td>
             <td>
                 <a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'edit'));?>">Modifier</a>

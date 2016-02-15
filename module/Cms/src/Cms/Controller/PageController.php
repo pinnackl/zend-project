@@ -2,6 +2,7 @@
 namespace Cms\Controller;
 
 use Cms\Form\PageFilter;
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\Controller\AbstractActionController,
     Zend\View\Model\ViewModel,
     Zend\Form\FormInterface,
@@ -17,7 +18,7 @@ use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBui
  */
 class PageController extends AbstractActionController
 {
-
+    protected $pagesTable = null;
     /**
      * @var Doctrine\ORM\EntityManager
      */
@@ -67,7 +68,7 @@ class PageController extends AbstractActionController
                 $data = $form->getData();
                 unset($data['submit']);
 
-                $this->getCategoriesTable()->insert($data);
+                $this->getPagesTable()->insert($data);
                 return $this->redirect()->toRoute('page', array('controller' => 'page', 'action' => 'index'));
             }
         }
@@ -103,7 +104,7 @@ class PageController extends AbstractActionController
         $form->setBindOnValidate(false);
         $form->bind($page);
 
-        $form->get('category_id')->setValue($page->getCategory() != null ? $page->getCategory()->getId() : '');
+        $form->get('ctgr_id')->setValue($page->getCategory() != null ? $page->getCategory()->getId() : '');
         $form->get('submit')->setAttribute('label', 'Edit');
         $request = $this->getRequest();
 
@@ -112,7 +113,7 @@ class PageController extends AbstractActionController
             $form->setData($request->getPost());
             //Contrôle les champs
             if ($form->isValid()) {
-                $categoryId = $form->get('category_id')->getValue();
+                $categoryId = $form->get('ctgr_id')->getValue();
                 $form->bindValues();
                 $category = null;
                 if (!empty($categoryId)) {
@@ -189,5 +190,17 @@ class PageController extends AbstractActionController
         return new ViewModel(array(
             'page' => $page
         ));
+    }
+
+    public function getPagesTable()
+    {
+        // I have a Table data Gateway ready to go right out of the box
+        if (!$this->pagesTable) {
+            $this->pagesTable = new TableGateway(
+                'pages',
+                $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+            );
+        }
+        return $this->pagesTable;
     }
 }

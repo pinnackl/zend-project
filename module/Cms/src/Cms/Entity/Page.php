@@ -134,7 +134,7 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
         $this->id = (isset($data['id'])) ? $data['id'] : null;
         $this->title = (isset($data['title'])) ? $data['title'] : null;
         $this->content = (isset($data['content'])) ? $data['content'] : null;
-        $this->category = (isset($data['category_id'])) ? $data['category_id'] : null;
+        $this->category = (isset($data['ctgr_id'])) ? $data['ctgr_id'] : null;
     }
     /**
      * Initialise et/ou retourne un objet de type InputFilter

@@ -21,7 +21,8 @@
                                 <?php echo $this->escapeHtml($article->getAuthor()->getUsrName());?>
                             </div>
                         <?php endif ?>
-                        <a href="#">This is a link</a>
+                        <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+                            array('controller' => 'index', 'action'=>'view', 'id' => $article->getArtcId()));?>">View</a>
                     </div>
                 </div>
             </div>

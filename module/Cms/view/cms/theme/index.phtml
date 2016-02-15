@@ -12,12 +12,13 @@ $this->headTitle($title);
         <tr>
             <td><?php echo $theme->getThemeName()?></td>
             <td>
-
+                <?php if($theme->getThemeId() == $user = $this->identity()->getUsrthId()) :?>
+                    <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+                        array('controller' => 'theme', 'action'=>'desactive', 'id' => $theme->getThemeId()));?>">Desactive</a>
+            <?php else: ?>
                 <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
                     array('controller' => 'theme', 'action'=>'active', 'id' => $theme->getThemeId()));?>">Active</a>
-
-                <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
-                    array('controller' => 'theme', 'action'=>'desactive', 'id' => $theme->getThemeId()));?>">Desactive</a>
+            <?php  endif ?>
 
             </td>
         </tr>
