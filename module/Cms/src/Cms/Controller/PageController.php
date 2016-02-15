@@ -69,7 +69,7 @@ class PageController extends AbstractActionController
                 unset($data['submit']);
 
                 $this->getPagesTable()->insert($data);
-                return $this->redirect()->toRoute('page', array('controller' => 'page', 'action' => 'index'));
+                return $this->redirect()->toRoute('cms/default', array('controller' => 'page', 'action' => 'index'));
             }
         }
         return array('form' => $form);
@@ -96,18 +96,15 @@ class PageController extends AbstractActionController
         $categories = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findAll();
         $options = array(""=>"");
         foreach($categories as $cat) {
-            $options[$cat->id] = $cat->name;
+            $options[$cat->getCtgrId()] = $cat->getCtgrName();
         }
         $form->setCategories($options);
 
-        //On charge ces données dans le formulaire initialise aussi les InputFilter
-        $form->setBindOnValidate(false);
         $form->bind($page);
+        $form->get('ctgr_id')->setValue($page->getCategory() != null ? $page->getCategory()->getCtgrId() : '');
 
-        $form->get('ctgr_id')->setValue($page->getCategory() != null ? $page->getCategory()->getId() : '');
-        $form->get('submit')->setAttribute('label', 'Edit');
+
         $request = $this->getRequest();
-
         //Vérifie le type de la requête
         if ($request->isPost()) {
             $form->setData($request->getPost());
@@ -123,7 +120,7 @@ class PageController extends AbstractActionController
                 $this->getEntityManager()->flush();
 
                 //Redirection vers la liste des pages
-                return $this->redirect()->toRoute('page');
+                return $this->redirect()->toRoute('cms/default', array('controller' => 'page', 'action' => 'index'));
             }
         }
         return array(

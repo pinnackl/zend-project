@@ -59,11 +59,9 @@ class CategoryController extends AbstractActionController
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $data = $form->getData();
-                var_dump($data);
-                die();
                 unset($data['submit']);
                 $this->getCategoriesTable()->insert($data);
-                return $this->redirect()->toRoute('category', array('controller' => 'category', 'action' => 'index'));
+                return $this->redirect()->toRoute('cms/default', array('controller' => 'category', 'action' => 'index'));
             }
         }
         return new ViewModel(array('form' => $form));

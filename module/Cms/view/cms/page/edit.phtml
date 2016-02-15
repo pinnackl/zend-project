@@ -3,13 +3,14 @@
 $title = 'Modifier la Page';
 $this->headTitle($title);
 $form = $this->form;
-$form->setAttribute('action', $this->url('page', array('action' => 'edit', 'id'=>$this->id)));
 ?>
-<h1><?=$this->escapeHtml($title)?></h1>
-<?=$this->form()->openTag($form)?>
-<?=$this->formRow($form->get('id'))?>
-<?=$this->formRow($form->get('title'))?>
-<?=$this->formRow($form->get('content'))?>
-<?=$this->formRow($form->get('category_id'))?>
-<?=$this->formRow($form->get('submit'))?>
-<?=$this->form()->closeTag($form)?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form->setAttribute('action', $this->url('cms/default', array('controller' => 'page', 'action' => 'edit', 'id'=>$this->id), true));
+
+$form->setAttribute('method', 'post');
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+

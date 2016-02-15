@@ -1,9 +1,9 @@
 <?php
 
-namespace Auth\Entity; // added by Stoyan
+namespace Auth\Entity; //
 
 use Doctrine\ORM\Mapping as ORM;
-// added by Stoyan
+//
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 

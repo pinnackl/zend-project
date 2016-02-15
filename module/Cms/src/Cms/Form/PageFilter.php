@@ -27,16 +27,5 @@ class PageFilter extends InputFilter
                 ),
             ),
         ));
-
-        $this->add(array(
-            'name'       => 'content',
-            'required'   => false,
-            'validators' => array(
-                array(
-                    'name' => 'EmailAddress'
-                ),
-            ),
-        ));
-
     }
 }

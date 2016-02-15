@@ -24,8 +24,8 @@ $this->headTitle($title);
                 <?=$this->escapeHtml($page->content)?>
             </td>
             <td>
-                <a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index', 'id' => $page->id), false);?>">Modifier</a>
-                <a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index','id' => $page->id), false);?>">Supprimer</a>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'edit', 'id' => $page->id), false);?>">Modifier</a>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'delete','id' => $page->id), false);?>">Supprimer</a>
             </td>
         </tr>
     <?php endforeach?>

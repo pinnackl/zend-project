@@ -1,9 +1,9 @@
 <?php
 
-namespace Cms\Entity; // added by Stoyan
+namespace Cms\Entity; //
 // If somethign doesn't work after git merge copy the Articles from the key drive or another working copy of the file
 use Doctrine\ORM\Mapping as ORM;
-// added by Stoyan
+//
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 

@@ -2,7 +2,7 @@
 namespace Cms\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-// added by Stoyan
+//
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 

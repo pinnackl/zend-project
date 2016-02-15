@@ -16,10 +16,6 @@ class PageForm extends Form {
         $this->setAttribute('method', 'post');
         //Définition des champs
 
-        //Page Id
-        $idField = new Element\Hidden('id');
-        $this->add($idField);
-
         //Page Title
         $titleField = new Element\Text('title');
         $titleField->setLabel('Titre');
