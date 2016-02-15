@@ -70,6 +70,8 @@ return array(
                     'add'	=> 'admin',
                     'edit'  => 'admin',
                     'delete'=> 'admin',
+                    'active' => 'admin',
+                    'desactive'	=> 'admin',
                 ),
                 'Cms\Controller\Comment' => array(
                     // 'all'   => 'guest'

@@ -2,6 +2,7 @@
 
 namespace Cms\Controller;
 
+use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -23,6 +24,9 @@ use Cms\Entity\Comment;
 
 class CommentController extends AbstractActionController
 {
+	protected $commentsTable = null;
+
+
     public function indexAction()
 	{
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -187,6 +191,32 @@ class CommentController extends AbstractActionController
                 'action' => 'index'
         ), true);
 	}
+
+	public function activeAction()
+	{
+		$id = $this->params()->fromRoute('id');
+
+		$user_id = $this->identity()->getUsrId();
+
+		$data = ['com_active' => 1];
+
+		$this->getCommentsTable()->update($data, array('user_id' => $user_id));
+
+		return $this->redirect()->toRoute('cms/default', array('controller' => 'comment', 'action' => 'index'));
+	}
+
+	public function desactiveAction()
+	{
+		$id = $this->params()->fromRoute('id');
+
+		$user_id = $this->identity()->getUsrId();
+
+		$data = ['com_active' => 0];
+
+		$this->getCommentsTable()->update($data, array('user_id' => $user_id));
+
+		return $this->redirect()->toRoute('cms/default', array('controller' => 'comment', 'action' => 'index'));
+	}
 	
 	public function prepareData($comment)
 	{
@@ -196,5 +226,16 @@ class CommentController extends AbstractActionController
 			$user = $auth->getIdentity();
 		}
 		$comment->setAuthor($user);	
+	}
+
+	public function getCommentsTable()
+	{
+		if (!$this->commentsTable) {
+			$this->commentsTable = new TableGateway(
+				'comments',
+				$this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
+			);
+		}
+		return $this->commentsTable;
 	}
 }

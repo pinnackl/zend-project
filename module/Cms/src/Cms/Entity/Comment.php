@@ -86,6 +86,15 @@ class Comment
      * @Annotation\Options({"label":"Title:"})	 
      */
     private $comTitle;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="com_active", type="integer", nullable=false)
+     * @Annotation\Options({"label":"Active:"})
+     */
+    private $comActive;
 	
     /**
      * @var string
@@ -265,6 +274,17 @@ class Comment
     public function getComId()
     {
         return $this->comId;
+    }
+
+
+    /**
+     * Get comId
+     *
+     * @return integer
+     */
+    public function getComActive()
+    {
+        return $this->comActive;
     }
 }
 

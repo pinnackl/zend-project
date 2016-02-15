@@ -24,8 +24,8 @@ $this->headTitle($title);
 </nav>
 
 <!-- <a href="<?php echo $this->url('cms/default', array('controller' => 'comment', 'action'=>'add')); /*NOtice without true no param is send*/?>">Add new translation</a> -->
-    <a href="<?php echo $this->url('cms/default', array('controller' => 'index', 'action'=>'index'), false);?>">&lt; Back to the articles | </a>
-    <a href="<?php echo $this->url('cms/default', array('controller' => 'comment', 'action'=>'add'), true);?>">Add New Comment</a>
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'index', 'action'=>'index'), false);?>">&lt; Back to the articles</a>
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'comment', 'action'=>'add'), true);?>">Add New Comment</a>
 
 
 <table class="striped">
@@ -35,7 +35,9 @@ $this->headTitle($title);
     <th>Author</th>
     <th>Language</th>
 	<th>Created</th>
+    <th>State</th>
     <th>&nbsp;</th>
+
 </tr>
 
 <?php foreach ($comments as $comment) : ?>
@@ -46,11 +48,24 @@ $this->headTitle($title);
     <td><?php if (is_object($comment->getLanguage())) echo $this->escapeHtml($comment->getLanguage()->getLngName());?></td>
     <td><?php if (is_object($comment->getComCreated())) echo $this->escapeHtml($comment->getComCreated()->format('Y-m-d H:i:s'));?></td><!-- Notice: getArtcCreated() returns an object convert to string -->
     <td>
+        <?php if($comment->getAuthor()->getUsrId() == $user = $this->identity()->getUsrId() && $comment->getComActive() ) :?>
+            <span class="badge" >Active</span>
+            <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+                array('controller' => 'comment', 'action'=>'desactive', 'id' => $comment->getComId()));?>">Desactive</a>
+        <?php else: ?>
+            <span class="badge">Desactive</span>
+            <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+                array('controller' => 'comment', 'action'=>'active', 'id' => $comment->getComId()));?>">Active</a>
+        <?php  endif ?>
+
+    </td>
+    <td>
         <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use grace-drops/<segment> NOT ONLY grace-drops
             array('controller' => 'comment', 'action'=>'edit', 'id2' => $comment->getComId()), true);?>">Edit</a>
         <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use grace-drops/<segment>
             array('controller' => 'comment', 'action'=>'delete', 'id2' => $comment->getComId()), true);?>" onclick="return confirm('Do you rely want to delete the record?')">Delete</a>
     </td>
+
 </tr>
 <?php endforeach; ?>
 </table>
