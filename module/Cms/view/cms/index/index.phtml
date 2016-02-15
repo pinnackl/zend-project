@@ -13,12 +13,18 @@ foreach($articles AS $article) {
 $title = 'Liste des articles';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-<p>
-    <a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'index', 'action'=>'add'));?>">Add article</a>
-</p>
 
-<table class="table">
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'index', 'action'=>'add'));?>">Add article</a>
+
+<table class="striped">
 <tr>
     <th>Title</th>
     <th>Intro Text</th>
@@ -40,7 +46,7 @@ $this->headTitle($title);
         <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
             array('controller' => 'translation', 'action'=>'index', 'id' => $article->getArtcId()));?>">Translations</a>
         <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
-            array('controller' => 'comment', 'action'=>'index', 'id' => $article->getArtcId()));?>">Comments</a>
+            array('controller' => 'comment', 'action'=>'index', 'id' => $article->getArtcId()));?>">Comments (<?php echo count($article->getComments()) ?>) </a>
         <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
             array('controller' => 'index', 'action'=>'view', 'id' => $article->getArtcId()));?>">View</a>
 		<a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms

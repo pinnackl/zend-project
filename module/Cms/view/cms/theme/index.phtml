@@ -2,7 +2,15 @@
 $title = 'Liste des Themes';
 $this->headTitle($title);
 ?>
-<h1><?=$this->escapeHtml($title)?></h1>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
 <table class="striped">
     <tr>
         <th>Name</th>

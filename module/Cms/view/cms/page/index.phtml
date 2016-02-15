@@ -2,9 +2,18 @@
 $title = 'Liste des Pages';
 $this->headTitle($title);
 ?>
-<h1><?=$this->escapeHtml($title)?></h1>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
 <a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'add'), false);?>">Ajouter une page </a>
 <a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'), false);?>">Gérer les catégories</a>
+
 <table class="striped">
     <tr>
         <th>Titre</th>

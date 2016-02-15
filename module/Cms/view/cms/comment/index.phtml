@@ -14,14 +14,21 @@ foreach($articles AS $article) {
 $title = 'My comments';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-<p>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
 <!-- <a href="<?php echo $this->url('cms/default', array('controller' => 'comment', 'action'=>'add')); /*NOtice without true no param is send*/?>">Add new translation</a> -->
     <a href="<?php echo $this->url('cms/default', array('controller' => 'index', 'action'=>'index'), false);?>">&lt; Back to the articles | </a>
     <a href="<?php echo $this->url('cms/default', array('controller' => 'comment', 'action'=>'add'), true);?>">Add New Comment</a>
-</p>
 
-<table class="table">
+
+<table class="striped">
 <tr>
     <th>Title</th>
     <th>Text</th>

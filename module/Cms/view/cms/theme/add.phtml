@@ -1,6 +1,19 @@
 <?php
+$title = 'Créer un theme';
+$this->headTitle($title);
+?>
 
-echo '<h1>Add Theme</h1>';
+    <nav class="nav-breadcrumb">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <?php echo $this->escapeHtml($title); ?>
+            </div>
+        </div>
+    </nav>
+
+
+<?php
+
 
 $form = $this->form;
 $form->prepare();

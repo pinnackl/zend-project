@@ -1,6 +1,17 @@
+<?php
+$title = 'Créer une category';
+$this->headTitle($title);
+?>
+
+    <nav class="nav-breadcrumb">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <?php echo $this->escapeHtml($title); ?>
+            </div>
+        </div>
+    </nav>
 
 <?php
-echo '<h1>Add category</h1>';
 $form = $this->form;
 $form->prepare();
 // Assuming the "contact/process" route exists...

@@ -1,6 +1,7 @@
 body {
     padding-bottom: 40px;
   color: black;
+  background-color: #b0bec5;
 }
 
 .zf-green {
@@ -36,7 +37,22 @@ body {
   }
 }
 
+.nav-wrapper {
+  font-size: 30px;
+}
 
 textarea {
   min-height: 200px;
+}
+
+.nav-breadcrumb {
+  margin-bottom: 20px;
+}
+
+.waves-effect {
+  margin-bottom: 20px;
+}
+
+form {
+  border: 1px solid #2BBBAD;
 }
