@@ -63,7 +63,7 @@ class UserController extends AbstractActionController
                 unset($data['submit']);
                 if (empty($data['user_registration_date'])) $data['user_registration_date'] = '2013-07-19 12:00:00';
                 $this->getUsersTable()->insert($data);
-                return $this->redirect()->toRoute('user', array('controller' => 'user', 'action' => 'index'));
+                return $this->redirect()->toRoute('cms/default', array('controller' => 'user', 'action' => 'index'));
             }
         }
         return new ViewModel(array('form' => $form));

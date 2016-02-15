@@ -21,7 +21,7 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'usrPassword',
+            'name' => 'user_password',
             'attributes' => array(
                 'type'  => 'password',
             ),
@@ -33,7 +33,7 @@ class UserForm extends Form
 
 
         $this->add(array(
-            'name' => 'usrEmail',
+            'name' => 'user_email',
             'attributes' => array(
                 'type'  => 'email',
             ),
@@ -88,16 +88,6 @@ class UserForm extends Form
             ),
             'attributes' => array(
                 'class' => 'browser-default',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'captcha',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'Question',
             ),
         ));
 
