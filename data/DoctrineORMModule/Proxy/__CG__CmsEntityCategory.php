@@ -51,28 +51,9 @@ class Category extends \Cms\Entity\Category implements \Doctrine\ORM\Proxy\Proxy
         $this->__cloner__      = $cloner;
     }
 
-    /**
-     * {@inheritDoc}
-     * @param string $name
-     */
-    public function __get($name)
-    {
-        $this->__initializer__ && $this->__initializer__->__invoke($this, '__get', array($name));
 
-        return parent::__get($name);
-    }
 
-    /**
-     * {@inheritDoc}
-     * @param string $name
-     * @param mixed  $value
-     */
-    public function __set($name, $value)
-    {
-        $this->__initializer__ && $this->__initializer__->__invoke($this, '__set', array($name, $value));
 
-        return parent::__set($name, $value);
-    }
 
 
 
@@ -83,10 +64,10 @@ class Category extends \Cms\Entity\Category implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'inputFilter', 'id', 'name');
+            return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrName', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'articles', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrId');
         }
 
-        return array('__isInitialized__', 'inputFilter', 'id', 'name');
+        return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrName', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'articles', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrId');
     }
 
     /**
@@ -195,93 +176,82 @@ class Category extends \Cms\Entity\Category implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setId($id)
+    public function __toString()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setId', array($id));
+        $this->__initializer__ && $this->__initializer__->__invoke($this, '__toString', array());
 
-        return parent::setId($id);
+        return parent::__toString();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function getId()
+    public function setCtgrName($ctgrName)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCtgrName', array($ctgrName));
+
+        return parent::setCtgrName($ctgrName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCtgrName()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCtgrName', array());
+
+        return parent::getCtgrName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getArticles()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArticles', array());
+
+        return parent::getArticles();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addArticle(\Cms\Entity\Article $article)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addArticle', array($article));
+
+        return parent::addArticle($article);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeArticle(\Cms\Entity\Article $article)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeArticle', array($article));
+
+        return parent::removeArticle($article);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCtgrId()
     {
         if ($this->__isInitialized__ === false) {
-            return (int)  parent::getId();
+            return (int)  parent::getCtgrId();
         }
 
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', array());
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCtgrId', array());
 
-        return parent::getId();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setName($name)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setName', array($name));
-
-        return parent::setName($name);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getName', array());
-
-        return parent::getName();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getArrayCopy()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArrayCopy', array());
-
-        return parent::getArrayCopy();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function exchangeArray(array $data)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'exchangeArray', array($data));
-
-        return parent::exchangeArray($data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getInputFilter()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getInputFilter', array());
-
-        return parent::getInputFilter();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setInputFilter(\Zend\InputFilter\InputFilterInterface $inputFilter)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setInputFilter', array($inputFilter));
-
-        return parent::setInputFilter($inputFilter);
+        return parent::getCtgrId();
     }
 
 }

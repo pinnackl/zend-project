@@ -11,9 +11,30 @@
     ?>
 
 
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
+    <?php if ($user = $this->identity()) :?>
+        <?php if($this->identity()->getUsrthId() == 1) :?>
+            <!-- Compiled and minified CSS -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+            <!-- Compiled and minified JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+        <?php elseif($this->identity()->getUsrthId() == 2) : ?>
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+            <!-- Optional theme -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+        <?php elseif($this->identity()->getUsrthId() == 3) : ?>
+        <?php endif ?>
+
+    <?php  else : ?>
+            <!-- Compiled and minified CSS -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+            <!-- Compiled and minified JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <?php endif ?>
 
 
     <!-- Le styles -->
@@ -48,9 +69,9 @@
             <?php endif ?>
         </ul>
 
-        <?php if ($user) :?>
+        <?php if ($user = $this->identity()) :?>
 
-                <a style="margin-left: 20px" href="<?php echo $this->url('home');?>"><?php echo ' Bonjour,  ' . $this->escapeHtml($user->getUsrName()); ?></a>
+                <a style="margin-left: 30px" href="<?php echo $this->url('home');?>"><?php echo ' Bonjour,  ' . $this->escapeHtml($user->getUsrName()); ?></a>
 
                 <a class="right" style="margin-right: 100px" href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a>
 
@@ -66,6 +87,7 @@
         <div class="collection">
             <?php if ($user = $this->identity()) :?>
                 <a class="collection-item" href="<?php echo $this->url('cms') ?>"><?php echo $this->translate('Articles') ?></a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'comment', 'action' => 'hello')) ?>"><?php echo $this->translate('Comments') ?></a>
                 <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'));?>">Catégories</a>
                 <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Pages</a>
                 <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'theme', 'action'=>'index'));?>">Themes</a>
