@@ -16,6 +16,13 @@ class PageForm extends Form {
         $this->setAttribute('method', 'post');
         //Définition des champs
 
+
+        //Menu Page
+        $idField = new Element\Select('menu_id');
+        $idField->setAttribute('class', 'browser-default');
+        $idField->setLabel('Menu');
+        $this->add($idField);
+
         //Page Title
         $titleField = new Element\Text('title');
         $titleField->setLabel('Titre');
@@ -23,7 +30,7 @@ class PageForm extends Form {
 
         //Page Content
         $contentField = new Element\Textarea('content');
-        $contentField->setLabel('Contenu');
+        $contentField->setLabel('Description');
         $this->add($contentField);
 
         //Page Category
@@ -46,5 +53,15 @@ class PageForm extends Form {
     public function setCategories($categories = array())
     {
         $this->get('ctgr_id')->setValueOptions($categories);
+    }
+
+    /**
+     * Allow controller to set Menus
+     *
+     * @param array $menus
+     */
+    public function setMenus($menus = array())
+    {
+        $this->get('menu_id')->setValueOptions($menus);
     }
 }

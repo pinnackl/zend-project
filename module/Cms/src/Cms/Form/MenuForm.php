@@ -1,7 +1,10 @@
 <?php
 namespace Cms\Form;
 
-use Zend\Form\Form;
+
+use Zend\Form\Form,
+    Zend\Form\Element;
+
 use Cms\Entity\Menu;
 
 class MenuForm extends Form
@@ -11,16 +14,10 @@ class MenuForm extends Form
         parent::__construct('menu');
         $this->setAttribute('method', 'post');
 
-        $this->add(array(
-            'name' => 'menu_name',
-            'require' => false,
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'Menu Name',
-            ),
-        ));
+        //Menu Name
+        $titleField = new Element\Text('menu_name');
+        $titleField->setLabel('Menu Name');
+        $this->add($titleField);
 
         $this->add(array(
             'name' => 'submit',

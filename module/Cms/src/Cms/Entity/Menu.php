@@ -31,15 +31,6 @@ class Menu
     private $menu_name;
 
     /**
-     * Bidirectional - Not neccessary !!! many categories to many Articles (INVERSE SIDE)
-     *
-     * @ORM\ManyToMany(targetEntity="Cms\Entity\Page", mappedBy="menus")
-     * @Annotation\Exclude()
-     */
-    private $pages;
-
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="menu_id", type="integer")

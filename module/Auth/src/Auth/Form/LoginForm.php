@@ -57,6 +57,7 @@ class LoginForm extends Form
                 'type'  => 'submit',
                 'value' => 'Login',
                 'id' => 'submitbutton',
+                'class' => 'btn waves-effect waves-light'
             ),
         ));
     }

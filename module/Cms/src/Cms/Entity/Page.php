@@ -46,6 +46,18 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
      * @param string $property
      * @return mixed
      */
+
+    /**
+     * @ManyToOne(targetEntity="Menu")
+     * @JoinColumn(name="menu_id", referencedColumnName="menu_id")
+     */
+    protected $menu;
+    /**
+     * Magic getter to expose protected properties.
+     *
+     * @param string $property
+     * @return mixed
+     */
     public function __get($property)
     {
         return $this->$property;
@@ -73,6 +85,21 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @param Cms\Entity\Menu $menu
+     */
+    public function setMenu($menu)
+    {
+        $this->menu = $menu;
+    }
+    /**
+     * @return Cms\Entity\Menu
+     */
+    public function getMenu()
+    {
+        return $this->menu;
     }
     /**
      * @param string $content

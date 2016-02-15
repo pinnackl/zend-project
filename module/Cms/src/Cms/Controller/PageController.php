@@ -61,13 +61,20 @@ class PageController extends AbstractActionController
         }
         $form->setCategories($options);
 
+
+        $menus = $this->getEntityManager()->getRepository('Cms\Entity\Menu')->findAll();
+        $options = array(""=>"");
+        foreach($menus as $menu) {
+            $options[$menu->getMenuId()] = $menu->getMenuName();
+        }
+        $form->setMenus($options);
+
         if ($request->isPost()) {
             $form->setInputFilter(new PageFilter());
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $data = $form->getData();
                 unset($data['submit']);
-
                 $this->getPagesTable()->insert($data);
                 return $this->redirect()->toRoute('cms/default', array('controller' => 'page', 'action' => 'index'));
             }

@@ -33,11 +33,10 @@ class IndexController extends AbstractActionController
             // Filters have been fixed
             $form->setInputFilter(new LoginFilter($this->getServiceLocator()));
             $form->setData($request->getPost());
-            // echo "<h1>I am here1</h1>";
+
             if ($form->isValid()) {
                 $data = $form->getData();
                 // $data = $this->getRequest()->getPost();
-
                 // If you used another name for the authentication service, change it here
                 // it simply returns the Doctrine Auth. This is all it does. lets first create the connection to the DB and the Entity
                 $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
@@ -46,7 +45,6 @@ class IndexController extends AbstractActionController
                 $adapter->setIdentityValue($data['username']); //$data['user_name']
                 $adapter->setCredentialValue($data['password']); // $data['user_password']
                 $authResult = $authService->authenticate();
-                // echo "<h1>I am here</h1>";
                 if ($authResult->isValid()) {
                     $identity = $authResult->getIdentity();
                     $authService->getStorage()->write($identity);
@@ -78,7 +76,6 @@ class IndexController extends AbstractActionController
 
     public function logoutAction()
     {
-        // in the controller
         // $auth = new AuthenticationService();
         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
         // @todo Set up the auth adapter, $authAdapter
@@ -93,12 +90,6 @@ class IndexController extends AbstractActionController
 //-		$auth->getStorage()->session->getManager()->forgetMe(); // no way to get to the sessionManager from the storage
         $sessionManager = new \Zend\Session\SessionManager();
         $sessionManager->forgetMe();
-
-        // $view = new ViewModel(array(
-        //    'message' => 'Hello world',
-        // ));
-        // $view->setTemplate('foo/baz-bat/do-something-crazy');
-        // return $view;
 
         return $this->redirect()->toRoute('home');
 
