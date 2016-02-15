@@ -56,7 +56,7 @@ class IndexController extends AbstractActionController
                         $sessionManager = new \Zend\Session\SessionManager();
                         $sessionManager->rememberMe($time);
                     }
-                     return $this->redirect()->toRoute('user');
+                    return $this->redirect()->toRoute('cms/default', array('controller' => 'user', 'action' => 'index'));
                 }
                 foreach ($authResult->getMessages() as $message) {
                     $messages .= "$message\n";
@@ -102,16 +102,6 @@ class IndexController extends AbstractActionController
 
         return $this->redirect()->toRoute('home');
 
-    }
-
-    // the use of controller plugin
-    public function authTestAction()
-    {
-        if ($user = $this->identity()) { // controller plugin
-            // someone is logged !
-        } else {
-            // not logged in
-        }
     }
 
     /**

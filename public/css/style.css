@@ -54,5 +54,9 @@ textarea {
 }
 
 form {
-  border: 1px solid #2BBBAD;
+  border: none;
+}
+
+label {
+  color: #2BBBAD;
 }
