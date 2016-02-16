@@ -89,6 +89,7 @@ echo $this->form()->closeTag();
     var gridster;
     var cpt =12;
     var diff=0;
+    var dataOldId= [];
 
     $(function() {
         gridster = $(".gridster > ul").gridster({
@@ -111,13 +112,11 @@ echo $this->form()->closeTag();
         }).data('gridster');
 
         $(".gs-w").hover(function (){
-
             var id = $(this).attr("data-id");
             //show close button on hover
             $("ul").find("[data-close='" + id + "']").show();
             //show modifie button on hover
             $("."+id).show();
-            console.log('id:'+id)
         });
         $(".gs-w").mouseleave(function (){
             var id = $(this).attr("data-id");
@@ -126,22 +125,30 @@ echo $this->form()->closeTag();
             //hide close button on hover
             $("."+id).hide();
         });
-        $(".close").click(function(){
-            var id=$(this).attr("data-close");
-            console.log(id);
-            //$("ul").find("[data-id='" + id + "']").remove();
-            gridster.remove_widget($("ul").find("[data-id='" + id + "']"));
-            cpt--;
-            diff++;
 
-        });
+        closeWidget();
+
+        function closeWidget() {
+            $(".close").click(function(){
+                var id=$(this).attr("data-close");
+                //$("ul").find("[data-id='" + id + "']").remove();
+                gridster.remove_widget($("ul").find("[data-id='" + id + "']"));
+                cpt--;
+                diff++;
+                dataOldId[diff] = id;
+            });
+        }
 
         $(document).on( "click", "#addWidgetButton", function(e) {
-            cpt++;
-            diff--;
-            e.preventDefault();
-            gridster.add_widget.apply(gridster, ['<li data-id="'+cpt+'"><h1>New bloc</h1>' +
-            '<img src="img/close.png" data-close="cpt" class="close"/></li>', 2, 1]);
+            console.log(dataOldId);
+            if(cpt!=12) {
+                cpt++;
+                e.preventDefault();
+                gridster.add_widget.apply(gridster, ['<li data-id="'+dataOldId[diff]+'"><h1>New bloc</h1>' +
+                '<img src="img/close.png" data-close="'+dataOldId[diff]+'" class="close"/></li>', 2, 1]);
+                diff--;
+                closeWidget();
+            }
         });
 
         $('.btn-submit-form-page').click(function() {
