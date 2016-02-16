@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
  * @property int $id
  * @property string $title
  * @property string $content
+ * @property string $structure
  */
 class Page implements ArraySerializableInterface, InputFilterAwareInterface
 {
@@ -35,6 +36,10 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
      * @ORM\Column(type="string")
      */
     protected $content;
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $structure;
     /**
      * @ManyToOne(targetEntity="Category")
      * @JoinColumn(name="ctgr_id", referencedColumnName="ctgr_id")
@@ -114,6 +119,21 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
     public function getContent()
     {
         return $this->content;
+    }
+
+    /**
+     * @param string $structure
+     */
+    public function setStructure($structure)
+    {
+        $this->structure = $structure;
+    }
+    /**
+     * @return string
+     */
+    public function getStructure()
+    {
+        return $this->structure;
     }
     /**
      * @param int $id

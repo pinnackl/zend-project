@@ -4,50 +4,46 @@
 
 <?= $page->id ?>
 
-<section class="demo">
-    <div class="gridster">
-        <ul>
-            <li data-row="1" data-col="1" data-sizex="1" data-sizey="1"><h1>Bloc 1</h1></li>
-            <li data-row="2" data-col="1" data-sizex="1" data-sizey="1"><h1>Bloc 2</h1></li>
-            <li data-row="3" data-col="1" data-sizex="1" data-sizey="1"><h1>Bloc 3<h1></li>
-            <li data-row="1" data-col="2" data-sizex="2" data-sizey="1"><h1>Bloc 4</h1></li>
-            <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"><h1>Bloc 5</h1></li>
-            <li data-row="1" data-col="4" data-sizex="1" data-sizey="1"><h1>Bloc 6</h1></li>
-            <li data-row="2" data-col="4" data-sizex="2" data-sizey="1"><h1>Bloc 7</h1></li>
-            <li data-row="3" data-col="4" data-sizex="1" data-sizey="1"><h1>Bloc 8</h1></li>
-            <li data-row="1" data-col="5" data-sizex="1" data-sizey="1"><h1>Bloc 9</h1></li>
-            <li data-row="3" data-col="5" data-sizex="1" data-sizey="1"><h1>Bloc 10</h1></li>
-            <li data-row="1" data-col="6" data-sizex="1" data-sizey="1"><h1>Bloc 11</h1></li>
-            <li data-row="2" data-col="6" data-sizex="1" data-sizey="2"><h1>Bloc 12</h1></li>
-        </ul>
-    </div>
-</section>
+<?= $page->structure ?>
+
+<div class="controls">
+    <button class="js-seralize">Build from serialize</button>
+</div>
+
+<div class="gridster">
+    <ul>
+    </ul>
+</div>
+
+
 <script src="<?php echo $this->basePath('lib/gridster/dist/jquery.gridster.min.js') ?>"></script>
 
 <script type="text/javascript">
     var gridster;
 
-    $(function() {
-        gridtster = $(".gridster > ul").gridster({
-            widget_margins: [10, 10],
-            widget_base_dimensions: [140, 140],
-            min_cols: 6,
-            max_cols:12,
+        // sort serialization
+        serialization = <?= $page->structure ?>;
 
-            resize: {
-                enabled: true,
-                start: function (e, ui, $widget) {
+    console.log(serialization)
 
-                },
-                stop: function (e, ui, $widget) {
-                    var newHeight = this.resize_coords.data.height;
-                    var newWidth = this.resize_coords.data.width;
+        $(function(){
 
-                }
-            },
-        }).data('gridster');
+            gridster = $(".gridster ul").gridster({
+                widget_base_dimensions: [100, 55],
+                widget_margins: [5, 5]
+            }).data('gridster');
 
 
-    });
+            $('.js-seralize').on('click', function() {
+                gridster.remove_all_widgets();
+                $.each(serialization, function() {
+                    gridster.add_widget('<li />', this.size_x, this.size_y, this.col, this.row);
+                });
+            });
+
+        });
+
+
+    
 </script>
 

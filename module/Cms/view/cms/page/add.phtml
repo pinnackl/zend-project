@@ -17,7 +17,7 @@ $this->headTitle($title);
 $form = $this->form;
 $form->prepare();
 
-$form->setAttribute('action', $this->url('cms/default', array('controller' => 'page', 'action' => 'add'), true));
+$form->setAttribute('action', $this->url('cms/default', array('controller' => 'page', 'action' => 'add','id' => 'theform'), true));
 
 // Set the method attribute for the form
 $form->setAttribute('method', 'post');
@@ -70,6 +70,18 @@ echo $this->form()->closeTag();
             },
         }).data('gridster');
 
+        var gridster = $(".gridster ul").gridster().data('gridster');
+        gridData = gridster.serialize();
+        console.log(gridData);
+
+        $('.btn-submit-form-page').click(function() {
+            var gridster = $(".gridster ul").gridster().data('gridster');
+            gridData = gridster.serialize();
+            console.log(gridData);
+            $('#structureform').val(JSON.stringify(gridData));
+            $("#theform").submit();
+            console.log(gridData)
+        });
 
     });
 </script>

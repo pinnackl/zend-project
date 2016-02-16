@@ -23,6 +23,11 @@ class PageForm extends Form {
         $idField->setLabel('Menu');
         $this->add($idField);
 
+
+        $idField = new Element\Hidden('structure');
+        $idField->setAttribute('id', 'structureform');
+        $this->add($idField);
+
         //Page Category
         $idField = new Element\Select('ctgr_id');
         $idField->setAttribute('class', 'browser-default');
@@ -35,13 +40,13 @@ class PageForm extends Form {
         $this->add($titleField);
 
         //Page Content
-        //$contentField = new Element\Textarea('content');
-        //$contentField->setLabel('Description');
-        //$this->add($contentField);
+        $contentField = new Element\Textarea('content');
+        $contentField->setLabel('Description');
+        $this->add($contentField);
 
         $submitField = new Element\Submit('submit');
         $submitField->setValue('Envoyer');
-        $submitField->setAttributes(array('id' => 'submitbutton', 'class' => 'btn waves-effect waves-light'));
+        $submitField->setAttributes(array('id' => 'submitbutton', 'class' => 'btn waves-effect waves-light btn-submit-form-page'));
         $this->add($submitField);
     }
 
