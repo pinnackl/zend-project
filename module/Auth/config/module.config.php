@@ -89,8 +89,8 @@ return array(
                 'paths' => array(
 //                    __DIR__ . '/../module/AuthDoctrine/src/Auth/Entity' // 'path/to/my/entities',
                     __DIR__ . '/../src/' . __NAMESPACE__ . '/Entity',
-                    // 'H:\PortableApps\PortableGit\projects\btk\module\Auth\src\Auth\Entity' // Stoyan added to use doctrine in Auth module
-//-					__DIR__ . '/../../Auth/src/Auth/Entity', // Stoyan added to use doctrine in Auth module
+                    // 'H:\PortableApps\PortableGit\projects\btk\module\Auth\src\Auth\Entity' //  added to use doctrine in Auth module
+//-					__DIR__ . '/../../Auth/src/Auth/Entity', //  added to use doctrine in Auth module
                     // 'another/path'
                 ),
             ),
@@ -102,7 +102,7 @@ return array(
                     // 'My\Namespace' => 'my_annotation_driver'
                     // 'AuthDoctrine' => 'my_annotation_driver'
                     __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver',
-//-					'Auth\Entity' => __NAMESPACE__ . '_driver' // Stoyan added to allow the module Auth also to use Doctrine
+//-					'Auth\Entity' => __NAMESPACE__ . '_driver' //  added to allow the module Auth also to use Doctrine
                 )
             )
         )

@@ -27,6 +27,7 @@ echo $this->formCollection($form);
 echo $this->form()->closeTag();
 
 ?>
+<button class="btn waves-effect waves-light" id="addWidgetButton">Add block page</button>
 <section class="demo">
     <div class="gridster">
         <ul>
@@ -51,7 +52,7 @@ echo $this->form()->closeTag();
     var gridster;
 
     $(function() {
-        gridtster = $(".gridster > ul").gridster({
+        gridster = $(".gridster > ul").gridster({
             widget_margins: [10, 10],
             widget_base_dimensions: [140, 140],
             min_cols: 6,
@@ -70,17 +71,17 @@ echo $this->form()->closeTag();
             },
         }).data('gridster');
 
-        var gridster = $(".gridster ul").gridster().data('gridster');
-        gridData = gridster.serialize();
-        console.log(gridData);
+
+        $(document).on( "click", "#addWidgetButton", function(e) {
+            e.preventDefault();
+            gridster.add_widget.apply(gridster, ['<li><h1>New bloc</h1></li>', 2, 1]);
+        });
 
         $('.btn-submit-form-page').click(function() {
             var gridster = $(".gridster ul").gridster().data('gridster');
             gridData = gridster.serialize();
-            console.log(gridData);
             $('#structureform').val(JSON.stringify(gridData));
             $("#theform").submit();
-            console.log(gridData)
         });
 
     });

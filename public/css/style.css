@@ -83,11 +83,6 @@ h3 {
   color: white;
 }
 
-/* Gridster styles */
-.demo {
-  margin: 3em 0;
-  padding: 7.5em 0 5.5em;
-}
 
 .demo:hover .gridster {
   opacity: 1;

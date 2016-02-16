@@ -1,15 +1,3 @@
-<?= $page->title ?> <br>
-
-<?= $page->content ?> <br>
-
-<?= $page->id ?>
-
-<?= $page->structure ?>
-
-<div class="controls">
-    <button class="js-seralize">Build from serialize</button>
-</div>
-
 <div class="gridster">
     <ul>
     </ul>
@@ -29,21 +17,27 @@
         $(function(){
 
             gridster = $(".gridster ul").gridster({
-                widget_base_dimensions: [100, 55],
-                widget_margins: [5, 5]
+                widget_base_dimensions: [140, 140],
+                widget_margins: [5, 5],
+                min_cols: 6,
+                max_cols:12,
+                draggable: {ignore_dragging: true},
             }).data('gridster');
 
 
-            $('.js-seralize').on('click', function() {
+            placementObject();
+
+            function placementObject() {
                 gridster.remove_all_widgets();
                 $.each(serialization, function() {
                     gridster.add_widget('<li />', this.size_x, this.size_y, this.col, this.row);
                 });
-            });
+
+            }
 
         });
 
 
-    
+
 </script>
 
