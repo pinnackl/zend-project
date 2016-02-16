@@ -1,3 +1,5 @@
+
+
 <?php
 $title = 'Créer une page';
 $this->headTitle($title);
@@ -23,3 +25,36 @@ $form->setAttribute('method', 'post');
 echo $this->form()->openTag($form);
 echo $this->formCollection($form);
 echo $this->form()->closeTag();
+
+?>
+<section class="demo">
+    <div class="gridster">
+        <ul>
+            <li data-row="1" data-col="1" data-sizex="1" data-sizey="1"><h1>Bloc 1</h1></li>
+            <li data-row="2" data-col="1" data-sizex="1" data-sizey="1"><h1>Bloc 2</h1></li>
+            <li data-row="3" data-col="1" data-sizex="1" data-sizey="1"><h1>Bloc 3<h1></li>
+            <li data-row="1" data-col="2" data-sizex="2" data-sizey="1"><h1>Bloc 4</h1></li>
+            <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"><h1>Bloc 5</h1></li>
+            <li data-row="1" data-col="4" data-sizex="1" data-sizey="1"><h1>Bloc 6</h1></li>
+            <li data-row="2" data-col="4" data-sizex="2" data-sizey="1"><h1>Bloc 7</h1></li>
+            <li data-row="3" data-col="4" data-sizex="1" data-sizey="1"><h1>Bloc 8</h1></li>
+            <li data-row="1" data-col="5" data-sizex="1" data-sizey="1"><h1>Bloc 9</h1></li>
+            <li data-row="3" data-col="5" data-sizex="1" data-sizey="1"><h1>Bloc 10</h1></li>
+            <li data-row="1" data-col="6" data-sizex="1" data-sizey="1"><h1>Bloc 11</h1></li>
+            <li data-row="2" data-col="6" data-sizex="1" data-sizey="2"><h1>Bloc 12</h1></li>
+        </ul>
+    </div>
+</section>
+<script src="<?php echo $this->basePath('lib/gridster/dist/jquery.gridster.min.js') ?>"></script>
+
+<script type="text/javascript">
+    var gridster;
+
+    $(function() {
+        gridtster = $(".gridster > ul").gridster({
+            widget_margins: [10, 10],
+            widget_base_dimensions: [140, 140],
+            min_cols: 6
+        }).data('gridster');
+    });
+</script>

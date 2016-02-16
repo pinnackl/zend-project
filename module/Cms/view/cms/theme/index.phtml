@@ -21,11 +21,11 @@ $this->headTitle($title);
             <td><?php echo $theme->getThemeName()?></td>
             <td>
             <?php if($theme->getThemeId() == $user = $this->identity()->getUsrthId()) :?>
-                <span class="badge">Active</span>
+                <span style="color: #fff;" class="badge light-green darken-4">Active</span>
                 <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
                 array('controller' => 'theme', 'action'=>'desactive', 'id' => $theme->getThemeId()));?>">Desactive</a>
             <?php else: ?>
-                <span class="badge">Desactive</span>
+                <span  style="color: #fff;" class="badge deep-orange accent-4">Desactive</span>
                 <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
                 array('controller' => 'theme', 'action'=>'active', 'id' => $theme->getThemeId()));?>">Active</a>
             <?php  endif ?>

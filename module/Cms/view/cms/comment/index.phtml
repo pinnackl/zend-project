@@ -53,12 +53,12 @@ $this->headTitle($title);
     <td><?php if (is_object($comment->getComCreated())) echo $this->escapeHtml($comment->getComCreated()->format('Y-m-d H:i:s'));?></td><!-- Notice: getArtcCreated() returns an object convert to string -->
     <td>
         <?php if($comment->getAuthor()->getUsrId() == $user = $this->identity()->getUsrId() && $comment->getComActive() ) :?>
-            <span class="badge" >Active</span>
-            <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+            <span style="color: #fff;" class="badge light-green darken-4">Active</span>
+            <a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
                 array('controller' => 'comment', 'action'=>'desactive', 'id' => $comment->getComId()));?>">Desactive</a>
         <?php else: ?>
-            <span class="badge">Desactive</span>
-            <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+            <span  style="color: #fff;" class="badge deep-orange accent-4">Desactive</span>
+            <a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
                 array('controller' => 'comment', 'action'=>'active', 'id' => $comment->getComId()));?>">Active</a>
         <?php  endif ?>
 

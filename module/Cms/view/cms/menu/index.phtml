@@ -25,11 +25,11 @@ $this->headTitle($title);
             </td>
             <td>
                 <?php if( $menu->getMenuActive() ) :?>
-                    <span class="badge" >Active</span>
+                    <span style="color: #fff;" class="badge light-green darken-4">Active</span>
                     <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
                         array('controller' => 'comment', 'action'=>'desactive', 'id' => $menu->getMenuId()));?>">Desactive</a>
                 <?php else: ?>
-                    <span class="badge">Desactive</span>
+                    <span  style="color: #fff;" class="badge deep-orange accent-4">Desactive</span>
                     <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
                         array('controller' => 'comment', 'action'=>'active', 'id' => $menu->getMenuId()));?>">Active</a>
                 <?php  endif ?>

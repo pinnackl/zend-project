@@ -18,6 +18,7 @@ $this->headTitle($title);
     <tr>
         <th>Titre</th>
         <th>Contenu</th>
+        <th>Category</th>
         <th>Menu</th>
         <th>&nbsp;</th>
     </tr>
@@ -26,12 +27,15 @@ $this->headTitle($title);
             <td><a href="<?=$this->url('cms/default', array('controller' => 'page', 'action'=>'view', 'id' => $page->id))?>">
                     <?=$this->escapeHtml($page->title)?>
                 </a>
-                <?php if($page->category != null):?>
-                    (<?=$this->escapeHtml($page->category->getCtgrName())?>)
-                <?php endif?>
+
             </td>
             <td>
                 <?=$this->escapeHtml($page->content)?>
+            </td>
+            <td>
+                <?php if($page->category != null):?>
+                    <?=$this->escapeHtml($page->category->getCtgrName())?>
+                <?php endif?>
             </td>
             <td>
                 <?php if($page->menu != null):?>
