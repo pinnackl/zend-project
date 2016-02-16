@@ -59,9 +59,8 @@ class UserController extends AbstractActionController
 
         $form->setData($request->getPost());
         if ($form->isValid()) {
-            $this->prepareData($user);
+            //$this->prepareData($user);
             $form->setInputFilter(new UserFilter());
-
             if ($form->isValid()) {
                 $data = $form->getData();
                 unset($data['submit']);
@@ -98,7 +97,6 @@ class UserController extends AbstractActionController
         return new ViewModel(array('form' => $form, 'id' => $id));
     }
 
-    // D - delete
     public function deleteAction()
     {
         $id = $this->params()->fromRoute('id');
@@ -106,7 +104,7 @@ class UserController extends AbstractActionController
             $this->getUsersTable()->delete(array('user_id' => $id));
         }
 
-        return $this->redirect()->toRoute('auth/default', array('controller' => 'admin', 'action' => 'index'));
+        return $this->redirect()->toRoute('cms/default', array('controller' => 'user', 'action' => 'index'));
     }
 
     public function viewAction()
@@ -142,7 +140,7 @@ class UserController extends AbstractActionController
 
     public function prepareData($user)
     {
-        $user->setUsrActive(0);
+        $user->setUsrActive(1);
         $user->setUsrPasswordSalt($this->generateDynamicSalt());
         $user->setUsrPassword($this->encriptPassword(
             $this->getStaticSalt(),
@@ -172,7 +170,7 @@ class UserController extends AbstractActionController
     {
         $staticSalt = '';
         $config = $this->getServiceLocator()->get('Config');
-        $staticSalt = 'lapin';//$config['static_salt'];
+        $staticSalt = $config['static_salt'];
         return $staticSalt;
     }
 
@@ -189,8 +187,6 @@ class UserController extends AbstractActionController
             $this->usersTable = new TableGateway(
                 'users',
                 $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter')
-//				new \Zend\Db\TableGateway\Feature\RowGatewayFeature('user_id') // Zend\Db\RowGateway\RowGateway Object
-//				ResultSetPrototype
             );
         }
         return $this->usersTable;

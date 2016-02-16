@@ -40,8 +40,8 @@ $this->headTitle($title);
                 <?php endif  ?>
             </td>
             <td>
-                <a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'edit'));?>">Modifier</a>
-                <a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'delete'));?>">Supprimer</a>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'edit', 'id' => $user->getUsrId()));?>">Modifier</a>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'delete', 'id' => $user->getUsrId()));?>">Supprimer</a>
             </td>
         </tr>
     <?php endforeach?>
