@@ -28,6 +28,11 @@ class PageForm extends Form {
         $idField->setAttribute('id', 'structureform');
         $this->add($idField);
 
+        $idField = new Element\Hidden('block_element');
+        $idField->setAttribute('id', 'block-element');
+        $this->add($idField);
+
+
         //Page Category
         $idField = new Element\Select('ctgr_id');
         $idField->setAttribute('class', 'browser-default');

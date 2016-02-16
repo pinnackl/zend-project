@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
  * @property string $title
  * @property string $content
  * @property string $structure
+ * @property string $block_element
  */
 class Page implements ArraySerializableInterface, InputFilterAwareInterface
 {
@@ -40,6 +41,13 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
      * @ORM\Column(type="string")
      */
     protected $structure;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $block_element;
+
+
     /**
      * @ManyToOne(targetEntity="Category")
      * @JoinColumn(name="ctgr_id", referencedColumnName="ctgr_id")
@@ -135,6 +143,24 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
     {
         return $this->structure;
     }
+
+    /**
+     * @param string $block_element
+     */
+    public function setBlockElement($block_element)
+    {
+        $this->block_element = $block_element;
+    }
+    /**
+     * @return string
+     */
+    public function getBlockElement()
+    {
+        return $this->block_element;
+    }
+
+
+
     /**
      * @param int $id
      */

@@ -35,7 +35,7 @@ echo $this->form()->closeTag();
             <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" data-id="1" data-element-id="" data-element-type="">
                 <h1 style="margin-top: 50px">Bloc 1</h1>
                 <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="1" class="close"/>
-                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger" data-settings="1">settings</i>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
             </li>
             <li data-row="2" data-col="1" data-sizex="1" data-sizey="1" data-id="2">
                 <h1 style="margin-top: 50px">Bloc 2</h1>
@@ -127,7 +127,7 @@ echo $this->form()->closeTag();
                         </select>
                     </div>
                     <div class="card-action">
-                        <a href="#" data-element="article">Choisir</a>
+                        <a href="#" data-element="article"  class="choose-element-block-article">Choisir</a>
                     </div>
                 </div>
             </div>
@@ -179,6 +179,8 @@ echo $this->form()->closeTag();
     var cpt =12;
     var diff=0;
     var dataOldId= [];
+    var currentModalId =0;
+    var elements = [];
 
     $(function() {
         gridster = $(".gridster > ul").gridster({
@@ -238,11 +240,30 @@ echo $this->form()->closeTag();
             var gridster = $(".gridster ul").gridster().data('gridster');
             gridData = gridster.serialize();
             $('#structureform').val(JSON.stringify(gridData));
+            $('#block-element').val(JSON.stringify(elements))
             $("#theform").submit();
         });
 
         $('.choose-element-block-menu').click(function() {
-            console.log($(this).parent().find('select').val());
+            var menuId= $(this).parent().parent().find('select').val();
+            elements.push({element_id: menuId,
+                        element_type: 'menu',
+                        element_block_id: currentModalId
+            });
+        });
+
+        $('.choose-element-block-article').click(function() {
+            var articleId= $(this).parent().parent().find('select').val();
+            elements.push({element_id: articleId,
+                element_type: 'article',
+                element_block_id: currentModalId
+            });
+
+        });
+
+        $('.modal-call-element').click(function() {
+            var blockId = $(this).parent().attr("data-id");
+            currentModalId = blockId;
         });
 
     });
