@@ -54,7 +54,22 @@ echo $this->form()->closeTag();
         gridtster = $(".gridster > ul").gridster({
             widget_margins: [10, 10],
             widget_base_dimensions: [140, 140],
-            min_cols: 6
+            min_cols: 6,
+            max_cols:12,
+
+            resize: {
+                enabled: true,
+                start: function (e, ui, $widget) {
+
+                },
+                stop: function (e, ui, $widget) {
+                    var newHeight = this.resize_coords.data.height;
+                    var newWidth = this.resize_coords.data.width;
+                    
+                }
+            },
         }).data('gridster');
+
+
     });
 </script>

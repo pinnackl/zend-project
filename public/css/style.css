@@ -87,7 +87,6 @@ h3 {
 .demo {
   margin: 3em 0;
   padding: 7.5em 0 5.5em;
-  background: #004756;
 }
 
 .demo:hover .gridster {
@@ -108,7 +107,7 @@ h3 {
 }
 
 .gridster li {
-  border: 1px solid greenyellow;
+  border: 1px solid #2bbbad;
 }
 
 .gridster .gs_w {
