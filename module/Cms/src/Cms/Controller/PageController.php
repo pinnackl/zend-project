@@ -61,6 +61,9 @@ class PageController extends AbstractActionController
         }
         $form->setCategories($options);
 
+        $articles = $this->getEntityManager()->getRepository('Cms\Entity\Article')->findAll();
+        $menus = $this->getEntityManager()->getRepository('Cms\Entity\Menu')->findAll();
+
 
         $menus = $this->getEntityManager()->getRepository('Cms\Entity\Menu')->findAll();
         $options = array(""=>"");
@@ -79,7 +82,10 @@ class PageController extends AbstractActionController
                 return $this->redirect()->toRoute('cms/default', array('controller' => 'page', 'action' => 'index'));
             }
         }
-        return array('form' => $form);
+        return array(   'form' => $form,
+                        'articles' => $articles,
+                        'menus' => $menus
+                    );
     }
 
     public function editAction()
