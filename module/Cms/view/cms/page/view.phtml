@@ -3,7 +3,7 @@
     </ul>
 </div>
 
-
+<?= $page->block_element ?>
 <script src="<?php echo $this->basePath('lib/gridster/dist/jquery.gridster.min.js') ?>"></script>
 
 <script type="text/javascript">
@@ -11,6 +11,9 @@
     // sort serialization
     serialization = <?= $page->structure ?>;
 
+    $array = <?= $page->block_element ?>;
+
+    console.log(serialization);
     $(function(){
 
         gridster = $(".gridster ul").gridster({
@@ -28,6 +31,9 @@
             $.each(serialization, function() {
                 gridster.add_widget('<li />', this.size_x, this.size_y, this.col, this.row);
             });
+            $.each($array, function() {
+
+            })
         }
     });
 </script>

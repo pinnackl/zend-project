@@ -177,6 +177,9 @@ class PageController extends AbstractActionController
     public function viewAction()
     {
 
+
+
+
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         //Si l'Id est vie on redirige vers la liste
         if (!$id) {
@@ -185,7 +188,13 @@ class PageController extends AbstractActionController
         try{
             //Sinon on charge la page correspondant à l'Id
             $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
+            var_dump(json_decode($page->block_element));
         }
+
+        //Récupérer les éléments json to block_element
+         //$menu = $this->getEntityManager()->find('Cms\Entity\Menu', $id);
+            //$articles = $this->getEntityManager()->find('Cms\Entity\Article', $id);
+
         catch(\Exception $e){
             //Si la page n'existe pas en base on génère une erreur 404
             $response   = $this->response;
