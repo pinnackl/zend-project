@@ -1,6 +1,7 @@
 <?php
 namespace Cms\Controller;
 
+use Auth\Entity\User;
 use Auth\Form\UserFilter;
 use Auth\Form\UserForm;
 use Zend\Mvc\Controller\AbstractActionController,
@@ -47,6 +48,7 @@ class UserController extends AbstractActionController
     public function addAction()
     {
         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        $user = new User;
 
         if(!$auth->hasIdentity()) {
             return $this->redirect()->toRoute('home');
@@ -55,9 +57,11 @@ class UserController extends AbstractActionController
         $form = new UserForm();
         $request = $this->getRequest();
 
-        if ($request->isPost()) {
+        $form->setData($request->getPost());
+        if ($form->isValid()) {
+            $this->prepareData($user);
             $form->setInputFilter(new UserFilter());
-            $form->setData($request->getPost());
+
             if ($form->isValid()) {
                 $data = $form->getData();
                 unset($data['submit']);
@@ -68,6 +72,7 @@ class UserController extends AbstractActionController
         }
         return new ViewModel(array('form' => $form));
     }
+
 
     public function updateAction()
     {
@@ -133,6 +138,47 @@ class UserController extends AbstractActionController
         return new ViewModel(array(
             'page' => $page
         ));
+    }
+
+    public function prepareData($user)
+    {
+        $user->setUsrActive(0);
+        $user->setUsrPasswordSalt($this->generateDynamicSalt());
+        $user->setUsrPassword($this->encriptPassword(
+            $this->getStaticSalt(),
+            $user->getUsrPassword(),
+            $user->getUsrPasswordSalt()
+        ));
+        $user->setUsrlId(2);
+        $user->setLngId(1);
+        $user->setUsrRegistrationDate(new \DateTime());
+        $user->setUsrRegistrationToken(md5(uniqid(mt_rand(), true))); // $this->generateDynamicSalt();
+//		$user->setUsrRegistrationToken(uniqid(php_uname('n'), true));
+        $user->setUsrEmailConfirmed(0);
+        return $user;
+    }
+
+
+    public function generateDynamicSalt()
+    {
+        $dynamicSalt = '';
+        for ($i = 0; $i < 50; $i++) {
+            $dynamicSalt .= chr(rand(33, 126));
+        }
+        return $dynamicSalt;
+    }
+
+    public function getStaticSalt()
+    {
+        $staticSalt = '';
+        $config = $this->getServiceLocator()->get('Config');
+        $staticSalt = 'lapin';//$config['static_salt'];
+        return $staticSalt;
+    }
+
+    public function encriptPassword($staticSalt, $password, $dynamicSalt)
+    {
+        return $password = md5($staticSalt . $password . $dynamicSalt);
     }
 
 

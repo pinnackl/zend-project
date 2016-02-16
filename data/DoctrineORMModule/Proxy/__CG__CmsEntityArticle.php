@@ -64,10 +64,10 @@ class Article extends \Cms\Entity\Article implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'children', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'parent', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'language', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'author', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'resource', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcTitle', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcSlug', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcIntrotext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcFulltext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcCreated', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'categories', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'comments', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcId');
+            return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'children', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'parent', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'language', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'author', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'resource', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcTitle', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcSlug', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcIntrotext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'art_image_filename', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcFulltext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcCreated', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'categories', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'comments', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcId');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'children', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'parent', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'language', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'author', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'resource', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcTitle', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcSlug', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcIntrotext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcFulltext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcCreated', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'categories', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'comments', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcId');
+        return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'children', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'parent', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'language', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'author', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'resource', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcTitle', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcSlug', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcIntrotext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'art_image_filename', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcFulltext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcCreated', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'categories', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'comments', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcId');
     }
 
     /**
@@ -281,6 +281,28 @@ class Article extends \Cms\Entity\Article implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setArtcSlug', array($artcSlug));
 
         return parent::setArtcSlug($artcSlug);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getArtcImageFilename()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArtcImageFilename', array());
+
+        return parent::getArtcImageFilename();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setArtcImageFilename($art_image_filename)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setArtcImageFilename', array($art_image_filename));
+
+        return parent::setArtcImageFilename($art_image_filename);
     }
 
     /**

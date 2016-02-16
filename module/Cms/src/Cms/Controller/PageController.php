@@ -61,11 +61,9 @@ class PageController extends AbstractActionController
         }
         $form->setCategories($options);
 
+        $menus = $this->getEntityManager()->getRepository('Cms\Entity\Menu')->findAll();
         $articles = $this->getEntityManager()->getRepository('Cms\Entity\Article')->findAll();
-        $menus = $this->getEntityManager()->getRepository('Cms\Entity\Menu')->findAll();
 
-
-        $menus = $this->getEntityManager()->getRepository('Cms\Entity\Menu')->findAll();
         $options = array(""=>"");
         foreach($menus as $menu) {
             $options[$menu->getMenuId()] = $menu->getMenuName();
@@ -145,12 +143,9 @@ class PageController extends AbstractActionController
     {
         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
 
-        if(!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('home');
-        }
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
         if (!$id) {
-            return $this->redirect()->toRoute('page');
+            return $this->redirect()->toRoute('cms/default', array('controller' => 'page', 'action' => 'index'));
         }
 
         $request = $this->getRequest();
@@ -166,7 +161,7 @@ class PageController extends AbstractActionController
             }
 
             //Redirection vers la liste des pages
-            return $this->redirect()->toRoute('page');
+            return $this->redirect()->toRoute('cms/default', array('controller' => 'page', 'action' => 'index'));
         }
         return array(
             'id' => $id,
@@ -176,24 +171,18 @@ class PageController extends AbstractActionController
 
     public function viewAction()
     {
-
-
-
-
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
-        //Si l'Id est vie on redirige vers la liste
         if (!$id) {
             return $this->redirect()->toRoute('page');
         }
         try{
-            //Sinon on charge la page correspondant à l'Id
             $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
             //var_dump(json_decode($page->block_element));
         }
 
         //Récupérer les éléments json to block_element
-         //$menu = $this->getEntityManager()->find('Cms\Entity\Menu', $id);
-            //$articles = $this->getEntityManager()->find('Cms\Entity\Article', $id);
+        //$menu = $this->getEntityManager()->find('Cms\Entity\Menu', $id);
+        //$articles = $this->getEntityManager()->find('Cms\Entity\Article', $id);
 
         catch(\Exception $e){
             //Si la page n'existe pas en base on génère une erreur 404
@@ -212,7 +201,6 @@ class PageController extends AbstractActionController
 
     public function getPagesTable()
     {
-        // I have a Table data Gateway ready to go right out of the box
         if (!$this->pagesTable) {
             $this->pagesTable = new TableGateway(
                 'pages',

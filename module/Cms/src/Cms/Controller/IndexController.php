@@ -48,7 +48,27 @@ class IndexController extends AbstractActionController
 		$form->get('categories')->setAttributes(array('class'=> 'browser-default', 'style'=> 'height:100px'));
 		
         $request = $this->getRequest();
+
         if ($request->isPost()) {
+			$files =  $request->getFiles()->toArray();
+			$httpadapter = new \Zend\File\Transfer\Adapter\Http();
+			$filesize  = new \Zend\Validator\File\Size(array('min' => 1000 )); //1KB
+			$extension = new \Zend\Validator\File\Extension(array('extension' => array('png')));
+			if(!empty($files)) {
+				$httpadapter->setValidators(array($filesize, $extension), $files['artcImageFilename']['name']);
+				if($httpadapter->isValid()) {
+					$basePath = $this->getRequest()->getBasePath();
+
+					$rep = $httpadapter->setDestination($basePath.'/public/uploads/');
+
+
+					if($httpadapter->receive($files['artcImageFilename']['name'])) {
+						$newfile = $httpadapter->getFileName();
+					}
+				}
+			}
+
+
 			$post = $request->getPost();
 			// uncooment and fix if you want to control the date and time
 //			$post->artcCreated = $post->artcCreatedDate . ' ' . $post->artcCreatedTime;
@@ -195,32 +215,40 @@ class IndexController extends AbstractActionController
 			}           
 		}
 
-		 $form->add(array(
-			 'type' => 'Zend\Form\Element\Date',
-			 'name' => 'artcCreatedDate',
-			 'options' => array(
-					 'label' => 'Created Date'
-			 ),
-			 'attributes' => array(
-					 'min' => '2012-01-01',
-					 'max' => '2020-01-01',
-					 'step' => '1', // days; default step interval is 1 day
-				 		'class' => 'datepicker'
-			 )
+
+		$form->add(array(
+			 'type' => 'Zend\Form\Element\File',
+			 'name' => 'artcImageFilename',
+
 		 ));
 
-		 $form->add(array(
-			 'type' => 'Zend\Form\Element\Time',
-			 'name' => 'artcCreatedTime',
-			 'options'=> array(
-					 'label' => 'Created Time'
-			 ),
-			 'attributes' => array(
-					 'min' => '00:00:00',
-					 'max' => '23:59:59',
-					 'step' => '60', // seconds; default step interval is 60 seconds
-			 )
-		 ));
+//
+//		 $form->add(array(
+//			 'type' => 'Zend\Form\Element\Date',
+//			 'name' => 'artcCreatedDate',
+//			 'options' => array(
+//					 'label' => 'Created Date'
+//			 ),
+//			 'attributes' => array(
+//					 'min' => '2012-01-01',
+//					 'max' => '2020-01-01',
+//					 'step' => '1', // days; default step interval is 1 day
+//				 		'class' => 'datepicker'
+//			 )
+//		 ));
+//
+//		 $form->add(array(
+//			 'type' => 'Zend\Form\Element\Time',
+//			 'name' => 'artcCreatedTime',
+//			 'options'=> array(
+//					 'label' => 'Created Time'
+//			 ),
+//			 'attributes' => array(
+//					 'min' => '00:00:00',
+//					 'max' => '23:59:59',
+//					 'step' => '60', // seconds; default step interval is 60 seconds
+//			 )
+//		 ));
 
 		$form->remove('artcCreated');
 		$form->remove('parent');

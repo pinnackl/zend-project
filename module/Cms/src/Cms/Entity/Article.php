@@ -126,6 +126,14 @@ class Article
      * @Annotation\Options({"label":"Intro Text:"})	 
      */
     private $artcIntrotext;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="art_image_filename", type="text", nullable=true)
+     *
+     */
+    private $art_image_filename;
 	
     /**
      * @var string
@@ -300,6 +308,29 @@ class Article
     {
         $this->artcSlug = $artcSlug;
     
+        return $this;
+    }
+
+    /**
+     * Get art_image_filename
+     *
+     * @return string
+     */
+    public function getArtcImageFilename()
+    {
+        return $this->art_image_filename;
+    }
+
+    /**
+     * Set art_image_filename
+     *
+     * @param string $art_image_filename
+     * @return Article
+     */
+    public function setArtcImageFilename($art_image_filename)
+    {
+        $this->art_image_filename = $art_image_filename;
+
         return $this;
     }
 

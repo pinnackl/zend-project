@@ -37,7 +37,7 @@ class RegistrationController extends AbstractActionController
         // 2) Better use a form class
         $form = new RegistrationForm();
         $form->get('submit')->setValue('Register');
-        $form->setHydrator(new DoctrineHydrator($entityManager,'AuthDoctrine\Entity\User'));
+        $form->setHydrator(new DoctrineHydrator($entityManager,'Aut\Entity\User'));
 
         $form->bind($user);
         $request = $this->getRequest();
@@ -46,8 +46,8 @@ class RegistrationController extends AbstractActionController
             $form->setData($request->getPost());
             if ($form->isValid()) {
                 $this->prepareData($user);
-                $this->sendConfirmationEmail($user);
-                $this->flashMessenger()->addMessage($user->getUsrEmail());
+                //$this->sendConfirmationEmail($user);
+                //$this->flashMessenger()->addMessage($user->getUsrEmail());
                 $entityManager->persist($user);
                 $entityManager->flush();
                 return $this->redirect()->toRoute('auth/default', array('controller'=>'registration', 'action'=>'registration-success'));
@@ -155,7 +155,7 @@ class RegistrationController extends AbstractActionController
     {
         $staticSalt = '';
         $config = $this->getServiceLocator()->get('Config');
-        $staticSalt = 'lapin';//$config['static_salt'];
+        $staticSalt = $config['static_salt'];//$config['static_salt'];
         return $staticSalt;
     }
 
