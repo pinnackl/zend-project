@@ -101,7 +101,7 @@ echo $this->form()->closeTag();
     <div class="modal-content">
         <h4>Choose Element</h4>
         <div class="row">
-            <div class="col s3 m3">
+            <div class="col s3 m4">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <span class="card-title">Menu (<?php echo count($menus);?>)</span>
@@ -116,7 +116,7 @@ echo $this->form()->closeTag();
                     </div>
                 </div>
             </div>
-            <div class="col s3 m3">
+            <div class="col s3 m4">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <span class="card-title">Article (<?php echo count($articles);?>)</span>
@@ -131,36 +131,36 @@ echo $this->form()->closeTag();
                     </div>
                 </div>
             </div>
-            <div class="col s3 m3">
+            <div class="col s3 m4">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
                         <span class="card-title">Bloc Comment</span>
-                        <p>I am a very simple card. I am good at containing small bits of information.</p>
+                        <p>Bloc de commentaire</p>
                     </div>
                     <div class="card-action">
                         <a href="#" data-element="comment">Choisir</a>
                     </div>
                 </div>
             </div>
-            <div class="col s3 m3">
+            <div class="col s4 m4">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
-                        <span class="card-title">Video</span>
-                        <p>I am a very simple card. I am good at containing small bits of information.</p>
+                        <span class="card-title">Bloc Media</span>
+                        <p>Liens vers les réseau sociaux</p>
                     </div>
                     <div class="card-action">
-                        <a href="#" data-element="video">Choisir</a>
+                        <a href="#" data-element="comment">Choisir</a>
                     </div>
                 </div>
             </div>
-            <div class="col s3 m3">
+            <div class="col s4 m4">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
-                        <span class="card-title">Image</span>
-                        <p>I am a very simple card. I am good at containing small bits of information.</p>
+                        <span class="card-title">Video</span>
+                        <p>Ajouter un video</p>
                     </div>
                     <div class="card-action">
-                        <a href="#" data-element="image">Choisir</a>
+                        <a href="#" data-element="video">Choisir</a>
                     </div>
                 </div>
             </div>
@@ -259,15 +259,21 @@ echo $this->form()->closeTag();
         });
 
         $('.choose-element-block-menu').click(function() {
-            var menuId= $(this).parent().parent().find('select').val();
+
+            var papa =$(this).parent().parent();
+            var menuId= papa.find('select').val();
+
+            $(".gridster > ul li").filter('[data-id="'+currentModalId+'"]').attr('data-id', currentModalId).find('h1').html(papa.find('select option:selected').text())
             elements.push({element_id: menuId,
-                        element_type: 'menu',
-                        element_block_id: currentModalId
+                element_type: 'menu',
+                element_block_id: currentModalId
             });
         });
 
         $('.choose-element-block-article').click(function() {
-            var articleId= $(this).parent().parent().find('select').val();
+            var papa =$(this).parent().parent();
+            var articleId= papa.find('select').val();
+            $(".gridster > ul li").filter('[data-id="'+currentModalId+'"]').attr('data-id', currentModalId).find('h1').html(papa.find('select option:selected').text())
             elements.push({element_id: articleId,
                 element_type: 'article',
                 element_block_id: currentModalId
