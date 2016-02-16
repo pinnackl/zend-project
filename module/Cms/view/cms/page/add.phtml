@@ -31,18 +31,55 @@ echo $this->form()->closeTag();
 <section class="demo">
     <div class="gridster">
         <ul>
-            <li data-row="1" data-col="1" data-sizex="1" data-sizey="1"><h1>Bloc 1</h1></li>
-            <li data-row="2" data-col="1" data-sizex="1" data-sizey="1"><h1>Bloc 2</h1></li>
-            <li data-row="3" data-col="1" data-sizex="1" data-sizey="1"><h1>Bloc 3<h1></li>
-            <li data-row="1" data-col="2" data-sizex="2" data-sizey="1"><h1>Bloc 4</h1></li>
-            <li data-row="2" data-col="2" data-sizex="2" data-sizey="2"><h1>Bloc 5</h1></li>
-            <li data-row="1" data-col="4" data-sizex="1" data-sizey="1"><h1>Bloc 6</h1></li>
-            <li data-row="2" data-col="4" data-sizex="2" data-sizey="1"><h1>Bloc 7</h1></li>
-            <li data-row="3" data-col="4" data-sizex="1" data-sizey="1"><h1>Bloc 8</h1></li>
-            <li data-row="1" data-col="5" data-sizex="1" data-sizey="1"><h1>Bloc 9</h1></li>
-            <li data-row="3" data-col="5" data-sizex="1" data-sizey="1"><h1>Bloc 10</h1></li>
-            <li data-row="1" data-col="6" data-sizex="1" data-sizey="1"><h1>Bloc 11</h1></li>
-            <li data-row="2" data-col="6" data-sizex="1" data-sizey="2"><h1>Bloc 12</h1></li>
+            <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" data-id="1">
+                <h1>Bloc 1</h1>
+                <img src="img/close.png" data-close="1" class="close"/>
+            </li>
+            <li data-row="2" data-col="1" data-sizex="1" data-sizey="1" data-id="2">
+                <h1>Bloc 2</h1>
+                <img src="img/close.png" data-close="2" class="close"/>
+            </li>
+            <li data-row="3" data-col="1" data-sizex="1" data-sizey="1" data-id="3">
+                <h1>Bloc 3<h1>
+                        <img src="img/close.png" data-close="3" class="close"/>
+            </li>
+            <li data-row="1" data-col="2" data-sizex="2" data-sizey="1" data-id="4">
+                <h1>Bloc 4</h1>
+                <img src="img/close.png" data-close="4" class="close"/>
+            </li>
+            <li data-row="2" data-col="2" data-sizex="2" data-sizey="2" data-id="5">
+                <h1>Bloc 5</h1>
+                <img src="img/close.png" data-close="5" class="close"/>
+            </li>
+            <li data-row="1" data-col="4" data-sizex="1" data-sizey="1" data-id="6">
+                <img src="img/close.png" data-close="6" class="close"/>
+                <h1>Bloc 6</h1>
+            </li>
+            <li data-row="2" data-col="4" data-sizex="2" data-sizey="1" data-id="7">
+                <h1>Bloc 7</h1>
+                <img src="img/close.png" data-close="7" class="close"/>
+            </li>
+            <li data-row="3" data-col="4" data-sizex="1" data-sizey="1" data-id="8">
+                <h1>Bloc 8</h1>
+                <img src="img/close.png" data-close="8" class="close"/>
+            </li>
+            <li data-row="1" data-col="5" data-sizex="1" data-sizey="1" data-id="9">
+                <h1>Bloc 9</h1>
+                <img src="img/close.png" data-close="9" class="close"/>
+            </li>
+            <li data-row="3" data-col="5" data-sizex="1" data-sizey="1" data-id="10">
+                <h1>Bloc 10</h1>
+
+                <img src="img/close.png" data-close="10" class="close"/>
+            </li>
+            <li data-row="1" data-col="6" data-sizex="1" data-sizey="1" data-id="11">
+                <h1>Bloc 11</h1>
+                <img src="img/close.png" data-close="11" class="close"/>
+            </li>
+            <li data-row="2" data-col="6" data-sizex="1" data-sizey="2" data-id="12">
+                <h1>Bloc 12</h1>
+                <img src="img/close.png" data-close="12" class="close"/>
+            </li>
         </ul>
     </div>
 </section>
@@ -50,6 +87,8 @@ echo $this->form()->closeTag();
 
 <script type="text/javascript">
     var gridster;
+    var cpt =12;
+    var diff=0;
 
     $(function() {
         gridster = $(".gridster > ul").gridster({
@@ -71,13 +110,43 @@ echo $this->form()->closeTag();
             },
         }).data('gridster');
 
+        $(".gs-w").hover(function (){
+
+            var id = $(this).attr("data-id");
+            //show close button on hover
+            $("ul").find("[data-close='" + id + "']").show();
+            //show modifie button on hover
+            $("."+id).show();
+            console.log('id:'+id)
+        });
+        $(".gs-w").mouseleave(function (){
+            var id = $(this).attr("data-id");
+            //hide close button on hover
+            $("ul").find("[data-close='" + id + "']").hide();
+            //hide close button on hover
+            $("."+id).hide();
+        });
+        $(".close").click(function(){
+            var id=$(this).attr("data-close");
+            console.log(id);
+            //$("ul").find("[data-id='" + id + "']").remove();
+            gridster.remove_widget($("ul").find("[data-id='" + id + "']"));
+            cpt--;
+            diff++;
+
+        });
 
         $(document).on( "click", "#addWidgetButton", function(e) {
+            cpt++;
+            diff--;
             e.preventDefault();
-            gridster.add_widget.apply(gridster, ['<li><h1>New bloc</h1></li>', 2, 1]);
+            gridster.add_widget.apply(gridster, ['<li data-id="'+cpt+'"><h1>New bloc</h1>' +
+            '<img src="img/close.png" data-close="cpt" class="close"/></li>', 2, 1]);
         });
 
         $('.btn-submit-form-page').click(function() {
+            cpt++;
+            diff--;
             var gridster = $(".gridster ul").gridster().data('gridster');
             gridData = gridster.serialize();
             $('#structureform').val(JSON.stringify(gridData));
