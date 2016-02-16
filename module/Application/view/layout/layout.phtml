@@ -10,26 +10,16 @@
         ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
     ?>
 
-
-
-
     <?php if ($user = $this->identity()) :?>
         <?php if($this->identity()->getUsrthId() == 1) :?>
-            <!-- Compiled and minified CSS -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-            <!-- Compiled and minified JavaScript -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-
         <?php elseif($this->identity()->getUsrthId() == 2) : ?>
-            <!-- Latest compiled and minified CSS -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-            <!-- Optional theme -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-
-
-
         <?php elseif($this->identity()->getUsrthId() == 3) : ?>
+
         <?php endif ?>
 
     <?php  else : ?>
@@ -49,17 +39,13 @@
     <?php echo $this->headScript()
         ->prependFile($this->basePath('js/jquery.min.js'))
         ->prependFile($this->basePath('js/bootstrap.min.js'))
-        ->prependFile($this->basePath('lib/gridster/dist/jquery.gridster.min.js'))
         ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
         ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
         ->prependFile($this->basePath('js/main.js'))
     ; ?>
-
-
-
 </head>
-<body>
 
+<body>
 <nav class="blue-grey darken-2">
     <div class="nav-wrapper">
         <a class="brand-logo right" href="<?php echo $this->url('home') ?>">CMS</a>
@@ -75,12 +61,8 @@
         </ul>
 
         <?php if ($user = $this->identity()) :?>
-
-                <a style="margin-left: 30px" href="<?php echo $this->url('home');?>"><?php echo ' Bonjour,  ' . $this->escapeHtml($user->getUsrName()); ?></a>
-
-                <a class="right" style="margin-right: 100px" href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a>
-
-
+            <a style="margin-left: 30px" href="<?php echo $this->url('home');?>"><?php echo ' Bonjour,  ' . $this->escapeHtml($user->getUsrName()); ?></a>
+            <a class="right" style="margin-right: 100px" href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a>
         <?php endif ?>
 
     </div>

@@ -188,7 +188,7 @@ class PageController extends AbstractActionController
         try{
             //Sinon on charge la page correspondant à l'Id
             $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
-            var_dump(json_decode($page->block_element));
+            //var_dump(json_decode($page->block_element));
         }
 
         //Récupérer les éléments json to block_element
