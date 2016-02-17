@@ -32,9 +32,21 @@
 
             });
             $.each($array, function() {
-                console.log(this.element_id);
+                $wi = $(".gridster > ul li").filter('[data-id="'+ this.element_id+'"]').attr('data-id', this.element_id);
                 $(".gridster > ul li").filter('[data-id="'+ this.element_id+'"]').attr('data-id', this.element_id).html(this.element_type)
+                applyStyleToElement(this.element_type, $wi)
             })
+        }
+
+        function applyStyleToElement($type, $wi) {
+            switch($type) {
+                case 'menu':
+                    $wi.append("<b>Appended html</b>");
+                    break;
+                case 'article':
+                    break;
+
+            }
         }
     });
 </script>
