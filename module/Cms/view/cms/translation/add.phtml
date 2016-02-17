@@ -1,0 +1,28 @@
+<?php
+$title = 'Créer une traduction';
+$this->headTitle($title);
+?>
+
+    <nav class="nav-breadcrumb">
+        <div class="nav-wrapper">
+            <div class="col s12">
+                <?php echo $this->escapeHtml($title); ?>
+            </div>
+        </div>
+    </nav>
+
+<?php
+
+$form = $this->form;
+$form->prepare();
+// Assuming the "contact/process" route exists...
+$form->setAttribute('action', $this->url('cms/default', array('controller' => 'translation', 'action' => 'add'), true)); //'contact/process'));
+// or
+// $form->setAttribute('action', $this->url('grace-drops/default', array('controller' => 'translation', 'action' => 'add', 'id' => $this->id))); //'contact/process'));
+
+// Set the method attribute for the form
+$form->setAttribute('method', 'post');
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();

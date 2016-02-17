@@ -1,0 +1,38 @@
+<?php
+$title = 'Liste des Themes';
+$this->headTitle($title);
+?>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
+<table class="striped">
+    <tr>
+        <th>Name</th>
+        <th>Active</th>
+    </tr>
+    <?php foreach($themes as $theme):?>
+        <tr>
+            <td><?php echo $theme->getThemeName()?></td>
+            <td>
+            <?php if($theme->getThemeId() == $user = $this->identity()->getUsrthId()) :?>
+                <span style="color: #fff;" class="badge light-green darken-4">Active</span>
+                <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+                array('controller' => 'theme', 'action'=>'desactive', 'id' => $theme->getThemeId()));?>">Desactive</a>
+            <?php else: ?>
+                <span  style="color: #fff;" class="badge deep-orange accent-4">Desactive</span>
+                <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
+                array('controller' => 'theme', 'action'=>'active', 'id' => $theme->getThemeId()));?>">Active</a>
+            <?php  endif ?>
+
+            </td>
+        </tr>
+    <?php endforeach ?>
+</table>
+
+

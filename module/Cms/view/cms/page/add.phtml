@@ -1,0 +1,330 @@
+
+
+<?php
+$title = 'Créer une page';
+$this->headTitle($title);
+?>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
+<?php
+$form = $this->form;
+$form->prepare();
+
+$form->setAttribute('action', $this->url('cms/default', array('controller' => 'page', 'action' => 'add','id' => 'theform'), true));
+
+// Set the method attribute for the form
+$form->setAttribute('method', 'post');
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+
+?>
+
+<button class="btn waves-effect waves-light" id="addWidgetButton">Add block page</button>
+<section class="demo">
+    <div class="gridster">
+        <ul>
+            <li data-row="1" data-col="1" data-sizex="1" data-sizey="1" data-id="1" data-element-id="" data-element-type="">
+                <h1 style="margin-top: 50px">Bloc 1</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="1" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="2" data-col="1" data-sizex="1" data-sizey="1" data-id="2">
+                <h1 style="margin-top: 50px">Bloc 2</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="2" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="3" data-col="1" data-sizex="1" data-sizey="1" data-id="3">
+                <h1 style="margin-top: 50px">Bloc 3<h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="3" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="1" data-col="2" data-sizex="4" data-sizey="1" data-id="4">
+                <h1 style="margin-top: 50px">Header</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="4" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="2" data-col="2" data-sizex="4" data-sizey="2" data-id="5">
+                <h1 style="margin-top: 50px">Content</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="5" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="1" data-col="4" data-sizex="1" data-sizey="1" data-id="6">
+                <h1 style="margin-top: 50px">Bloc 6</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="6" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="2" data-col="4" data-sizex="1" data-sizey="1" data-id="7">
+                <h1 style="margin-top: 50px">Bloc 7</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="7" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="3" data-col="4" data-sizex="1" data-sizey="1" data-id="8">
+                <h1 style="margin-top: 50px">Bloc 8</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="8" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="5" data-col="1" data-sizex="6" data-sizey="1" data-id="9">
+                <h1 style="margin-top: 50px">Bloc 9</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="9" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="4" data-col="1" data-sizex="1" data-sizey="1" data-id="10">
+                <h1 style="margin-top: 50px">Bloc 10</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="10" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="4" data-col="2" data-sizex="4" data-sizey="1" data-id="11">
+                <h1 style="margin-top: 50px">Bloc 11</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="11" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+            <li data-row="4" data-col="3" data-sizex="1" data-sizey="1" data-id="12">
+                <h1 style="margin-top: 50px">Bloc 12</h1>
+                <img style="height:20px;top:5px;left:5px;position:absolute" src="<?php echo $this->basePath('img/close.png') ?>" data-close="12" class="close"/>
+                <i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-choose-element" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<!-- Modal Structure -->
+<div id="modal-choose-element" class="modal">
+    <div class="modal-content">
+        <h4>Choose Element</h4>
+        <div class="row">
+            <div class="col s4 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Menu (<?php echo count($menus);?>)</span>
+                        <select name="menu" id="menu" class="browser-default" style="color: #2BBBAD;">
+                            <?php foreach($menus as $menu): ?>
+                                <option value="<?php echo $menu->getMenuId(); ?>"><?php echo $menu->getMenuName() ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <div class="card-action">
+                        <a href="#!" data-element="menu" class="choose-element-block-menu modal-close">Choisir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Article (<?php echo count($articles);?>)</span>
+                        <select name="menu" id="" class="browser-default" style="color: #2BBBAD;">
+                            <?php foreach($articles as $article): ?>
+                                <option value="<?= $article->getArtcId() ?>"><?php echo $article->getArtcTitle() ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <div class="card-action">
+                        <a href="#!" data-element="article"  class="choose-element-block-article modal-close">Choisir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Bloc Comment</span>
+                        <p>Bloc de commentaire</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#!" data-element="comment" class="choose-element-block-comment modal-close">Choisir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Bloc Media</span>
+                        <p>Liens vers les réseau sociaux</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#!" data-element="media" class="choose-element-block-share modal-close">Choisir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Espace Pub</span>
+                        <p>Espace publicitaires</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#!" data-element="media" class="choose-element-block-pub modal-close">Choisir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s4 m4">
+                <div class="card blue-grey darken-1">
+                    <div class="card-content white-text">
+                        <span class="card-title">Video</span>
+                        <p>Ajouter un video</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" data-element="video">Choisir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script src="<?php echo $this->basePath('lib/gridster/dist/jquery.gridster.js') ?>"></script>
+
+<script type="text/javascript">
+    var gridster;
+    var cpt =12;
+    var diff=0;
+    var dataOldId= [];
+    var currentModalId =0;
+    var elements = [];
+    var blockId;
+
+    $(function() {
+        gridster = $(".gridster > ul").gridster({
+            widget_margins: [10, 10],
+            widget_base_dimensions: [140, 140],
+            min_cols: 6,
+            max_cols:12,
+
+            resize: {
+                enabled: true,
+                start: function (e, ui, $widget) {
+
+                },
+                stop: function (e, ui, $widget) {
+                    var newHeight = this.resize_coords.data.height;
+                    var newWidth = this.resize_coords.data.width;
+
+                }
+            },
+            serialize_params: function ($w, wgd) {
+                return {
+                    id: $w.attr("data-id"),
+                    col: wgd.col,
+                    row: wgd.row,
+                    size_x: wgd.size_x,
+                    size_y: wgd.size_y,
+                };
+            },
+        }).data('gridster');
+
+        $(".gs-w").hover(function (){
+            var id = $(this).attr("data-id");
+            $("ul").find("[data-close='" + id + "']").show();
+            $("."+id).show();
+        });
+
+        closeWidget();
+
+        function closeWidget() {
+            $(".close").click(function(){
+                var id=$(this).attr("data-close");
+                //$("ul").find("[data-id='" + id + "']").remove();
+                gridster.remove_widget($("ul").find("[data-id='" + id + "']"));
+                cpt--;
+                diff++;
+                dataOldId[diff] = id;
+            });
+        }
+
+        reloadCallToAction();
+
+
+        function reloadCallToAction() {
+            $(document).on( "click", "#addWidgetButton", function(e) {
+                if(cpt!=12) {
+                    cpt++;
+                    e.preventDefault();
+                    gridster.add_widget.apply(gridster, ['<li data-id="'+dataOldId[diff]+'"><h1>New bloc</h1>' +
+                    '<img src="<?php echo $this->basePath('img/close.png') ?>" style="height:20px;top:5px;left:5px;position:absolute" data-close="'+dataOldId[diff]+'" class="close"/>' +
+                    '<i style="height:20px;top:5px;right:5px;position:absolute" data-target="modal-'+dataOldId[diff]+'" class="material-icons modal-trigger modal-call-element" data-settings="1">settings</i></li>', 1, 1]);
+                    diff--;
+                    closeWidget();
+                }
+            });
+
+            $('.btn-submit-form-page').click(function() {
+                cpt++;
+                diff--;
+                var gridster = $(".gridster ul").gridster().data('gridster');
+                gridData = gridster.serialize();
+
+                alert(gridster);
+                $('#structureform').val(JSON.stringify(gridData));
+                $('#block-element').val(JSON.stringify(elements))
+                $("#theform").submit();
+            });
+
+            $('.choose-element-block-menu').click(function() {
+                var papa =$(this).parent().parent();
+                var menuId= papa.find('select').val();
+
+                $(".gridster > ul li").filter('[data-id="'+currentModalId+'"]').attr('data-id', currentModalId).find('h1').html(papa.find('select option:selected').text())
+                elements.push({element_id: menuId,
+                    element_type: 'menu',
+                    element_block_id: currentModalId
+                });
+            });
+
+            $('.choose-element-block-article').click(function() {
+                var papa =$(this).parent().parent();
+                var articleId= papa.find('select').val();
+                $(".gridster > ul li").filter('[data-id="'+currentModalId+'"]').attr('data-id', currentModalId).find('h1').html(papa.find('select option:selected').text())
+                elements.push({element_id: articleId,
+                    element_type: 'article',
+                    element_block_id: currentModalId
+                });
+
+            });
+
+            $('.choose-element-block-share').click(function() {
+                var papa =$(this).parent().parent();
+                var articleId= papa.find('select').val();
+                $(".gridster > ul li").filter('[data-id="'+currentModalId+'"]').attr('data-id', currentModalId).find('h1').html('Media share')
+                elements.push({element_id: '',
+                    element_type: 'share',
+                    element_block_id: currentModalId
+                });
+            });
+
+            $('.choose-element-block-comment').click(function() {
+                var papa =$(this).parent().parent();
+                $(".gridster > ul li").filter('[data-id="'+currentModalId+'"]').attr('data-id', currentModalId).find('h1').html('Comment')
+                elements.push({element_id: '',
+                    element_type: 'comment',
+                    element_block_id: currentModalId
+                });
+            });
+
+            $('.choose-element-block-pub').click(function() {
+                var papa =$(this).parent().parent();
+                $(".gridster > ul li").filter('[data-id="'+currentModalId+'"]').attr('data-id', currentModalId).find('h1').html('Pub')
+                elements.push({element_id: '',
+                    element_type: 'pub',
+                    element_block_id: currentModalId
+                });
+            });
+        }
+
+        $('.modal-call-element').click(function() {
+            blockId = $(this).parent().attr("data-id");
+            currentModalId = blockId;
+        });
+
+    });
+</script>

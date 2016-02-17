@@ -1,55 +1,127 @@
 <?php echo $this->doctype(); ?>
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <?php echo $this->headTitle('ZF2 '. $this->translate('Skeleton Application'))->setSeparator(' - ')->setAutoEscape(false) ?>
+<head>
+    <meta charset="utf-8">
+    <?php echo $this->headTitle('CMS')->setSeparator(' - ')->setAutoEscape(false) ?>
 
-        <?php echo $this->headMeta()
-            ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-            ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
+    <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+    ?>
 
-        <!-- Le styles -->
-        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
-                        ->prependStylesheet($this->basePath('css/style.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-                        ->prependStylesheet($this->basePath('css/bootstrap.min.css')) ?>
+    <?php if ($user = $this->identity()) :?>
+        <?php if($this->identity()->getUsrthId() == 1) :?>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+        <?php elseif($this->identity()->getUsrthId() == 2) : ?>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <?php elseif($this->identity()->getUsrthId() == 3) : ?>
 
-        <!-- Scripts -->
-        <?php echo $this->headScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery.min.js'))
-            ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
-            ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
-        ; ?>
+        <?php endif ?>
 
-    </head>
-    <body>
-        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><img src="<?php echo $this->basePath('img/zf2-logo.png') ?>" alt="Zend Framework 2"/>&nbsp;<?php echo $this->translate('Zend CMS') ?></a>
-                </div>
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
+    <?php  else : ?>
+            <!-- Compiled and minified CSS -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+            <!-- Compiled and minified JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <?php endif ?>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js"></script>
+    <!-- Le styles -->
+    <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+        ->prependStylesheet($this->basePath('css/style.css'))
+        ->prependStylesheet($this->basePath('lib/gridster/dist/jquery.gridster.min.css'))?>
+
+    <!-- Scripts -->
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath('js/jquery.min.js'))
+        ->prependFile($this->basePath('js/bootstrap.min.js'))
+        ->prependFile($this->basePath('js/respond.min.js'), 'text/javascript', array('conditional' => 'lt IE 9',))
+        ->prependFile($this->basePath('js/html5shiv.min.js'),   'text/javascript', array('conditional' => 'lt IE 9',))
+        ->prependFile($this->basePath('js/main.js'))
+    ; ?>
+</head>
+
+<body>
+<nav class="blue-grey darken-2">
+    <div class="nav-wrapper">
+        <a class="brand-logo right" href="<?php echo $this->url('home') ?>">CMS</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <?php if (!$user = $this->identity()) :?>
+                <li>
+                    <a href="<?php echo $this->url('home') ?>"> <?php echo $this->translate('Home') ?></a>
+                </li>
+                <li>
+                    <a href="<?php echo $this->url('auth') ?>"><?php echo $this->translate('login') ?></a>
+                </li>
+            <?php endif ?>
+        </ul>
+
+        <?php if ($user = $this->identity()) :?>
+            <a style="margin-left: 30px" href="<?php echo $this->url('home');?>"><?php echo ' Bonjour,  ' . $this->escapeHtml($user->getUsrName()); ?></a>
+            <a class="right" style="margin-right: 100px" href="<?php echo $this->url('auth/default', array('controller' => 'index', 'action' => 'logout'));?>"><?php echo $this->translate('Logout'); ?></a>
+        <?php endif ?>
+
+    </div>
+</nav>
+
+<div class="row">
+
+    <div class="col s2 blue-grey lighten-5">
+        <div class="collection">
+            <?php if ($user = $this->identity()) :?>
+                <a class="collection-item" href="<?php echo $this->url('cms') ?>"><?php echo $this->translate('Articles') ?></a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'comment', 'action' => 'hello')) ?>"><?php echo $this->translate('Comments') ?></a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'));?>">Catégories</a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Pages</a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'menu', 'action'=>'index'));?>">Menus</a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'theme', 'action'=>'index'));?>">Themes</a>
+                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'index'));?>">Users</a>
+            <?php  else: ?>
+                <a class="collection-item" href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Articles') ?></a>
+            <?php endif ?>
+        </div>
+    </div>
+
+    <div class="col s10" style="min-height: 600px">
+        <?php echo $this->content; ?>
+    </div>
+
+</div>
+
+
+
+<footer class="page-footer blue-grey darken-2">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
             </div>
-        </nav>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
         <div class="container">
-            <?php echo $this->content; ?>
-            <hr>
-            <footer>
-<!--                <p>&copy; 2005 - --><?php //echo date('Y') ?><!-- by Zend Technologies Ltd. --><?php //echo $this->translate('All rights reserved.') ?><!--</p>-->
-            </footer>
-        </div> <!-- /container -->
-        <?php echo $this->inlineScript() ?>
-    </body>
+            © 2016 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>
+<?php echo $this->inlineScript() ?>
+<script>
+
+</script>
+</body>
 </html>

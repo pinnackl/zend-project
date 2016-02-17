@@ -8,9 +8,13 @@
 return array(
     'modules' => array(
         'Application',
-        'Guestbook',
         'DoctrineModule',
-        'DoctrineORMModule'
+        'DoctrineORMModule',
+        //'Cms-old',
+        'Auth',
+        'Navigation',
+        'Cms',
+        'Authorize',
     ),
     'module_listener_options' => array(
         'module_paths' => array(

@@ -1,0 +1,35 @@
+<?php
+$title = 'Liste des Catégories';
+$this->headTitle($title);
+?>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'add'));?>">Ajouter une catégorie</a>
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Gérer les pages</a>
+
+<table class="striped">
+    <tr>
+        <th>Nom</th>
+        <th>Nb Articles</th>
+        <th></th>
+    </tr>
+    <?php foreach($categories as $category):?>
+        <tr>
+            <td><?=$this->escapeHtml($category->getCtgrName())?>
+            </td>
+            <td>
+                <?= $this->escapeHtml(count($category->getArticles())) ?>
+            </td>
+            <td>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action' => 'delete','id' => $category->getCtgrId() )) ?>">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach?>
+</table>

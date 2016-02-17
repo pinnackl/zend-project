@@ -52,17 +52,6 @@ return array(
                     ),
                 ),
             ),
-
-            'hello' => array(
-               'type' => 'Zend\Mvc\Router\Http\Literal',
-               'options' => array(
-                   'route'    => '/hello',
-                   'defaults' => array(
-                       'controller' => 'Application\Controller\Index',
-                       'action'     => 'hello',
-                   ),
-               ),
-           ),
         ),
     ),
     'service_manager' => array(

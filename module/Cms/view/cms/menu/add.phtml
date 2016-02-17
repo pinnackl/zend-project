@@ -1,0 +1,93 @@
+<?php
+$title = 'Créer un menu';
+$this->headTitle($title);
+?>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
+<?php
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('action', $this->url('cms/default', array('controller' => 'menu', 'action' => 'add'), true));
+
+$form->setAttribute('method', 'post');
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+
+
+?>
+
+    <div class="cf nestable-lists">
+
+    <button class="waves-effect waves-light btn" id="appendnestable">+ Add item</button>
+
+    <div class="dd" id="nestable3">
+        <ol class="dd-list">
+            <li class="dd-item dd3-item" data-id="13">
+                <div class="dd-handle dd3-handle">Drag</div>
+                <div class="dd3-content">
+                    <input type="text" value="" placeholder="item 1" style="height: 1rem"/>
+                </div>
+            </li>
+            <li class="dd-item dd3-item" data-id="14">
+                <div class="dd-handle dd3-handle">Drag</div>
+                <div class="dd3-content">
+                    <input type="text" value="" placeholder="item 2" style="height: 1rem"/>
+                </div>
+            </li>
+
+        </ol>
+    </div>
+</div>
+
+
+<script src="<?php echo $this->basePath('js/jquery.nestable.js') ?>"></script>
+
+<script>
+    $(document).ready(function()
+    {
+        $('#nestable').nestable()
+
+        var nestablecount = 3;
+        $('#appendnestable').click(function () {
+            $('ol.dd-list').append('<li class="dd-item dd3-item" data-id="' + nestablecount + '">' +
+                '<div class="dd-handle dd3-handle">Drag</div>' +
+                '<div class="dd3-content" name="' + nestablecount + '">' +
+                '<input type="text" value="" placeholder="item ' + nestablecount + '" style="height: 1rem" /></div></li>');
+            nestablecount++;
+        });
+
+        var updateOutput = function(e)
+        {
+            var list   = e.length ? e : $(e.target),
+                output = list.data('output');
+            if (window.JSON) {
+                output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+            } else {
+                output.val('JSON browser support required for this demo.');
+            }
+        };
+
+        $('#nestable-menu').on('click', function(e)
+        {
+            var target = $(e.target),
+                action = target.data('action');
+            if (action === 'expand-all') {
+                $('.dd').nestable('expandAll');
+            }
+            if (action === 'collapse-all') {
+                $('.dd').nestable('collapseAll');
+            }
+        });
+        $('#nestable3').nestable();
+    });
+</script>
+

@@ -1,0 +1,55 @@
+<?php
+$title = 'Modifier la Page';
+$this->headTitle($title);
+$form = $this->form;
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php
+$form->setAttribute('action', $this->url('cms/default', array('controller' => 'page', 'action' => 'edit', 'id'=> $this->id), true));
+
+$form->setAttribute('method', 'post');
+
+echo $this->form()->openTag($form);
+echo $this->formCollection($form);
+echo $this->form()->closeTag();
+?>
+
+<div class="gridster">
+    <ul>
+    </ul>
+</div>
+
+<script src="<?php echo $this->basePath('lib/gridster/dist/jquery.gridster.js') ?>"></script>
+
+<script type="text/javascript">
+    var gridster;
+    // sort serialization
+    serialization = <?= $page->structure ?>;
+    $array = <?= $page->block_element ?>;
+
+    $(function(){
+
+        gridster = $(".gridster ul").gridster({
+            widget_base_dimensions: [140, 200],
+            widget_margins: [5, 5],
+            min_cols: 6,
+            max_cols:12,
+        }).data('gridster');
+
+        placementObject();
+
+        function placementObject() {
+            gridster.remove_all_widgets();
+            $.each(serialization, function() {
+                $html ='<li />';
+                $w = gridster.add_widget($html, this.size_x, this.size_y, this.col, this.row);
+                $w.attr('data-id', this.id)
+
+            });
+            $.each($array, function() {
+                console.log(this.element_id);
+                $(".gridster > ul li").filter('[data-id="'+ this.element_id+'"]').attr('data-id', this.element_id).html(this.element_type)
+            })
+        }
+    });
+</script>

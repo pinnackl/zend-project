@@ -1,0 +1,14 @@
+<?php
+$title = 'Supprimer la page';
+$this->headTitle($title);
+$url = $this->url('cms/default', array('controller' => 'page', 'action' => 'delete','id' => 'theform', 'id'=>$this->id));
+?>
+<h1><?=$this->escapeHtml($title)?></h1>
+Etes-vous sûr de vouloir supprimer la page "<?=$this->escapeHtml($page->title)?>" ?
+<form action="<?=$url?>" method="post">
+    <div>
+        <input type="hidden" name="id" value="<?=$page->id?>" />
+        <input type="submit" name="del" value="Oui" />
+        <input type="submit" name="del" value="Non" />
+    </div>
+</form>

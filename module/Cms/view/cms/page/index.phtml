@@ -1,0 +1,51 @@
+<?php
+$title = 'Liste des Pages';
+$this->headTitle($title);
+?>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'add'), false);?>">Ajouter une page </a>
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'), false);?>">Gérer les catégories</a>
+
+<table class="striped">
+    <tr>
+        <th>Titre</th>
+        <th>Contenu</th>
+        <th>Category</th>
+        <th>Menu</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($pages as $page):?>
+        <tr>
+            <td><a href="<?=$this->url('cms/default', array('controller' => 'page', 'action'=>'view', 'id' => $page->id))?>">
+                    <?=$this->escapeHtml($page->title)?>
+                </a>
+
+            </td>
+            <td>
+                <?=$this->escapeHtml($page->content)?>
+            </td>
+            <td>
+                <?php if($page->category != null):?>
+                    <?=$this->escapeHtml($page->category->getCtgrName())?>
+                <?php endif?>
+            </td>
+            <td>
+                <?php if($page->menu != null):?>
+                    <?=$this->escapeHtml($page->menu->getMenuName())?>
+                <?php endif?>
+            </td>
+            <td>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'edit', 'id' => $page->id), false);?>">Modifier</a>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'delete','id' => $page->id), false);?>">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach?>
+</table>

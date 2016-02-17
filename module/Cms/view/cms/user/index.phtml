@@ -1,0 +1,48 @@
+<?php
+$title = 'Liste des Users';
+$this->headTitle($title);
+?>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+           <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'add'), false);?>">Créer un utilisateur</a>
+
+<table class="striped">
+    <tr>
+        <th>Email</th>
+        <th>Nom</th>
+        <th>Role</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($users as $user):?>
+        <tr>
+            <td><a href="">
+                    <?=$this->escapeHtml($user->getUsrEmail())?>
+                </a>
+
+            </td>
+            <td>
+                <?= $this->escapeHtml($user->getUsrName())?>
+            </td>
+            <td>
+                <?php if ($user->getUsrlId() == 1): ?>
+                    Invité
+                <?php elseif ($user->getUsrlId() == 2) : ?>
+                    Membre
+                <?php elseif ($user->getUsrlId() == 3) : ?>
+                    Admin
+                <?php endif  ?>
+            </td>
+            <td>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'edit', 'id' => $user->getUsrId()));?>">Modifier</a>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'delete', 'id' => $user->getUsrId()));?>">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach?>
+</table>
