@@ -24,7 +24,7 @@ class CategoryForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
-                'value' => 'Go',
+                'value' => 'Envoyer',
                 'id' => 'submitbutton',
                 'class' => 'btn waves-effect waves-light'
             ),

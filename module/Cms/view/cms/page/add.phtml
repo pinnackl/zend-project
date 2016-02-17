@@ -310,6 +310,15 @@ echo $this->form()->closeTag();
                     element_block_id: currentModalId
                 });
             });
+
+            $('.choose-element-block-pub').click(function() {
+                var papa =$(this).parent().parent();
+                $(".gridster > ul li").filter('[data-id="'+currentModalId+'"]').attr('data-id', currentModalId).find('h1').html('Pub')
+                elements.push({element_id: '',
+                    element_type: 'pub',
+                    element_block_id: currentModalId
+                });
+            });
         }
 
         $('.modal-call-element').click(function() {

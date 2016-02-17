@@ -110,9 +110,18 @@ class PageController extends AbstractActionController
             $options[$cat->getCtgrId()] = $cat->getCtgrName();
         }
         $form->setCategories($options);
-
         $form->bind($page);
+
         $form->get('ctgr_id')->setValue($page->getCategory() != null ? $page->getCategory()->getCtgrId() : '');
+        $menus = $this->getEntityManager()->getRepository('Cms\Entity\Menu')->findAll();
+        $articles = $this->getEntityManager()->getRepository('Cms\Entity\Article')->findAll();
+
+        $options = array(""=>"");
+        foreach($menus as $menu) {
+            $options[$menu->getMenuId()] = $menu->getMenuName();
+        }
+        $form->setMenus($options);
+        $form->get('menu_id')->setValue($page->getMenu() != null ? $page->getMenu()->getMenuId() : '');
 
         $request = $this->getRequest();
         //Vérifie le type de la requête
