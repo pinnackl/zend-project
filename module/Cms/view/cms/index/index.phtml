@@ -30,7 +30,7 @@ $this->headTitle($title);
     <th>Intro Text</th>
     <th>Author</th>
     <th>Language</th>
-	<th>Parent</th>
+
 	<th>Created</th>
     <th>&nbsp;</th>
 </tr>
@@ -40,7 +40,6 @@ $this->headTitle($title);
     <td><?php echo $this->escapeHtml($article->getArtcIntrotext());?></td>
     <td><?php if (is_object($article->getAuthor())) echo $this->escapeHtml($article->getAuthor()->getUsrName());?></td>
     <td><?php if (is_object($article->getLanguage())) echo $this->escapeHtml($article->getLanguage()->getLngName());?></td>
-    <td><?php if (is_object($article->getParent())) echo $this->escapeHtml($article->getParent()->getArtcTitle());?></td>
     <td><?php echo $this->escapeHtml($article->getArtcCreated()->format('Y-m-d H:i:s'));?></td><!-- Notice: getArtcCreated() returns an object convert to string -->
     <td>
         <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms

@@ -96,6 +96,8 @@ class CommentController extends AbstractActionController
 				$this->prepareData($comment);
 				$entityManager->persist($comment);
 				$entityManager->flush();
+				  $this->sendMail();
+
                 return $this->redirect()->toRoute('cms/default', array('controller' => 'comment', 'action' => 'index', 'id' => $id), true);
 			  }
 		}
@@ -158,9 +160,9 @@ class CommentController extends AbstractActionController
             $form->setData($request->getPost());
             if ($form->isValid()) {
 				$entityManager->persist($comment);
-				$entityManager->flush();				
-				
-                 return $this->redirect()->toRoute('cms/default', array('controller' => 'comment', 'action' => 'index'), true);
+				$entityManager->flush();
+
+				return $this->redirect()->toRoute('cms/default', array('controller' => 'comment', 'action' => 'index'), true);
             }
         }
 		
@@ -241,5 +243,29 @@ class CommentController extends AbstractActionController
 			);
 		}
 		return $this->commentsTable;
+	}
+
+	public function sendMail()
+	{
+
+		$message = new \Zend\Mail\Message();
+		$message->setBody('This is the body');
+		$message->setFrom('zend-cms@mydomain.com');
+		$message->addTo('antoine.humbert@neoxia.com');
+		$message->setSubject('Test subject');
+
+		$smtpOptions = new \Zend\Mail\Transport\SmtpOptions();
+		$smtpOptions->setHost('smtp.gmail.com')
+			->setConnectionClass('login')
+			->setName('smtp.gmail.com')
+			->setConnectionConfig(array(
+				'username' => 'antoine.ah.humbert@gmail.com',
+				'password' => '',
+				'ssl' => 'tls',
+			));
+
+		$transport = new \Zend\Mail\Transport\Smtp($smtpOptions);
+		$transport->send($message);
+
 	}
 }
