@@ -186,13 +186,7 @@ class PageController extends AbstractActionController
         }
         try{
             $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
-            //var_dump(json_decode($page->block_element));
         }
-
-        //Récupérer les éléments json to block_element
-        //$menu = $this->getEntityManager()->find('Cms\Entity\Menu', $id);
-        //$articles = $this->getEntityManager()->find('Cms\Entity\Article', $id);
-
         catch(\Exception $e){
             //Si la page n'existe pas en base on génère une erreur 404
             $response   = $this->response;
@@ -207,16 +201,18 @@ class PageController extends AbstractActionController
         $menus = [];
         $articles = [];
         $stuctureElements = json_decode($page->block_element);
-        foreach($stuctureElements as $structureElt) {
-            switch($structureElt->element_type) {
-                case 'menu':
-                    $menu = $this->getEntityManager()->find('Cms\Entity\Menu', $structureElt->element_id);
-                    $menus[] = $menu;
-                    break;
-                case 'article':
-                    $article = $this->getEntityManager()->find('Cms\Entity\Article', $structureElt->element_id);
-                    $articles[] = $article;
-                    break;
+        if($stuctureElements) {
+            foreach($stuctureElements as $structureElt) {
+                switch($structureElt->element_type) {
+                    case 'menu':
+                        $menu = $this->getEntityManager()->find('Cms\Entity\Menu', $structureElt->element_id);
+                        $menus[] = $menu;
+                        break;
+                    case 'article':
+                        $article = $this->getEntityManager()->find('Cms\Entity\Article', $structureElt->element_id);
+                        $articles[] = $article;
+                        break;
+                }
             }
         }
 
