@@ -5,7 +5,11 @@ $this->headTitle($title);
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
-
+<style>
+    #sortable {list-style-type: none; margin: 0; padding: 0; }
+    #sortable li { height: 20vh; width: 100% }
+    img{ display:block;max-height:90%;}
+</style>
 
 <nav class="nav-breadcrumb">
     <div class="nav-wrapper">
@@ -29,26 +33,158 @@ echo $this->form()->closeTag();
 
 ?>
 
-<div class="cf nestable-lists">
-    <ul id="items1" class="items">
-        <li class="list">Item 1-1</li>
-    </ul>
-    <ul id="items2" class="items">
-        <?php foreach($categories as $categorie): ?>
-            <li class="list g"><?= $categorie->getCtgrName() ?></li>
-        <?php endforeach ?>
-    </ul>
-</div>
-
-<div>
-
-<div>
 
 
+
+    <div class="row">
+        <div class="col-md-6" style="width: 40%;display: inline-block">
+            <div id="left">
+                <ul id="sortable" style="height:80vh; overflow:scroll">
+
+                </ul>
+                <button id="savebutton">Save</button>
+            </div>
+        </div>
+
+        <div class="col-md-6" style="width: 40%;display: inline-block">
+            <div id="postslist">
+                <?php foreach($categories as $categorie): ?>
+                <li id="post1" post-id="<?= $categorie->getCtgrId() ?>" class="ui-state-default" data-type="<?= $categorie->getCtgrId() ?>">
+                    <span class="ui-icon ui-icon-plus"></span>
+                    <h3><?= $categorie->getCtgrName() ?></h3>
+                    <div style="float: left;height:100%">
+                        <img src="" style="height:100%">
+                    </div>
+                    <div style="float: right;height:100%">
+                    </div>
+                </li>
+                <?php endforeach ?>
+            </div>
+        </div>
+    </div>
 
 <script src="<?php echo $this->basePath('js/jquery.nestable.js') ?>"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
+
+
+<script>
+    var type=$('#post1').data('type')
+    var hasChanged=0;
+    var selectedPosts=[];
+    var availablePosts=[];
+    $(function() {
+        $( "#sortable" ).sortable();
+        $( "#sortable" ).disableSelection();
+        $("#sortable").on("sortupdate",function(){
+            hasChanged=1;
+        });
+        $(window).bind('beforeunload', function(){
+            if(hasChanged)
+                return "Des changements ont été effectués mais n'ont pas été sauvegardés.";
+        });
+
+        $(document).on( "click","#postslist li .ui-icon-plus",function(){
+            hasChanged=1;
+            var li=$(this).parent();
+            var id = li.attr("post-id");
+            var i = 0;
+            $(this).removeClass("ui-icon-plus").addClass("ui-icon-minus")
+            li.remove();
+            while (availablePosts[i]) {
+                if(availablePosts[i].id==id){
+                    $("#sortable").prepend($(availablePosts[i].content));
+                    selectedPosts.push(availablePosts[i]);
+                    availablePosts.splice(i,1);
+                    return;
+                }
+                i++;
+            }
+        })
+
+        $(document).on( "dblclick","#postslist li",function(){
+            hasChanged=1;
+            var li=$(this).parent();
+            var id = $(this).attr("post-id");
+            var i = 0;
+            $(this).find(".ui-icon").removeClass("ui-icon-plus").addClass("ui-icon-minus")
+            $(this).remove();
+            while (availablePosts[i]) {
+                if(availablePosts[i].id==id){
+                    $("#sortable").prepend($(availablePosts[i].content));
+                    selectedPosts.push(availablePosts[i]);
+                    availablePosts.splice(i,1);
+                    return;
+                }
+                i++;
+            }
+        })
+        $(document).on( "click","#sortable li .ui-icon-minus",function(){
+            hasChanged=1;
+            var li=$(this).parent();
+            var id = li.attr("post-id");
+            var i = 0;
+            $(this).removeClass("ui-icon-minus").addClass("ui-icon-plus")
+            li.remove();
+
+            $.ajax({
+                method: "PUT",
+                url: "organisationsmanager/"+id,
+            }).done(function() {
+                hasChanged=0;
+            });
+
+            while (selectedPosts[i]) {
+                if(selectedPosts[i].id==id){
+                    $("#postslist").prepend($(selectedPosts[i].content));
+                    availablePosts.push(selectedPosts[i]);
+                    selectedPosts.splice(i,1);
+                    return;
+                }
+                i++;
+            }
+        })
+        $(document).on("click","#savebutton",function(){
+            var postlist=[];
+            var i=0;
+            $( "#sortable" ).sortable( "refresh" );
+            var sortedIDs = $( "#sortable" ).sortable( "toArray", {attribute:"post-id"} );
+            console.log(sortedIDs);
+            while (sortedIDs[i]) {
+                postlist.push({id:sortedIDs[i]});
+                i++;
+            }
+            $.ajax({
+                method: "POST",
+                url: "organisationsmanager",
+                data: {postlist:postlist,
+                    type:type,
+
+                },
+
+                success: function(data) {
+
+                }
+            })
+                .done(function() {
+                    hasChanged=0;
+                    alert("Page sauvegardée");
+                });
+        });
+        initPosts();
+    });
+    function initPosts(){
+        $("#sortable").find("li").each(function(){
+            selectedPosts.push({id:$(this).attr("post-id"),content:$(this).eq(0)});
+        });
+        $("#postslist").find("li").each(function(){
+            availablePosts.push({id:$(this).attr("post-id"),content:$(this).eq(0)});
+        });
+    }
+
+</script>
+
+
 
 <script>
     $(document).ready(function()
