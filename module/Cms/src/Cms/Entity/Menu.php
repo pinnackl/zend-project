@@ -49,6 +49,11 @@ class Menu
      */
     private $menu_active;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $order;
+
     public function __construct() {
         $this->pages = new ArrayCollection();
     }
@@ -56,6 +61,22 @@ class Menu
     public function __toString()
     {
         return $this->menu_name;
+    }
+
+
+    /**
+     * @param string $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+    }
+    /**
+     * @return string
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 
     /**
