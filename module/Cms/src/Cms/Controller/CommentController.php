@@ -20,6 +20,8 @@ use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBui
 
 //- use Doctrine\Common\Persistence\ObjectManager;
 
+use Auth\Controller\MailController;
+
 use Cms\Entity\Comment;
 
 class CommentController extends AbstractActionController
@@ -96,7 +98,8 @@ class CommentController extends AbstractActionController
 				$this->prepareData($comment);
 				$entityManager->persist($comment);
 				$entityManager->flush();
-				  $this->sendMail();
+				$mail = new MailController();
+                $mail->initMail('commentCreated','pataky@hotmail.fr');
 
                 return $this->redirect()->toRoute('cms/default', array('controller' => 'comment', 'action' => 'index', 'id' => $id), true);
 			  }
@@ -243,29 +246,5 @@ class CommentController extends AbstractActionController
 			);
 		}
 		return $this->commentsTable;
-	}
-
-	public function sendMail()
-	{
-
-		$message = new \Zend\Mail\Message();
-		$message->setBody('This is the body');
-		$message->setFrom('zend-cms@mydomain.com');
-		$message->addTo('antoine.humbert@neoxia.com');
-		$message->setSubject('Test subject');
-
-		$smtpOptions = new \Zend\Mail\Transport\SmtpOptions();
-		$smtpOptions->setHost('smtp.gmail.com')
-			->setConnectionClass('login')
-			->setName('smtp.gmail.com')
-			->setConnectionConfig(array(
-				'username' => 'antoine.ah.humbert@gmail.com',
-				'password' => '',
-				'ssl' => 'tls',
-			));
-
-		$transport = new \Zend\Mail\Transport\Smtp($smtpOptions);
-		$transport->send($message);
-
 	}
 }
