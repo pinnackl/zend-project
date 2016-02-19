@@ -154,7 +154,7 @@ h3 {
 /**
 * Nestable Extras
 */
-.nestable-lists { display: block; clear: both; padding: 30px 0; width: 100%; border: 0; border-top: 2px solid #ddd; border-bottom: 2px solid #ddd; }
+.nestable-lists { display: block; clear: both; padding: 30px 0; width: 100%; border: 0; border-top: 2px solid #ddd; border-bottom: 2px solid #ddd;     height: 450px;}
 #nestable-menu { padding: 0; margin: 20px 0; }
 #nestable-output,
 #nestable2-output { width: 100%; height: 7em; font-size: 0.75em; line-height: 1.333333em; font-family: Consolas, monospace; padding: 5px; box-sizing: border-box; -moz-box-sizing: border-box; }
@@ -199,3 +199,42 @@ h3 {
 }
 .dd3-handle:before { content: '≡'; display: block; position: absolute; left: 0; top: 3px; width: 100%; text-align: center; text-indent: 0; color: #fff; font-size: 20px; font-weight: normal; }
 .dd3-handle:hover { background: #ddd; }
+
+
+.list {
+  background-color: #0d47a1;
+  border: 1px solid gray;
+}
+
+.items .ui-selected {
+  background: red;
+  color: white;
+  font-weight: bold;
+}
+
+.items {
+  list-style-type: none;
+  margin-left: 10px;
+  padding: 0;
+  width: 40%;
+  float: left;
+}
+
+.items li {
+  padding: 5px;
+  margin: 2px;
+  cursor: pointer;
+}
+
+.g {
+  background-color: #bbdefb ;
+}
+
+.o {
+  background-color: orange;
+}
+
+.highlight {
+  border: 2px solid red;
+  font-weight: bold;
+}

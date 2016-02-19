@@ -3,6 +3,10 @@ $title = 'Créer un menu';
 $this->headTitle($title);
 ?>
 
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+
+
+
 <nav class="nav-breadcrumb">
     <div class="nav-wrapper">
         <div class="col s12">
@@ -25,31 +29,26 @@ echo $this->form()->closeTag();
 
 ?>
 
-    <div class="cf nestable-lists">
-
-    <button class="waves-effect waves-light btn" id="appendnestable">+ Add item</button>
-
-    <div class="dd" id="nestable3">
-        <ol class="dd-list">
-            <li class="dd-item dd3-item" data-id="13">
-                <div class="dd-handle dd3-handle">Drag</div>
-                <div class="dd3-content">
-                    <input type="text" value="" placeholder="item 1" style="height: 1rem"/>
-                </div>
-            </li>
-            <li class="dd-item dd3-item" data-id="14">
-                <div class="dd-handle dd3-handle">Drag</div>
-                <div class="dd3-content">
-                    <input type="text" value="" placeholder="item 2" style="height: 1rem"/>
-                </div>
-            </li>
-
-        </ol>
-    </div>
+<div class="cf nestable-lists">
+    <ul id="items1" class="items">
+        <li class="list">Item 1-1</li>
+    </ul>
+    <ul id="items2" class="items">
+        <?php foreach($categories as $categorie): ?>
+            <li class="list g"><?= $categorie->getCtgrName() ?></li>
+        <?php endforeach ?>
+    </ul>
 </div>
+
+<div>
+
+<div>
+
 
 
 <script src="<?php echo $this->basePath('js/jquery.nestable.js') ?>"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<script type="text/javascript" src="http://www.pureexample.com/js/lib/jquery.ui.touch-punch.min.js"></script>
 
 <script>
     $(document).ready(function()
@@ -88,6 +87,18 @@ echo $this->form()->closeTag();
             }
         });
         $('#nestable3').nestable();
+
+
+        $("#items1,#items2,#items3").sortable({
+            connectWith: "#items1,#items2,#items3",
+            start: function (event, ui) {
+                ui.item.toggleClass("highlight");
+            },
+            stop: function (event, ui) {
+                ui.item.toggleClass("highlight");
+            }
+        });
+        $("#items1,#items2,#items3").disableSelection();
     });
 </script>
 
