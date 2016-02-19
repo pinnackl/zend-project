@@ -67,13 +67,8 @@ return array(
                     // echo '<h1>callback user->getPassword = ' .$user->getPassword() . ' passwordGiven = ' . $passwordGiven . '</h1>';
                     //- if ($user->getPassword() == md5($passwordGiven)) { // original
                     // ToDo find a way to access the Service Manager and get the static salt from config array
-                    if ($user->getUsrPassword() == md5('aFGQ475SDsdfsaf2342' . $passwordGiven . $user->getUsrPasswordSalt()) &&
-                        $user->getUsrActive() == 1) {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
+                    $bcrypt = new \Zend\Crypt\Password\Bcrypt();
+                    return $bcrypt->verify($passwordGiven, $user->getUsrPassword());
                 },
             ),
         ),
