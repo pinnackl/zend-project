@@ -48,7 +48,10 @@ class MenuController extends AbstractActionController
     {
         $form = new MenuForm();
 
+        $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findAll();
+
         $request = $this->getRequest();
+
         if ($request->isPost()) {
             $form->setInputFilter(new MenuFilter());
             $form->setData($request->getPost());
@@ -59,7 +62,7 @@ class MenuController extends AbstractActionController
                 return $this->redirect()->toRoute('cms/default', array('controller' => 'menu', 'action' => 'index'));
             }
         }
-        return new ViewModel(array('form' => $form));
+        return new ViewModel(array('form' => $form, 'categories' => $resultSet));
     }
     public function deleteAction()
     {
