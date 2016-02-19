@@ -19,7 +19,6 @@ $this->headTitle($title);
         <th>Titre</th>
         <th>Contenu</th>
         <th>Category</th>
-        <th>Menu</th>
         <th>&nbsp;</th>
     </tr>
     <?php foreach($pages as $page):?>
@@ -35,11 +34,6 @@ $this->headTitle($title);
             <td>
                 <?php if($page->category != null):?>
                     <?=$this->escapeHtml($page->category->getCtgrName())?>
-                <?php endif?>
-            </td>
-            <td>
-                <?php if($page->menu != null):?>
-                    <?=$this->escapeHtml($page->menu->getMenuName())?>
                 <?php endif?>
             </td>
             <td>

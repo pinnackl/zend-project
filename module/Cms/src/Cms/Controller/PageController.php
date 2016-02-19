@@ -68,7 +68,7 @@ class PageController extends AbstractActionController
         foreach($menus as $menu) {
             $options[$menu->getMenuId()] = $menu->getMenuName();
         }
-        $form->setMenus($options);
+//        $form->setMenus($options);
 
         if ($request->isPost()) {
             $form->setInputFilter(new PageFilter());
@@ -120,8 +120,8 @@ class PageController extends AbstractActionController
         foreach($menus as $menu) {
             $options[$menu->getMenuId()] = $menu->getMenuName();
         }
-        $form->setMenus($options);
-        $form->get('menu_id')->setValue($page->getMenu() != null ? $page->getMenu()->getMenuId() : '');
+//        $form->setMenus($options);
+//        $form->get('menu_id')->setValue($page->getMenu() != null ? $page->getMenu()->getMenuId() : '');
 
         $request = $this->getRequest();
         //Vérifie le type de la requête

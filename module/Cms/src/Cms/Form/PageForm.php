@@ -18,10 +18,10 @@ class PageForm extends Form {
 
 
         //Menu Page
-        $idField = new Element\Select('menu_id');
-        $idField->setAttribute('class', 'browser-default');
-        $idField->setLabel('Menu');
-        $this->add($idField);
+//        $idField = new Element\Select('menu_id');
+//        $idField->setAttribute('class', 'browser-default');
+//        $idField->setLabel('Menu');
+//        $this->add($idField);
 
 
         $idField = new Element\Hidden('structure');
@@ -70,8 +70,8 @@ class PageForm extends Form {
      *
      * @param array $menus
      */
-    public function setMenus($menus = array())
-    {
-        $this->get('menu_id')->setValueOptions($menus);
-    }
+//    public function setMenus($menus = array())
+//    {
+//        $this->get('menu_id')->setValueOptions($menus);
+//    }
 }
