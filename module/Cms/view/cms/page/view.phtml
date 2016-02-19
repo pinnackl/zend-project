@@ -48,7 +48,7 @@
                     $wi.append(
                         "<div class='row' style='background-color: #004d40;height: 100%;padding:5px'>" +
                             "<img style='width: 100%' src='<?php echo $this->basePath('/img/sample-1.jpg') ?>'>" +
-                            "<span class=''>Title</span>" +
+                            "<span class=''><?= $articles[0]->getArtcTitle() ?></span>" +
                             "<div class='card-content'>" +
                                 "<p><?php echo substr('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, deleniti et explicabo fuga in magni nam obcaecati omnis quae soluta! Accusamus atque earum error nostrum nulla placeat rerum tempore temporibus',0,35)?>...</p>" +
                             "</div>" +

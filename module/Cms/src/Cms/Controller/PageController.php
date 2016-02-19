@@ -203,8 +203,27 @@ class PageController extends AbstractActionController
             $event->setController('page');
             return ;
         }
+
+        $menus = [];
+        $articles = [];
+        $stuctureElements = json_decode($page->block_element);
+        foreach($stuctureElements as $structureElt) {
+            switch($structureElt->element_type) {
+                case 'menu':
+                    $menu = $this->getEntityManager()->find('Cms\Entity\Menu', $structureElt->element_id);
+                    $menus[] = $menu;
+                    break;
+                case 'article':
+                    $article = $this->getEntityManager()->find('Cms\Entity\Article', $structureElt->element_id);
+                    $articles[] = $article;
+                    break;
+            }
+        }
+
         return new ViewModel(array(
-            'page' => $page
+            'page' => $page,
+            'menus' => $menus,
+            'articles' => $articles,
         ));
     }
 
