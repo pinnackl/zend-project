@@ -22,10 +22,33 @@ return array(
                     ),
                 ),
             ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
+
+            'category' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/category',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Category',
+                        'action'     => 'view',
+                    ),
+                ),
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:id',
+                            'constraints' => array(
+                                'id'     => '[0-9]+',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Category',
+                                'action' => 'view'
+                            ),
+                        ),
+                    ),
+                ),
+                'may_terminate' => true
+            ),
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -75,7 +98,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => Controller\IndexController::class
+            'Application\Controller\Index' => Controller\IndexController::class,
+            'Application\Controller\Category' => Controller\CategoryController::class
         ),
     ),
     'view_manager' => array(

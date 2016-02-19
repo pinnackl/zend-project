@@ -16,10 +16,21 @@ use Zend\Form\Annotation\AnnotationBuilder;
 
 use Zend\Form\Element;
 
+use Cms\Form\PageFilter;
+use Zend\Db\TableGateway\TableGateway,
+    Zend\Form\FormInterface,
+    Cms\Form\PageForm,
+    Cms\Entity\Page,
+    Doctrine\ORM\EntityManager,
+    Doctrine\ORM\Query;
+
+use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
+
 // hydration tests
 use Zend\Stdlib\Hydrator;
 
-class IndexController extends AbstractActionController
+
+class CategoryController extends AbstractActionController
 {
     protected $em;
 
@@ -32,30 +43,21 @@ class IndexController extends AbstractActionController
         return $this->em;
     }
 
+
     public function indexAction()
     {
-        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $dql = "SELECT a, u, l, c FROM Cms\Entity\Article a LEFT JOIN a.author u LEFT JOIN a.language l LEFT JOIN a.categories c WHERE a.parent IS NULL";
-        $query = $entityManager->createQuery($dql);
-        $query->setMaxResults(30);
-        $articles = $query->getResult();
-
-        $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findAll();
-        return new ViewModel(array(
-            'categories' => $resultSet,
-        ));
-
+        var_dump('dans index');
     }
-
     public function viewAction()
     {
-        var_dump('dans view');
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
+
         if (!$id) {
             return $this->redirect()->toRoute('home');
         }
+
         try{
-            $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
+            $category = $this->getEntityManager()->find('Cms\Entity\Category', $id);
         }
         catch(\Exception $e){
             //Si la page n'existe pas en base on génère une erreur 404
@@ -65,11 +67,25 @@ class IndexController extends AbstractActionController
             $response->setStatusCode(404);
             $event->setParam('exception', new \Exception('Page Inconnue'.$id));
             $event->setController('page');
+            var_dump('dans catch');
+            die();
             return ;
         }
 
+//        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+//        $dql = "SELECT ctgr_id FROM Cms\Entity\Page p WHERE p.ctgr_id= ". $id;
+//        var_dump($dql);
+//
+//        $query = $entityManager->createQuery($dql);
+//        $query->setMaxResults(30);
+//        $pages = $query->getResult();
+
+
+        $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findBy(['ctgr_id'=> $id]);
+        var_dump($resultSet);
+
         return new ViewModel(array(
-            'page' => $page,
+            'category' => $category,
         ));
     }
 }

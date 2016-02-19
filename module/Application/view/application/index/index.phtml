@@ -1,31 +1,21 @@
 <h2>Home page </h2>
 
-
 <div class="row">
-
-
-    <?php foreach($articles as $article) :?>
-
-            <div class="col s12 m4">
-                <div class="card small">
-                    <div class="card-image">
-                        <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
-                        <span class="card-title" ><?php echo $this->escapeHtml($article->getArtcTitle());?></span>
-                    </div>
-                    <div class="card-content">
-                        <p><?php echo $this->escapeHtml($article->getArtcIntrotext());?></p>
-                    </div>
-                    <div class="card-action">
-                        <?php if (is_object($article->getAuthor())):?>
-                            <div class="chip">
-                                <?php echo $this->escapeHtml($article->getAuthor()->getUsrName());?>
-                            </div>
-                        <?php endif ?>
-                        <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
-                            array('controller' => 'index', 'action'=>'view', 'id' => $article->getArtcId()));?>">View</a>
-                    </div>
+    <?php foreach($categories as $category) :?>
+        <div class="col s12 m4">
+            <div class="card small">
+                <div class="card-image">
+                    <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
+                    <span class="card-title" ><?php echo $this->escapeHtml($category->getCtgrName());?></span>
+                </div>
+                <div class="card-content">
+                    <p></p>
+                </div>
+                <div class="card-action">
+                    <a href="<?php echo $this->url('category',
+                        array('controller' => 'category', 'action' =>'view', 'id' => $category->getCtgrId())).'/'.$category->getCtgrId() ;?>">View</a>
                 </div>
             </div>
-
+        </div>
     <?php endforeach ?>
 </div>

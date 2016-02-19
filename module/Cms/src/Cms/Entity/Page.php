@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
  * @ORM\Entity
  * @ORM\Table(name="pages")
  * @property int $id
+ *  @property int $ctgr_id
  * @property string $title
  * @property string $content
  * @property string $structure
@@ -49,8 +50,9 @@ class Page implements ArraySerializableInterface, InputFilterAwareInterface
 
 
     /**
-     * @ManyToOne(targetEntity="Category")
-     * @JoinColumn(name="ctgr_id", referencedColumnName="ctgr_id")
+     * @ManyToOne(targetEntity="Cms\Entity\Category")
+     * @JoinColumn(name="ctgr_id",  referencedColumnName="ctgr_id")
+     *
      */
     protected $category;
     /**
