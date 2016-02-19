@@ -98,7 +98,8 @@ class CommentController extends AbstractActionController
 				$this->prepareData($comment);
 				$entityManager->persist($comment);
 				$entityManager->flush();
-				$mail = new MailController();
+				
+                $mail = new MailController();
                 $mail->initMail('commentCreated','pataky@hotmail.fr');
 
                 return $this->redirect()->toRoute('cms/default', array('controller' => 'comment', 'action' => 'index', 'id' => $id), true);

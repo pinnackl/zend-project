@@ -10,7 +10,7 @@ use Zend\Mail\Transport\Smtp;
 
 class MailController extends AbstractActionController
 {
-    public function initMail($action, $email)
+    public function initMail($action, $email, $password=null)
     {
         $message = new Message();
         $message->addTo($email);
@@ -21,6 +21,14 @@ class MailController extends AbstractActionController
             case "commentCreated" :
                 $message->setBody('This is the body');
                 $message->setSubject('Test subject');
+                break;
+            case "forgotPassword" :
+                $message->setBody("Your password has been changed. Your new password is: " . $password);
+                $message->setSubject('Forgot Password');
+                break;
+            case "accountCreated" :
+                $message->setBody("Your account has been created.");
+                $message->setSubject('Account created');
                 break;
         }
 		
