@@ -14,13 +14,7 @@ return array(
 //-                    'all'   => 'member'
 //-                )
                 'Application\Controller\Index' => array(
-                    'all'   => 'guest',
-                    'view'	=> 'guest',
-                ),
-
-                'Application\Controller\Category' => array(
-                    'all'   => 'guest',
-                    'view'	=> 'guest',
+                    'all'   => 'guest'
                 ),
 
                 'Auth\Controller\Index' => array(

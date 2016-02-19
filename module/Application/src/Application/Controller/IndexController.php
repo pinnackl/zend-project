@@ -19,19 +19,16 @@ use Zend\Form\Element;
 // hydration tests
 use Zend\Stdlib\Hydrator;
 
+// for Doctrine annotation
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
+use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
+
+//- use Doctrine\Common\Persistence\ObjectManager;
+
 class IndexController extends AbstractActionController
 {
-    protected $em;
-
-    public function getEntityManager()
-    {
-
-        if (null === $this->em) {
-            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        }
-        return $this->em;
-    }
-
+    // R - retriev
     public function indexAction()
     {
         $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
@@ -40,36 +37,6 @@ class IndexController extends AbstractActionController
         $query->setMaxResults(30);
         $articles = $query->getResult();
 
-        $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findAll();
-        return new ViewModel(array(
-            'categories' => $resultSet,
-        ));
-
-    }
-
-    public function viewAction()
-    {
-        var_dump('dans view');
-        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
-        if (!$id) {
-            return $this->redirect()->toRoute('home');
-        }
-        try{
-            $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
-        }
-        catch(\Exception $e){
-            //Si la page n'existe pas en base on génère une erreur 404
-            $response   = $this->response;
-            $event	  = $this->getEvent();
-            $routeMatch = $event->getRouteMatch();
-            $response->setStatusCode(404);
-            $event->setParam('exception', new \Exception('Page Inconnue'.$id));
-            $event->setController('page');
-            return ;
-        }
-
-        return new ViewModel(array(
-            'page' => $page,
-        ));
+        return new ViewModel(array('articles' => $articles));
     }
 }
