@@ -6,8 +6,15 @@ $this->headTitle($title);
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 
 <style>
+    ul {
+        list-style: none;
+    }
+    ul li {
+        list-style: none;
+    }
     #sortable {list-style-type: none; margin: 0; padding: 0; }
-    #sortable li { height: 20vh; width: 100% }
+    #sortable li {  width: 100%; list-style: none; margin-bottom: 20px; text-align: center;
+        color: blue; }
     img{ display:block;max-height:90%;}
 </style>
 
@@ -20,48 +27,46 @@ $this->headTitle($title);
 </nav>
 
 <?php
+
 $form = $this->form;
 $form->prepare();
 $form->setAttribute('action', $this->url('cms/default', array('controller' => 'menu', 'action' => 'add'), true));
-
 $form->setAttribute('method', 'post');
 
 echo $this->form()->openTag($form);
 echo $this->formCollection($form);
 echo $this->form()->closeTag();
 
-
 ?>
 
+<div class="row">
+    <div class="col-md-6" style="width: 40%;display: inline-block">
+        <div id="left">
+            <legend><h3 style="margin-top: 0">Liste des catégories dans le menu</h3></legend>
+            <ul id="sortable" style="height:80vh; overflow:scroll">
 
-
-
-    <div class="row">
-        <div class="col-md-6" style="width: 40%;display: inline-block">
-            <div id="left">
-                <ul id="sortable" style="height:80vh; overflow:scroll">
-
-                </ul>
-                <button id="savebutton">Save</button>
-            </div>
-        </div>
-
-        <div class="col-md-6" style="width: 40%;display: inline-block">
-            <div id="postslist">
-                <?php foreach($categories as $categorie): ?>
-                <li id="post1" post-id="<?= $categorie->getCtgrId() ?>" class="ui-state-default" data-type="<?= $categorie->getCtgrId() ?>">
-                    <span class="ui-icon ui-icon-plus"></span>
-                    <h3><?= $categorie->getCtgrName() ?></h3>
-                    <div style="float: left;height:100%">
-                        <img src="" style="height:100%">
-                    </div>
-                    <div style="float: right;height:100%">
-                    </div>
-                </li>
-                <?php endforeach ?>
-            </div>
+            </ul>
+            <button class="btn" id="savebutton">Save</button>
         </div>
     </div>
+
+    <div class="col-md-6" style="width: 40%;display: inline-block; vertical-align: top">
+        <div id="postslist" style="vertical-align: top">
+            <legend class=""><h3>Liste des catégories</h3></legend>
+            <?php foreach($categories as $categorie): ?>
+            <li id="post1" post-id="<?= $categorie->getCtgrId() ?>" class="ui-state-defaul green" data-type="<?= $categorie->getCtgrId() ?>">
+                <span class="ui-icon ui-icon-plus"></span>
+                <h3><?= $categorie->getCtgrName() ?></h3>
+                <div style="float: left;height:100%">
+                    <img src="" style="height:100%">
+                </div>
+                <div style="float: right;height:100%">
+                </div>
+            </li>
+            <?php endforeach ?>
+        </div>
+    </div>
+</div>
 
 <script src="<?php echo $this->basePath('js/jquery.nestable.js') ?>"></script>
 <script type="text/javascript" src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
