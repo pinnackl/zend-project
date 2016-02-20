@@ -240,7 +240,7 @@ class RegistrationController extends AbstractActionController
             'type'  => 'submit'
         ));
         $form->add($send);
-        // ...
+
         return $form;
     }
 }
