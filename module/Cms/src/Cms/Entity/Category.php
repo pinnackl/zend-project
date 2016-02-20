@@ -46,8 +46,6 @@ class Category
      */
     private $ctgr_image_filename;
 
-
-
     /**
      * @var integer
      *

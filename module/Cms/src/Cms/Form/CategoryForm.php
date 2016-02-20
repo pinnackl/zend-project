@@ -10,6 +10,7 @@ class CategoryForm extends Form
     {
         parent::__construct('category');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('enctype', 'multipart/form-data');
 
         $this->add(array(
             'name' => 'ctgr_name',
