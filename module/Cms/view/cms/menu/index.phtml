@@ -16,24 +16,11 @@ $this->headTitle($title);
 <table class="striped">
     <tr>
         <th>Nom</th>
-        <th>Active/Desactive</th>
         <th></th>
     </tr>
     <?php foreach($menus as $menu):?>
         <tr>
             <td><?=$this->escapeHtml($menu->getMenuName())?>
-            </td>
-            <td>
-                <?php if( $menu->getMenuActive() ) :?>
-                    <span style="color: #fff;" class="badge light-green darken-4">Active</span>
-                    <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
-                        array('controller' => 'comment', 'action'=>'desactive', 'id' => $menu->getMenuId()));?>">Desactive</a>
-                <?php else: ?>
-                    <span  style="color: #fff;" class="badge deep-orange accent-4">Desactive</span>
-                    <a href="<?php echo $this->url('cms/default', // SUPER IMPORTANT use cms/<segment> NOT ONLY cms
-                        array('controller' => 'comment', 'action'=>'active', 'id' => $menu->getMenuId()));?>">Active</a>
-                <?php  endif ?>
-
             </td>
             <td>
                 <a href="<?php echo $this->url('cms/default', array('controller' => 'menu', 'action' => 'delete','id' => $menu->getMenuId() )) ?>">Supprimer</a>

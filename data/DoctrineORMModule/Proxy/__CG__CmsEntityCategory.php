@@ -64,10 +64,10 @@ class Category extends \Cms\Entity\Category implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrName', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'articles', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrId');
+            return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrName', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'articles', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgr_image_filename', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrId');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrName', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'articles', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrId');
+        return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrName', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'articles', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgr_image_filename', '' . "\0" . 'Cms\\Entity\\Category' . "\0" . 'ctgrId');
     }
 
     /**

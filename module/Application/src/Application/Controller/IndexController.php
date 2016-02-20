@@ -12,19 +12,9 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-use Zend\Form\Annotation\AnnotationBuilder;
-
 use Zend\Form\Element;
 
-// hydration tests
 use Zend\Stdlib\Hydrator;
-
-// for Doctrine annotation
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
-use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
-
-//- use Doctrine\Common\Persistence\ObjectManager;
 
 class IndexController extends AbstractActionController
 {

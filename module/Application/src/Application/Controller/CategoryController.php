@@ -24,8 +24,6 @@ use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
 use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
 
-//- use Doctrine\Common\Persistence\ObjectManager;
-
 class CategoryController extends AbstractActionController
 {
 
@@ -60,12 +58,11 @@ class CategoryController extends AbstractActionController
 //        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
 //        $dql = "SELECT ctgr_id FROM Cms\Entity\Page p WHERE p.ctgr_id= ". $id;
 //        var_dump($dql);
-//
-//        $query = $entityManager->createQuery($dql);
+//        $query = $this->getEntityManager()->createQuery($dql);
 //        $query->setMaxResults(30);
 //        $pages = $query->getResult();
-        //$resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findBy(['ctgr_id'=> $id]);
-       // var_dump($resultSet);
+//        $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findBy(['ctgr_id'=> $id]);
+//        var_dump($resultSet);
         return new ViewModel(array(
             'category' => $category,
         ));

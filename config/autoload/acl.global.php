@@ -1,5 +1,5 @@
 <?php
-// First I created an extra config for ACL (could be also in module.config.php, but I prefer to have it in a separated file)
+
 return array(
     'acl' => array(
         'roles' => array(
@@ -9,10 +9,6 @@ return array(
         ),
         'resources' => array(
             'allow' => array(
-//-                'user' => array(
-//-                    'login' => 'guest',
-//-                    'all'   => 'member'
-//-                )
                 'Application\Controller\Index' => array(
                     'all'   => 'guest'
                 ),
@@ -107,6 +103,8 @@ return array(
                     'add'	=> 'admin',
                     'edit'  => 'admin',
                     'delete'=> 'admin',
+                    'active' => 'admin',
+                    'desactive'	=> 'admin',
                 ),
 
                 'Cms\Controller\Theme'=> array(
