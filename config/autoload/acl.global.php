@@ -17,6 +17,10 @@ return array(
                     'all'   => 'guest'
                 ),
 
+                'Application\Controller\Article' => array(
+                    'all'   => 'guest'
+                ),
+
                 'Auth\Controller\Index' => array(
                     // 'index' => 'guest',
                     // 'all'   => 'member',
