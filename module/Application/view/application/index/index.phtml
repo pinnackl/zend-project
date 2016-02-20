@@ -6,7 +6,7 @@
         <div class="col s12 m4">
             <div class="card small">
                 <div class="card-image">
-                    <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
+                    <img src="<?php echo $this->basePath('/uploads/'.$category->getCtgrImageFilename()) ?>">
                     <span class="card-title" ><?php echo $this->escapeHtml($category->getCtgrName());?></span>
                 </div>
                 <div class="card-content">

@@ -1,14 +1,48 @@
 <h2>Catégorie : <?= $category->getCtgrName() ?></h2>
 
-<div style="width: 40%;display: inline-block;">
-    <lengend>Articles :</lengend>
-    <?php foreach($category->getArticles() as $article) :?>
-        <legend><?= $article->getArtcTitle() ?></legend>
-    <?php endforeach ?>
-</div>
+
+
+<div style="width: 48%;display: inline-block;">
+    <div class="row">
+        <legend>Articles :</legend>
+        <?php foreach($category->getArticles() as $article) :?>
+        <div class="col s12 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
+                    <span class="card-title"><?= $article->getArtcTitle() ?></span>
+                </div>
+                <div class="card-content">
+                    <p>I am a very simple card. I am good at containing small bits of information.
+                        I am convenient because I require little markup to use effectively.</p>
+                </div>
+                <div class="card-action">
+                    <a href="#">This is a link</a>
+                </div>
+            </div>
+        </div>
+        <?php endforeach ?>
+    </div>
+    </div>
 <div style="width: 40%;display: inline-block;vertical-align: top">
-    <lengend>Pages :</lengend>
-    <?php foreach($pages as $page) :?>
-        <legend><?= $page->getTitle() ?></legend>
-    <?php endforeach ?>
+    <div class="row">
+        <legend>Pages :</legend>
+        <?php foreach($pages as $page) :?>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
+                        <span class="card-title"><?= $page->getTitle() ?></span>
+                    </div>
+                    <div class="card-content">
+                        <p>I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach ?>
+    </div>
 </div>
