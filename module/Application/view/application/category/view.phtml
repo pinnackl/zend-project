@@ -1,16 +1,14 @@
-<h2>Catégorie : <?= $category->getCtgrName() ?></h2>
-
-
+<h2><?= $category->getCtgrName() ?></h2>
 
 <div style="width: 48%;display: inline-block;">
     <div class="row">
-        <legend>Articles :</legend>
+        <h3>Articles :</h3>
         <?php foreach($category->getArticles() as $article) :?>
-        <div class="col s12 m3">
-            <div class="card">
+        <div class="col s12 m5">
+            <div class="card brown">
                 <div class="card-image">
                     <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
-                    <span class="card-title"><?= $article->getArtcTitle() ?></span>
+                    <span class="card-title" ><?= $article->getArtcTitle() ?></span>
                 </div>
                 <div class="card-content">
                     <p><?= $this->escapeHtml($article->getArtcIntrotext()) ?></p>
@@ -26,10 +24,10 @@
     </div>
 <div style="width: 40%;display: inline-block;vertical-align: top">
     <div class="row">
-        <legend>Pages :</legend>
+        <h3>Pages :</h3>
         <?php foreach($pages as $page) :?>
-            <div class="col s12 m3">
-                <div class="card">
+            <div class="col s12 m5">
+                <div class="card blue">
                     <div class="card-image">
                         <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
                         <span class="card-title"><?= $page->getTitle() ?></span>

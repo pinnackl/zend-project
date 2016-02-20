@@ -18,7 +18,7 @@ $this->headTitle($title);
     <tr>
         <th>Titre</th>
         <th>Contenu</th>
-        <th>Category</th>
+
         <th>&nbsp;</th>
     </tr>
     <?php foreach($pages as $page):?>
@@ -31,11 +31,7 @@ $this->headTitle($title);
             <td>
                 <?=$this->escapeHtml($page->content)?>
             </td>
-            <td>
-                <?php if($page->category != null):?>
-                    <?=$this->escapeHtml($page->category->getCtgrName())?>
-                <?php endif?>
-            </td>
+
             <td>
                 <a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'edit', 'id' => $page->id), false);?>">Modifier</a>
                 <a href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'delete','id' => $page->id), false);?>">Supprimer</a>
