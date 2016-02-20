@@ -77,31 +77,6 @@ class UserForm extends Form
         ));
 
         $this->add(array(
-            'name' => 'user_active',
-            'type' => 'Zend\Form\Element\Select',
-            'options' => array(
-                'label' => 'Active',
-                'value_options' => array(
-                    '0' => 'No',
-                    '1' => 'Yes',
-                ),
-            ),
-            'attributes' => array(
-                'class' => 'browser-default',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'user_answer',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'Answer',
-            ),
-        ));
-
-        $this->add(array(
             'name' => 'user_picture',
             'attributes' => array(
                 'type'  => 'text',
@@ -119,31 +94,6 @@ class UserForm extends Form
             ),
             'options' => array(
                 'label' => 'Registration Date',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'user_registration_token',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'Registration Token',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'user_email_confirmed',
-            'type' => 'Zend\Form\Element\Select',
-            'options' => array(
-                'label' => 'E-mail was confirmed?',
-                'value_options' => array(
-                    '0' => 'No',
-                    '1' => 'Yes',
-                ),
-            ),
-            'attributes' => array(
-                'class' => 'browser-default'
             ),
         ));
 
