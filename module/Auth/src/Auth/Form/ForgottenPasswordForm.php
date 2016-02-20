@@ -7,7 +7,7 @@ class ForgottenPasswordForm extends Form
 {
     public function __construct($name = null)
     {
-        parent::__construct('registration');
+        parent::__construct('forgotten-password');
         $this->setAttribute('method', 'post');
 
         $this->add(array(
@@ -26,6 +26,7 @@ class ForgottenPasswordForm extends Form
                 'type'  => 'submit',
                 'value' => 'Envoyer',
                 'id' => 'submitbutton',
+                'class' => 'btn waves-effect waves-light'
             ),
         ));
     }

@@ -66,6 +66,7 @@ class RegistrationForm extends Form
                 'class' => 'btn',
                 'value' => 'Envoyer',
                 'id' => 'submitbutton',
+                'class' => 'btn waves-effect waves-light'
             ),
         ));
     }
