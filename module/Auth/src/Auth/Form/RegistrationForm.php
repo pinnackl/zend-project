@@ -63,6 +63,7 @@ class RegistrationForm extends Form
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
+                'class' => 'btn',
                 'value' => 'Envoyer',
                 'id' => 'submitbutton',
             ),
