@@ -13,11 +13,9 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 use Zend\Form\Element;
-
-// hydration tests
 use Zend\Stdlib\Hydrator;
 
-class ArticleController extends AbstractActionController
+class PageController extends AbstractActionController
 {
 
     protected $em;
@@ -36,10 +34,9 @@ class ArticleController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
         try{
-            $article = $this->getEntityManager()->find('Cms\Entity\Article', $id);
+            $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
         }
         catch(\Exception $e){
-            //Si la page n'existe pas en base on génère une erreur 404
             $response   = $this->response;
             $event	  = $this->getEvent();
             $routeMatch = $event->getRouteMatch();
@@ -53,8 +50,28 @@ class ArticleController extends AbstractActionController
 //        $query = $this->getEntityManager()->createQuery($dql);
 //        $pages = $query->getResult();
 
+        $menus = [];
+        $articles = [];
+        $stuctureElements = json_decode($page->block_element);
+        if($stuctureElements) {
+            foreach($stuctureElements as $structureElt) {
+                switch($structureElt->element_type) {
+                    case 'menu':
+                        $menu = $this->getEntityManager()->find('Cms\Entity\Menu', $structureElt->element_id);
+                        $menus[] = $menu;
+                        break;
+                    case 'article':
+                        $article = $this->getEntityManager()->find('Cms\Entity\Article', $structureElt->element_id);
+                        $articles[] = $article;
+                        break;
+                }
+            }
+        }
+
         return new ViewModel(array(
-            'article' => $article
+            'page' => $page,
+            'menus' => $menus,
+            'articles' => $articles,
         ));
     }
 }
