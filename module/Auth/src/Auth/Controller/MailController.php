@@ -10,7 +10,7 @@ use Zend\Mail\Transport\Smtp;
 
 class MailController extends AbstractActionController
 {
-    public function initMail($action, $email, $password=null)
+    public function initMail($action, $email, $username, $parameter=null)
     {
         $message = new Message();
         $message->addTo($email);
@@ -19,20 +19,19 @@ class MailController extends AbstractActionController
         switch($action)
         {
             case "commentCreated" :
-                $message->setBody('This is the body');
-                $message->setSubject('Test subject');
+                $message->setBody('New comment for the article :'. $parameter);
+                $message->setSubject('New comment');
                 break;
             case "forgotPassword" :
-                $message->setBody("Your password has been changed. Your new password is: " . $password);
+                $message->setBody($username .", your password has been changed. Your new password is: " . $parameter);
                 $message->setSubject('Forgot Password');
                 break;
             case "accountCreated" :
-                $message->setBody("Your account has been created.");
+                $message->setBody($username .", your account has been created.");
                 $message->setSubject('Account created');
                 break;
         }
-		
-        
+
         $this->sendMail($message);
     }
     
@@ -43,6 +42,11 @@ class MailController extends AbstractActionController
 			->setName('smtp.numericable.fr');
 
 		$transport = new Smtp($smtpOptions);
-		$transport->send($message);
+		
+        try {
+            $transport->send($message);
+        }catch (\Exception $ex) {
+           
+        }
     }
 }
