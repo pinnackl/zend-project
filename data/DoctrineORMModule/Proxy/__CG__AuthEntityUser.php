@@ -64,10 +64,10 @@ class User extends \Auth\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrName', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPassword', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrEmail', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrlId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrthId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'lngId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrActive', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrQuestion', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrAnswer', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPicture', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPasswordSalt', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrRegistrationDate', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrRegistrationToken', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrEmailConfirmed', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrId');
+            return array('__isInitialized__', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrName', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPassword', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrEmail', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrlId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrthId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'lngId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPicture', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrRegistrationDate', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrId');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrName', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPassword', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrEmail', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrlId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrthId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'lngId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrActive', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrQuestion', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrAnswer', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPicture', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPasswordSalt', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrRegistrationDate', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrRegistrationToken', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrEmailConfirmed', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrId');
+        return array('__isInitialized__', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrName', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPassword', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrEmail', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrlId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrthId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'lngId', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrPicture', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrRegistrationDate', '' . "\0" . 'Auth\\Entity\\User' . "\0" . 'usrId');
     }
 
     /**
@@ -396,28 +396,6 @@ class User extends \Auth\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setUsrPasswordSalt($usrPasswordSalt)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsrPasswordSalt', array($usrPasswordSalt));
-
-        return parent::setUsrPasswordSalt($usrPasswordSalt);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUsrPasswordSalt()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsrPasswordSalt', array());
-
-        return parent::getUsrPasswordSalt();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setUsrRegistrationDate($usrRegistrationDate)
     {
 
@@ -435,50 +413,6 @@ class User extends \Auth\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsrRegistrationDate', array());
 
         return parent::getUsrRegistrationDate();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setUsrRegistrationToken($usrRegistrationToken)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsrRegistrationToken', array($usrRegistrationToken));
-
-        return parent::setUsrRegistrationToken($usrRegistrationToken);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUsrRegistrationToken()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsrRegistrationToken', array());
-
-        return parent::getUsrRegistrationToken();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setUsrEmailConfirmed($usrEmailConfirmed)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsrEmailConfirmed', array($usrEmailConfirmed));
-
-        return parent::setUsrEmailConfirmed($usrEmailConfirmed);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUsrEmailConfirmed()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsrEmailConfirmed', array());
-
-        return parent::getUsrEmailConfirmed();
     }
 
     /**

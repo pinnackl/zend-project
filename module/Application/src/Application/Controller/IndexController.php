@@ -28,7 +28,16 @@ use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBui
 
 class IndexController extends AbstractActionController
 {
-    // R - retriev
+
+    protected $em;
+    public function getEntityManager()
+    {
+        if (null === $this->em) {
+            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        }
+        return $this->em;
+    }
+
     public function indexAction()
     {
         $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
@@ -37,6 +46,12 @@ class IndexController extends AbstractActionController
         $query->setMaxResults(30);
         $articles = $query->getResult();
 
+        $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findAll();
+            return new ViewModel(array(
+            'categories' => $resultSet,
+        ));
+
         return new ViewModel(array('articles' => $articles));
     }
+
 }
