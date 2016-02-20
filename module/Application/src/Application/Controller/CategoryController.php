@@ -55,16 +55,14 @@ class CategoryController extends AbstractActionController
             $event->setController('page');
             return ;
         }
-//        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-//        $dql = "SELECT ctgr_id FROM Cms\Entity\Page p WHERE p.ctgr_id= ". $id;
-//        var_dump($dql);
-//        $query = $this->getEntityManager()->createQuery($dql);
-//        $query->setMaxResults(30);
-//        $pages = $query->getResult();
-//        $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findBy(['ctgr_id'=> $id]);
-//        var_dump($resultSet);
+
+        $dql ="SELECT p FROM Cms\Entity\Page p WHERE p.category = ".$id;
+        $query = $this->getEntityManager()->createQuery($dql);
+        $pages = $query->getResult();
+
         return new ViewModel(array(
             'category' => $category,
+            'pages' => $pages,
         ));
     }
 }

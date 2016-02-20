@@ -1,5 +1,14 @@
 <h2>Catégorie : <?= $category->getCtgrName() ?></h2>
 
-<?php foreach($category->getArticles() as $article) :?>
-    <legend><?= $article->getArtcTitle() ?></legend>
-<?php endforeach ?>
+<div style="width: 40%;display: inline-block;">
+    <lengend>Articles :</lengend>
+    <?php foreach($category->getArticles() as $article) :?>
+        <legend><?= $article->getArtcTitle() ?></legend>
+    <?php endforeach ?>
+</div>
+<div style="width: 40%;display: inline-block;vertical-align: top">
+    <lengend>Pages :</lengend>
+    <?php foreach($pages as $page) :?>
+        <legend><?= $page->getTitle() ?></legend>
+    <?php endforeach ?>
+</div>
