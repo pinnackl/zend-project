@@ -1,1 +1,47 @@
 <h2>Catégorie : <?= $category->getCtgrName() ?></h2>
+
+
+
+<div style="width: 48%;display: inline-block;">
+    <div class="row">
+        <legend>Articles :</legend>
+        <?php foreach($category->getArticles() as $article) :?>
+        <div class="col s12 m3">
+            <div class="card">
+                <div class="card-image">
+                    <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
+                    <span class="card-title"><?= $article->getArtcTitle() ?></span>
+                </div>
+                <div class="card-content">
+                    <p><?= $this->escapeHtml($article->getArtcIntrotext()) ?></p>
+                </div>
+                <div class="card-action">
+                    <a href="<?php echo $this->url('article',
+                        array('controller' => 'article', 'action' =>'view', 'id' => $article->getArtcId())).'/view/'.$article->getArtcId()?>">Voir plus</a>
+                </div>
+            </div>
+        </div>
+        <?php endforeach ?>
+    </div>
+    </div>
+<div style="width: 40%;display: inline-block;vertical-align: top">
+    <div class="row">
+        <legend>Pages :</legend>
+        <?php foreach($pages as $page) :?>
+            <div class="col s12 m3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
+                        <span class="card-title"><?= $page->getTitle() ?></span>
+                    </div>
+                    <div class="card-content">
+                    </div>
+                    <div class="card-action">
+                        <a href="<?php echo $this->url('page',
+                                array('controller' => 'page', 'action' =>'view', 'id' => $page->getId())).'/view/'.$page->getId()?>">Voir plus</a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach ?>
+    </div>
+</div>

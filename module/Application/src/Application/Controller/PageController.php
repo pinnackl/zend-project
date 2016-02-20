@@ -12,19 +12,10 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-use Zend\Form\Annotation\AnnotationBuilder;
-
 use Zend\Form\Element;
-
-// hydration tests
 use Zend\Stdlib\Hydrator;
 
-// for Doctrine annotation
-use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
-use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
-use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
-
-class CategoryController extends AbstractActionController
+class PageController extends AbstractActionController
 {
 
     protected $em;
@@ -43,10 +34,9 @@ class CategoryController extends AbstractActionController
             return $this->redirect()->toRoute('home');
         }
         try{
-            $category = $this->getEntityManager()->find('Cms\Entity\Category', $id);
+            $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
         }
         catch(\Exception $e){
-            //Si la page n'existe pas en base on génère une erreur 404
             $response   = $this->response;
             $event	  = $this->getEvent();
             $routeMatch = $event->getRouteMatch();
@@ -56,13 +46,32 @@ class CategoryController extends AbstractActionController
             return ;
         }
 
-        $dql ="SELECT p FROM Cms\Entity\Page p WHERE p.category = ".$id;
-        $query = $this->getEntityManager()->createQuery($dql);
-        $pages = $query->getResult();
+//        $dql ="SELECT p FROM Cms\Entity\Page p WHERE p.category = ".$id;
+//        $query = $this->getEntityManager()->createQuery($dql);
+//        $pages = $query->getResult();
+
+        $menus = [];
+        $articles = [];
+        $stuctureElements = json_decode($page->block_element);
+        if($stuctureElements) {
+            foreach($stuctureElements as $structureElt) {
+                switch($structureElt->element_type) {
+                    case 'menu':
+                        $menu = $this->getEntityManager()->find('Cms\Entity\Menu', $structureElt->element_id);
+                        $menus[] = $menu;
+                        break;
+                    case 'article':
+                        $article = $this->getEntityManager()->find('Cms\Entity\Article', $structureElt->element_id);
+                        $articles[] = $article;
+                        break;
+                }
+            }
+        }
 
         return new ViewModel(array(
-            'category' => $category,
-            'pages' => $pages,
+            'page' => $page,
+            'menus' => $menus,
+            'articles' => $articles,
         ));
     }
 }

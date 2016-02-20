@@ -209,6 +209,28 @@ class Category extends \Cms\Entity\Category implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function setCtgrImageFileName($ctgrImageFileName)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setCtgrImageFileName', array($ctgrImageFileName));
+
+        return parent::setCtgrImageFileName($ctgrImageFileName);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCtgrImageFileName()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCtgrImageFileName', array());
+
+        return parent::getCtgrImageFileName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getArticles()
     {
 

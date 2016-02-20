@@ -35,7 +35,6 @@ class IndexController extends AbstractActionController
 		return new ViewModel(array('articles' => $articles));
 	}
 
-	// C - create
     public function addAction()
 	{
 		$entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
@@ -45,40 +44,36 @@ class IndexController extends AbstractActionController
 		$form->bind($article);
 
 		$form->get('language')->setAttribute('class', 'browser-default');
+		$form->get('resource')->setAttribute('class', 'browser-default');
 		$form->get('categories')->setAttributes(array('class'=> 'browser-default', 'style'=> 'height:100px'));
 		
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-			$files =  $request->getFiles()->toArray();
+			$files = $request->getFiles()->toArray();
 			$httpadapter = new \Zend\File\Transfer\Adapter\Http();
-			$filesize  = new \Zend\Validator\File\Size(array('min' => 1000 )); //1KB
+			$filesize = new \Zend\Validator\File\Size(array('min' => 1000)); //1KB
 			$extension = new \Zend\Validator\File\Extension(array('extension' => array('png')));
-			if(!empty($files)) {
-				$httpadapter->setValidators(array($filesize, $extension), $files['artcImageFilename']['name']);
-				if($httpadapter->isValid()) {
-					$basePath = $this->getRequest()->getBasePath();
+			$httpadapter->setValidators(array($filesize, $extension), $files['art_image_filename']['name']);
+			if ($httpadapter->isValid()) {
+				$route = $httpadapter->setDestination('public/article/');
 
-					$rep = $httpadapter->setDestination($basePath.'/public/uploads/');
-
-
-					if($httpadapter->receive($files['artcImageFilename']['name'])) {
-						$newfile = $httpadapter->getFileName();
-					}
+				if ($httpadapter->receive($files['art_image_filename']['name'])) {
+					$newfile = $httpadapter->getFileName();
 				}
 			}
 
-
 			$post = $request->getPost();
-			// uncooment and fix if you want to control the date and time
-//			$post->artcCreated = $post->artcCreatedDate . ' ' . $post->artcCreatedTime;
 			$form->setData($post);
-			 if ($form->isValid()) {
+
+			if ($form->isValid()) {
+				$data = $form->getData();
+				$article->setArtcImageFilename($files['art_image_filename']['name']);
 				$this->prepareData($article);
 				$entityManager->persist($article);
 				$entityManager->flush();
-                return $this->redirect()->toRoute('cms/default', array('controller' => 'index', 'action' => 'index'));
-			 }
+				return $this->redirect()->toRoute('cms/default', array('controller' => 'index', 'action' => 'index'));
+			}
 		}
 		return new ViewModel(array('form' => $form));
 	}
@@ -203,6 +198,7 @@ class IndexController extends AbstractActionController
 	{
 		$builder = new DoctrineAnnotationBuilder($entityManager);
 		$form = $builder->createForm( $article );
+		$form->setAttribute('enctype', 'multipart/form-data');
 		
 		//!!!!!! Start !!!!! Added to make the association tables work with select
 		foreach ($form->getElements() as $element){
@@ -214,12 +210,10 @@ class IndexController extends AbstractActionController
 			}           
 		}
 
-
-		$form->add(array(
-			 'type' => 'Zend\Form\Element\File',
-			 'name' => 'artcImageFilename',
-
-		 ));
+		//Image article
+		$titleField = new Element\File('art_image_filename');
+		$titleField->setLabel('Image article');
+		$form->add($titleField);
 
 //
 //		 $form->add(array(
@@ -264,13 +258,13 @@ class IndexController extends AbstractActionController
 		return $form;		
 	}
 	
-	public function prepareData($artcile)
+	public function prepareData($article)
 	{
-		$artcile->setArtcCreated(new \DateTime());
+		$article->setArtcCreated(new \DateTime());
 		$auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
 		if ($auth->hasIdentity()) {
 			$user = $auth->getIdentity();
 		}
-		$artcile->setAuthor($user);
+		$article->setAuthor($user);
 	}
 }

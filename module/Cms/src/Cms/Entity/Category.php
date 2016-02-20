@@ -46,8 +46,6 @@ class Category
      */
     private $ctgr_image_filename;
 
-
-
     /**
      * @var integer
      *
@@ -88,6 +86,29 @@ class Category
     public function getCtgrName()
     {
         return $this->ctgrName;
+    }
+
+    /**
+     * Set ctgrImageFileName
+     *
+     * @param string $ctgrImageFileName
+     * @return Category
+     */
+    public function setCtgrImageFileName($ctgrImageFileName)
+    {
+        $this->ctgr_image_filename = $ctgrImageFileName;
+
+        return $this;
+    }
+
+    /**
+     * Get ctgrImageFileName
+     *
+     * @return string
+     */
+    public function getCtgrImageFileName()
+    {
+        return $this->ctgr_image_filename;
     }
 
     /**

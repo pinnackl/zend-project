@@ -11,3 +11,5 @@ vendor
 composer.phar
 .idea
 config/autoload/global.php
+public/uploads/
+public/article/

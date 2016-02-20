@@ -54,23 +54,26 @@ class CategoryController extends AbstractActionController
         $form = new CategoryForm();
         $request = $this->getRequest();
 
-
         if ($request->isPost()) {
             $form->setInputFilter(new CategoryFilter());
-//            $form->setData($request->getPost());
+            $form->setData($request->getPost());
 
-            $form->setData(array_merge_recursive(
-                $this->getRequest()->getPost()->toArray(),
-                $this->getRequest()->getFiles()->toArray()
-            ));
+            $files =  $request->getFiles()->toArray();
+            $httpadapter = new \Zend\File\Transfer\Adapter\Http();
+            $filesize  = new \Zend\Validator\File\Size(array('min' => 1000 )); //1KB
+            $extension = new \Zend\Validator\File\Extension(array('extension' => array('png')));
+            $httpadapter->setValidators(array($filesize, $extension), $files['ctgr_image_filename']['name']);
+            if($httpadapter->isValid()) {
+                $route = $httpadapter->setDestination('public/uploads/');
 
-            $dataFile = $this->getRequest()->getFiles()->toArray();
-            var_dump($dataFile['ctgr_image_filename']['name']);
+                if($httpadapter->receive($files['ctgr_image_filename']['name'])) {
+                    $newfile = $httpadapter->getFileName();
+                }
+            }
 
             if ($form->isValid()) {
                 $data = $form->getData();
-                $tmp_name = $data['ctgr_image_filename'] = $data['ctgr_image_filename']['name'];
-                move_uploaded_file($tmp_name, "uploads/category");
+                $data['ctgr_image_filename'] = $data['ctgr_image_filename']['name'];
                 unset($data['submit']);
                 $this->getCategoriesTable()->insert($data);
                 return $this->redirect()->toRoute('cms/default', array('controller' => 'category', 'action' => 'index'));
