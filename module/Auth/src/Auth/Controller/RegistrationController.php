@@ -54,7 +54,7 @@ class RegistrationController extends AbstractActionController
                 $entityManager->flush();
                 
                 $mail = new MailController();
-                $mail->initMail('accountCreated',$user->getUsrEmail());
+                $mail->initMail('accountCreated',$user->getUsrEmail(),$user->getUsrName());
                 
                 return $this->redirect()->toRoute('auth/default', array('controller'=>'registration', 'action'=>'registration-success'));
             }
@@ -87,7 +87,8 @@ class RegistrationController extends AbstractActionController
                 $data = $form->getData();
                 $usrEmail = $data['usrEmail'];
                 $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-                $user = $entityManager->getRepository('Auth\Entity\User')->findOneBy(array('usrEmail' => $usrEmail)); //
+                $user = $entityManager->getRepository('Auth\Entity\User')->findOneBy(array('usrEmail' => $usrEmail));
+                $username = $user->getUsrName();
                 $password = $this->generatePassword();
                 
                 $bcrypt = new Bcrypt();
@@ -97,7 +98,7 @@ class RegistrationController extends AbstractActionController
                 $entityManager->flush();
                 
                 $mail = new MailController();
-                $mail->initMail('forgotPassword',$usrEmail,$password);
+                $mail->initMail('forgotPassword',$usrEmail,$username,$password);
                 
                 return $this->redirect()->toRoute('auth/default', array('controller'=>'registration', 'action'=>'password-change-success'));
             }

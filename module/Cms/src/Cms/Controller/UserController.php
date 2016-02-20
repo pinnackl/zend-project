@@ -77,7 +77,7 @@ class UserController extends AbstractActionController
                 $entityManager->flush();
 
                 $mail = new MailController();
-                $mail->initMail('accountCreated',$user->getUsrEmail());
+                $mail->initMail('accountCreated',$user->getUsrEmail(),$user->getUsrEmail());
 
                 return $this->redirect()->toRoute('cms/default', array('controller'=>'user', 'action'=>'index'));
             }
