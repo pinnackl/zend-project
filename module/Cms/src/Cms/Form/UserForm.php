@@ -122,25 +122,6 @@ class UserForm extends Form
             ),
         ));
 
-        $this->add(array(
-            'name' => 'user_registration_date',
-            'attributes' => array(
-                'type'  => 'Zend\Form\Element\DateTime', // 'text'
-            ),
-            'options' => array(
-                'label' => 'Registration Date',
-            ),
-        ));
-
-        $this->add(array(
-            'name' => 'user_registration_token',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => 'Registration Token',
-            ),
-        ));
 
         $this->add(array(
             'name' => 'user_email_confirmed',

@@ -1,6 +1,7 @@
 <?php
 namespace Cms\Controller;
 
+use Auth\Controller\MailController;
 use Auth\Entity\User;
 use Auth\Form\UserFilter;
 use Auth\Form\UserForm;
@@ -9,8 +10,14 @@ use Zend\Mvc\Controller\AbstractActionController,
     Doctrine\ORM\EntityManager,
     Doctrine\ORM\Query;
 
+// Doctrine Annotations
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
+use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
 
 use Zend\Db\TableGateway\TableGateway;
+
+use Zend\Crypt\Password\Bcrypt;
 
 /**
  * Controller des User
@@ -47,29 +54,50 @@ class UserController extends AbstractActionController
 
     public function addAction()
     {
-        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+
+        $entityManager = $this->getEntityManager();
         $user = new User;
+        //1)  A lot of work to manualy change the form add fields etc. Better use a form class
+//-		$form = $this->getRegistrationForm($entityManager, $user);
 
-        if(!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('home');
-        }
-
+        // 2) Better use a form class
         $form = new UserForm();
-        $request = $this->getRequest();
+        $form->get('submit')->setValue('Register');
+        $form->setHydrator(new DoctrineHydrator($entityManager,'Aut\Entity\User'));
 
-        $form->setData($request->getPost());
-        if ($form->isValid()) {
-            //$this->prepareData($user);
+        $form->bind($user);
+        $request = $this->getRequest();
+        if ($request->isPost()) {
             $form->setInputFilter(new UserFilter());
+            $form->setData($request->getPost());
             if ($form->isValid()) {
-                $data = $form->getData();
-                unset($data['submit']);
-                if (empty($data['user_registration_date'])) $data['user_registration_date'] = '2013-07-19 12:00:00';
-                $this->getUsersTable()->insert($data);
-                return $this->redirect()->toRoute('cms/default', array('controller' => 'user', 'action' => 'index'));
+                $this->prepareData($user);
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $mail = new MailController();
+                $mail->initMail('accountCreated',$user->getUsrEmail());
+
+                return $this->redirect()->toRoute('cms/default', array('controller'=>'user', 'action'=>'index'));
             }
         }
         return new ViewModel(array('form' => $form));
+
+//
+//        $form->setData($request->getPost());
+//        if ($form->isValid()) {
+//            //$this->prepareData($user);
+//
+//            if ($form->isValid()) {
+//                $data = $form->getData();
+//                unset($data['submit']);
+//                if (empty($data['user_registration_date'])) $data['user_registration_date'] = '2013-07-19 12:00:00';
+//                $this->getUsersTable()->insert($data);
+//                return $this->redirect()->toRoute('cms/default', array('controller' => 'user', 'action' => 'index'));
+//            }
+//        }
+//        return new ViewModel(array('form' => $form));
     }
 
 
@@ -107,78 +135,27 @@ class UserController extends AbstractActionController
         return $this->redirect()->toRoute('cms/default', array('controller' => 'user', 'action' => 'index'));
     }
 
-    public function viewAction()
-    {
-        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
-
-        if(!$auth->hasIdentity()) {
-            return $this->redirect()->toRoute('home');
-        }
-        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
-        //Si l'Id est vie on redirige vers la liste
-        if (!$id) {
-            return $this->redirect()->toRoute('page');
-        }
-        try{
-            //Sinon on charge la page correspondant à l'Id
-            $page = $this->getEntityManager()->find('Cms\Entity\Page', $id);
-        }
-        catch(\Exception $e){
-            //Si la page n'existe pas en base on génère une erreur 404
-            $response   = $this->response;
-            $event	  = $this->getEvent();
-            $routeMatch = $event->getRouteMatch();
-            $response->setStatusCode(404);
-            $event->setParam('exception', new \Exception('Page Inconnue'.$id));
-            $event->setController('page');
-            return ;
-        }
-        return new ViewModel(array(
-            'page' => $page
-        ));
-    }
 
     public function prepareData($user)
     {
-        $user->setUsrActive(1);
-        $user->setUsrPasswordSalt($this->generateDynamicSalt());
-        $user->setUsrPassword($this->encriptPassword(
-            $this->getStaticSalt(),
-            $user->getUsrPassword(),
-            $user->getUsrPasswordSalt()
-        ));
+        $bcrypt = new Bcrypt();
+
+        $user->setUsrPassword($bcrypt->create($user->getUsrPassword()));
         $user->setUsrlId(2);
         $user->setLngId(1);
         $user->setUsrRegistrationDate(new \DateTime());
-        $user->setUsrRegistrationToken(md5(uniqid(mt_rand(), true))); // $this->generateDynamicSalt();
-//		$user->setUsrRegistrationToken(uniqid(php_uname('n'), true));
-        $user->setUsrEmailConfirmed(0);
         return $user;
     }
 
-
-    public function generateDynamicSalt()
+    public function generatePassword($length = 10, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
     {
-        $dynamicSalt = '';
-        for ($i = 0; $i < 50; $i++) {
-            $dynamicSalt .= chr(rand(33, 126));
+        $str = '';
+        $max = mb_strlen($keyspace, '8bit') - 1;
+        for ($i = 0; $i < $length; ++$i) {
+            $str .= $keyspace[random_int(0, $max)];
         }
-        return $dynamicSalt;
+        return $str;
     }
-
-    public function getStaticSalt()
-    {
-        $staticSalt = '';
-        $config = $this->getServiceLocator()->get('Config');
-        $staticSalt = $config['static_salt'];
-        return $staticSalt;
-    }
-
-    public function encriptPassword($staticSalt, $password, $dynamicSalt)
-    {
-        return $password = md5($staticSalt . $password . $dynamicSalt);
-    }
-
 
     public function getUsersTable()
     {

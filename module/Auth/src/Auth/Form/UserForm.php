@@ -30,8 +30,6 @@ class UserForm extends Form
             ),
         ));
 
-
-
         $this->add(array(
             'name' => 'user_email',
             'attributes' => array(
@@ -86,16 +84,6 @@ class UserForm extends Form
             ),
         ));
 
-        $this->add(array(
-            'name' => 'user_registration_date',
-            'attributes' => array(
-                'type'  => 'Zend\Form\Element\Date',
-                 'class' => 'datepicker'// 'text'
-            ),
-            'options' => array(
-                'label' => 'Registration Date',
-            ),
-        ));
 
         $this->add(array(
             'name' => 'submit',
