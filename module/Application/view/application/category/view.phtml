@@ -1,1 +1,5 @@
 <h2>Catégorie : <?= $category->getCtgrName() ?></h2>
+
+<?php foreach($category->getArticles() as $article) :?>
+    <legend><?= $article->getArtcTitle() ?></legend>
+<?php endforeach ?>
