@@ -27,10 +27,6 @@ class IndexController extends AbstractActionController
         $messages = null;
         $request = $this->getRequest();
         if ($request->isPost()) {
-            //- $authFormFilters = new User(); // we use the Entity for the filters
-            // TODO fix the filters
-            //- $form->setInputFilter($authFormFilters->getInputFilter());
-            // Filters have been fixed
             $form->setInputFilter(new LoginFilter($this->getServiceLocator()));
             $form->setData($request->getPost());
 
@@ -42,14 +38,13 @@ class IndexController extends AbstractActionController
                 $authService = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
                 // Do the same you did for the ordinar Zend AuthService
                 $adapter = $authService->getAdapter();
-                $adapter->setIdentityValue($data['username']); //$data['user_name']
-                $adapter->setCredentialValue($data['password']); // $data['user_password']
+                $adapter->setIdentityValue($data['username']); 
+                $adapter->setCredentialValue($data['password']); 
                 $authResult = $authService->authenticate();
                 if ($authResult->isValid()) {
                     $identity = $authResult->getIdentity();
                     $authService->getStorage()->write($identity);
                     $time = 1209600; // 14 days 1209600/3600 = 336 hours => 336/24 = 14 days
-//-					if ($data['rememberme']) $authService->getStorage()->session->getManager()->rememberMe($time); // no way to get the session
                     if ($data['rememberme']) {
                         $sessionManager = new \Zend\Session\SessionManager();
                         $sessionManager->rememberMe($time);
@@ -59,13 +54,8 @@ class IndexController extends AbstractActionController
                 foreach ($authResult->getMessages() as $message) {
                     $messages .= "$message\n";
                 }
-                /*
-                        $identity = $authenticationResult->getIdentity();
-                        $authService->getStorage()->write($identity);
-                        $authenticationService = $this->serviceLocator()->get('Zend\Authentication\AuthenticationService');
-                        $loggedUser = $authenticationService->getIdentity();
-                */
             }
+                
         }
         return new ViewModel(array(
             'error' => 'Your authentication credentials are not valid',
@@ -76,18 +66,13 @@ class IndexController extends AbstractActionController
 
     public function logoutAction()
     {
-        // $auth = new AuthenticationService();
         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
         // @todo Set up the auth adapter, $authAdapter
         if ($auth->hasIdentity()) {
             // Identity exists; get it
             $identity = $auth->getIdentity();
-//-			echo '<pre>';
-//-			print_r($identity);
-//-			echo '</pre>';
         }
         $auth->clearIdentity();
-//-		$auth->getStorage()->session->getManager()->forgetMe(); // no way to get to the sessionManager from the storage
         $sessionManager = new \Zend\Session\SessionManager();
         $sessionManager->forgetMe();
 

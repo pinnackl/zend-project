@@ -50,11 +50,12 @@ class RegistrationController extends AbstractActionController
             if ($form->isValid()) {
                 $this->prepareData($user);
                 
+                $entityManager->persist($user);
+                $entityManager->flush();
+                
                 $mail = new MailController();
                 $mail->initMail('accountCreated',$user->getUsrEmail());
                 
-                $entityManager->persist($user);
-                $entityManager->flush();
                 return $this->redirect()->toRoute('auth/default', array('controller'=>'registration', 'action'=>'registration-success'));
             }
         }
@@ -86,19 +87,34 @@ class RegistrationController extends AbstractActionController
                 $data = $form->getData();
                 $usrEmail = $data['usrEmail'];
                 $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-                $user = $entityManager->getRepository('AuthDoctrine\Entity\User')->findOneBy(array('usrEmail' => $usrEmail)); //
+                $user = $entityManager->getRepository('Auth\Entity\User')->findOneBy(array('usrEmail' => $usrEmail)); //
                 $password = $this->generatePassword();
+                
+                $bcrypt = new Bcrypt();
+                
+                $user->setUsrPassword($bcrypt->create($password));
+                $entityManager->persist($user);
+                $entityManager->flush();
                 
                 $mail = new MailController();
                 $mail->initMail('forgotPassword',$usrEmail,$password);
                 
-                $user->setUsrPassword($password);
-                $entityManager->persist($user);
-                $entityManager->flush();
                 return $this->redirect()->toRoute('auth/default', array('controller'=>'registration', 'action'=>'password-change-success'));
             }
         }
         return new ViewModel(array('form' => $form));
+    }
+    
+    public function passwordChangeSuccessAction()
+    {
+        $user_email = null;
+        $flashMessenger = $this->flashMessenger();
+        if ($flashMessenger->hasMessages()) {
+            foreach($flashMessenger->getMessages() as $key => $value) {
+                $user_email .=  $value;
+            }
+        }
+        return new ViewModel(array('user_email' => $user_email));
     }
 
 
@@ -115,77 +131,14 @@ class RegistrationController extends AbstractActionController
 
 
 
-    public function generatePassword($l = 8, $c = 0, $n = 0, $s = 0) {
-        // get count of all required minimum special chars
-        $count = $c + $n + $s;
-        $out = '';
-        // sanitize inputs; should be self-explanatory
-        if(!is_int($l) || !is_int($c) || !is_int($n) || !is_int($s)) {
-            trigger_error('Argument(s) not an integer', E_USER_WARNING);
-            return false;
+    public function generatePassword($length = 10, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+    {
+        $str = '';
+        $max = mb_strlen($keyspace, '8bit') - 1;
+        for ($i = 0; $i < $length; ++$i) {
+            $str .= $keyspace[random_int(0, $max)];
         }
-        elseif($l < 0 || $l > 20 || $c < 0 || $n < 0 || $s < 0) {
-            trigger_error('Argument(s) out of range', E_USER_WARNING);
-            return false;
-        }
-        elseif($c > $l) {
-            trigger_error('Number of password capitals required exceeds password length', E_USER_WARNING);
-            return false;
-        }
-        elseif($n > $l) {
-            trigger_error('Number of password numerals exceeds password length', E_USER_WARNING);
-            return false;
-        }
-        elseif($s > $l) {
-            trigger_error('Number of password capitals exceeds password length', E_USER_WARNING);
-            return false;
-        }
-        elseif($count > $l) {
-            trigger_error('Number of password special characters exceeds specified password length', E_USER_WARNING);
-            return false;
-        }
-
-        // all inputs clean, proceed to build password
-
-        // change these strings if you want to include or exclude possible password characters
-        $chars = "abcdefghijklmnopqrstuvwxyz";
-        $caps = strtoupper($chars);
-        $nums = "0123456789";
-        $syms = "!@#$%^&*()-+?";
-
-        // build the base password of all lower-case letters
-        for($i = 0; $i < $l; $i++) {
-            $out .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
-        }
-
-        // create arrays if special character(s) required
-        if($count) {
-            // split base password to array; create special chars array
-            $tmp1 = str_split($out);
-            $tmp2 = array();
-
-            // add required special character(s) to second array
-            for($i = 0; $i < $c; $i++) {
-                array_push($tmp2, substr($caps, mt_rand(0, strlen($caps) - 1), 1));
-            }
-            for($i = 0; $i < $n; $i++) {
-                array_push($tmp2, substr($nums, mt_rand(0, strlen($nums) - 1), 1));
-            }
-            for($i = 0; $i < $s; $i++) {
-                array_push($tmp2, substr($syms, mt_rand(0, strlen($syms) - 1), 1));
-            }
-
-            // hack off a chunk of the base password array that's as big as the special chars array
-            $tmp1 = array_slice($tmp1, 0, $l - $count);
-            // merge special character(s) array with base password array
-            $tmp1 = array_merge($tmp1, $tmp2);
-            // mix the characters up
-            shuffle($tmp1);
-            // convert to string for output
-            $out = implode('', $tmp1);
-        }
-
-        return $out;
+        return $str;
     }
 
     public function getUsersTable()
