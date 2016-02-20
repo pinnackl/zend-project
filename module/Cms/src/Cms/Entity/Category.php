@@ -37,7 +37,17 @@ class Category
 	 * @Annotation\Exclude()
      */
     private $articles;
-	
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ctgr_image_filename", type="text", nullable=true)
+     *
+     */
+    private $ctgr_image_filename;
+
+
+
     /**
      * @var integer
      *

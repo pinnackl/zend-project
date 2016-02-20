@@ -1,8 +1,9 @@
 <?php
 namespace Cms\Form;
 
-use Zend\Form\Form;
 
+use Zend\Form\Form,
+    Zend\Form\Element;
 class CategoryForm extends Form
 {
     public function __construct($name = null)
@@ -19,6 +20,11 @@ class CategoryForm extends Form
                 'label' => 'Username',
             ),
         ));
+
+        //Menu Name
+        $titleField = new Element\File('ctgr_image_filename');
+        $titleField->setLabel('Image catégroy');
+        $this->add($titleField);
 
         $this->add(array(
             'name' => 'submit',
