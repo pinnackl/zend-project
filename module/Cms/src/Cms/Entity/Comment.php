@@ -9,20 +9,6 @@ use Doctrine\Common\Collections\Collection;
 
 use Zend\Form\Annotation;
 
-// SUPER important is to remove      @ORM\Column(name="rl_id", type="integer", nullable=true) from the role in order to make it work
-// http://stackoverflow.com/questions/6899335/doctrine-class-has-no-association-named
-// setters and getters - Zend\Stdlib\Hydrator\ClassMethods, for public properties - Zend\Stdlib\Hydrator\ObjectProperty, array 
-// Zend\Stdlib\Hydrator\ArraySerializable
-// Follows the definition of ArrayObject. 
-// Objects must implement either the exchangeArray() or populate() methods to support hydration, 
-// and the getArrayCopy() method to support extraction.
-// https://bitbucket.org/todor_velichkov/homeworkuniversity/src/935b37b87e3f211a72ee571142571089dffbf82d/module/University/src/University/Form/StudentForm.php?at=master
-
-// read here http://framework.zend.com/manual/2.1/en/modules/zend.form.quick-start.html
-
-// children - are the transaltions
-// parent - is the original article
-
 /**
  * Comment
  *
@@ -38,12 +24,7 @@ class Comment
      *
 	 * @ORM\ManyToOne(targetEntity="Cms\Entity\Language")
 	 * @ORM\JoinColumn(name="lang_id", referencedColumnName="lang_id")
-	 * @Annotation\Type("DoctrineModule\Form\Element\ObjectSelect")
-	 * @Annotation\Options({
-	 * "label":"Language:",
-	 * "empty_option": "Please, choose your language",
-	 * "target_class":"Cms\Entity\Language",
-	 * "property": "lngName"})
+	 *
      */
     private $language;
 
@@ -92,7 +73,6 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="com_active", type="integer", nullable=false)
-     * @Annotation\Options({"label":"Active:"})
      */
     private $comActive;
 	
@@ -101,7 +81,7 @@ class Comment
      *
      * @ORM\Column(name="com_text", type="text", nullable=true)
      * @Annotation\Attributes({"type":"textarea"})
-     * @Annotation\Options({"label":"Text:"})	 
+     * @Annotation\Options({"label":"COmmentaire:"})
      */
     private $comText;
 	
@@ -287,9 +267,3 @@ class Comment
         return $this->comActive;
     }
 }
-
-/*
-@var Cms\Entity\Article
-
- @ORM\ManyToOne(targetEntity="Cms\Entity\Article") - Unidirectional
-*/

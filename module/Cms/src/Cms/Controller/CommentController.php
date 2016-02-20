@@ -2,6 +2,7 @@
 
 namespace Cms\Controller;
 
+use Cms\Form\CommentForm;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -63,32 +64,21 @@ class CommentController extends AbstractActionController
 				'action' => 'index'
             ));
         }
-		$builder = new DoctrineAnnotationBuilder($entityManager);
-		$form = $builder->createForm( $comment );
-		$form->get('language')->setAttribute('class', 'browser-default');
-		
+
+		$form = new CommentForm();
 		$form->remove('comCreated');
 		$form->remove('author');
 		$form->remove('article');
 		foreach ($form->getElements() as $element){
-			if(method_exists($element, 'getProxy')){                
+			if(method_exists($element, 'getProxy')){
 				$proxy = $element->getProxy();
-				if(method_exists($proxy, 'setObjectManager')){  
+				if(method_exists($proxy, 'setObjectManager')){
 					$proxy->setObjectManager($entityManager);
 				}
-			}           
+			}
 		}
-		
+
 		$form->setHydrator(new DoctrineHydrator($entityManager,'Cms\Entity\Comment'));
-
-		$send = new Element('send');
-		$send->setValue('Add'); // submit
-		$send->setAttributes(array(
-			'class' => 'btn waves-effect waves-light',
-			'type'  => 'submit'
-		));
-		$form->add($send);
-
 		$form->bind($comment);
 		
         $request = $this->getRequest();
