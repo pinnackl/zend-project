@@ -29,13 +29,18 @@ use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBui
 class CategoryController extends AbstractActionController
 {
 
+    protected $em;
+    public function getEntityManager()
+    {
+        if (null === $this->em) {
+            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        }
+        return $this->em;
+    }
 
     public function viewAction()
     {
-        var_dump('dans view category');
         $id = (int)$this->getEvent()->getRouteMatch()->getParam('id');
-        var_dump($id);
-        die();
         if (!$id) {
             return $this->redirect()->toRoute('home');
         }
@@ -50,8 +55,6 @@ class CategoryController extends AbstractActionController
             $response->setStatusCode(404);
             $event->setParam('exception', new \Exception('Page Inconnue'.$id));
             $event->setController('page');
-            var_dump('dans catch');
-            die();
             return ;
         }
 //        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
@@ -61,8 +64,8 @@ class CategoryController extends AbstractActionController
 //        $query = $entityManager->createQuery($dql);
 //        $query->setMaxResults(30);
 //        $pages = $query->getResult();
-        $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findBy(['ctgr_id'=> $id]);
-        var_dump($resultSet);
+        //$resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findBy(['ctgr_id'=> $id]);
+       // var_dump($resultSet);
         return new ViewModel(array(
             'category' => $category,
         ));

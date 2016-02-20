@@ -13,8 +13,8 @@
                     <p></p>
                 </div>
                 <div class="card-action">
-                    <a href="<?php echo $this->url('home/default',
-                            array('controller' => 'category', 'action' =>'view', 'id' => $category->getCtgrId())).'/'.$category->getCtgrId() ;?>">View</a>
+                    <a href="<?php echo $this->url('category',
+                            array('controller' => 'category', 'action' =>'view', 'id' => $category->getCtgrId())).'/view/'.$category->getCtgrId() ;?>">View</a>
                 </div>
             </div>
         </div>
