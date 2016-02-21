@@ -44,7 +44,12 @@
 
             switch($type) {
                 case 'menu':
-                    $wi.append("MenuName: "+"<?= $menus[0]->getMenuName() ?>");
+                    $wi.append("<ul>"+
+                        "<li><?= $menus[0]->getMenuName() ?></li>"+
+                        "<li><a href=''>Cat 1</a></li>" +
+                        "<li><a href=''>Cat 2</a></li>" +
+                        "<li><a href=''>Cat 3</a></li>" +
+                        "</ul>");
                     break;
                 case 'article':
                     var $title = '<?= $articles[$cpt]->getArtcTitle() ?>';
