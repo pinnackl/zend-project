@@ -9,6 +9,8 @@
 
 namespace Application\Controller;
 
+use Cms\Entity\Comment;
+use Cms\Form\CommentForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -16,6 +18,11 @@ use Zend\Form\Element;
 
 // hydration tests
 use Zend\Stdlib\Hydrator;
+
+// for Doctrine annotation
+use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
+use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
 
 class ArticleController extends AbstractActionController
 {
@@ -53,8 +60,37 @@ class ArticleController extends AbstractActionController
 //        $query = $this->getEntityManager()->createQuery($dql);
 //        $pages = $query->getResult();
 
+        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $comment = new Comment;
+
+        $form = new CommentForm();
+        $form->remove('comCreated');
+        $form->remove('author');
+        $form->remove('article');
+
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+        if ($auth->hasIdentity()) {
+            $form->remove('com_email');
+            $form->remove('com_author');
+        }
+
+        foreach ($form->getElements() as $element){
+            if(method_exists($element, 'getProxy')){
+                $proxy = $element->getProxy();
+                if(method_exists($proxy, 'setObjectManager')){
+                    $proxy->setObjectManager($entityManager);
+                }
+            }
+        }
+
+        $form->setHydrator(new DoctrineHydrator($entityManager,'Cms\Entity\Comment'));
+        $form->bind($comment);
+
+        $request = $this->getRequest();
+
         return new ViewModel(array(
-            'article' => $article
+            'article' => $article,
+            'form' => $form,
         ));
     }
 }

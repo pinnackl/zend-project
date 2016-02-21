@@ -10,7 +10,6 @@ use Zend\View\Model\ViewModel;
 use Zend\Form\Annotation\AnnotationBuilder;
 
 use Zend\Form\Element;
-
 // hydration tests
 use Zend\Stdlib\Hydrator;
 
@@ -18,8 +17,6 @@ use Zend\Stdlib\Hydrator;
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
 use DoctrineORMModule\Stdlib\Hydrator\DoctrineEntity;
 use DoctrineORMModule\Form\Annotation\AnnotationBuilder as DoctrineAnnotationBuilder;
-
-//- use Doctrine\Common\Persistence\ObjectManager;
 
 use Auth\Controller\MailController;
 
