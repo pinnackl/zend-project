@@ -10,7 +10,6 @@ return array(
         'Application',
         'DoctrineModule',
         'DoctrineORMModule',
-        //'Cms-old',
         'Auth',
         'Navigation',
         'Cms',
