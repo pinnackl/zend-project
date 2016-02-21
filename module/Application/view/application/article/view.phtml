@@ -16,14 +16,20 @@
     </div>
 
     <div>
+        <?php foreach($article->getComments() as $comment): ?>
+            <div class="card blue-grey lighten-2" style="padding: 10px">
+                <p><?php echo $this->escapeHtml($comment->getComTitle());?></p>
+                <p><?php echo $this->escapeHtml($comment->getComText());?></p>
+                <p><?php echo $this->escapeHtml($comment->getComUsername());?></p>
+                <p><?php if (is_object($comment->getComCreated())) echo $this->escapeHtml($comment->getComCreated()->format('Y-m-d H:i:s'));?></p><!-- Notice: getArtcCreated() returns an object convert to string -->
+            </div>
+        <?php endforeach ?>
+    </div>
+
+    <div>
         <?php $form = $this->form;
             $form->prepare();
-            // Assuming the "contact/process" route exists...
             $form->setAttribute('action', $this->url('cms/default', array('controller' => 'comment', 'action' => 'add'), true)); //'contact/process'));
-            // or
-            // $form->setAttribute('action', $this->url('grace-drops/default', array('controller' => 'translation', 'action' => 'add', 'id' => $this->id))); //'contact/process'));
-
-            // Set the method attribute for the form
             $form->setAttribute('method', 'post');
 
             echo $this->form()->openTag($form);
