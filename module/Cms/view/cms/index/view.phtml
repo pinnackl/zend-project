@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class=" s12 m7">
         <div class="card">
@@ -7,7 +6,8 @@
                 <span class="card-title"><h1><?php echo $article->getArtcTitle(); ?></h1>e</span>
             </div>
             <div class="card-content" style="min-height: 200px;">
-                <p><?php echo $article->getArtcFullText(); ?></p>
+                <p><?php echo $article->getArtcIntrotext(); ?></p>
+                <p><?php echo $article->getArtcFulltext(); ?></p>
             </div>
             <div class="card-action">
                 <?php echo $this->escapeHtml($article->getArtcCreated()->format('Y-m-d H:i:s'));?>
