@@ -1,3 +1,9 @@
+<style>
+    .gridster li {
+        border: none;
+    }
+</style>
+
 <div class="gridster">
     <ul>
     </ul>
@@ -49,7 +55,7 @@
                     break;
                 case 'menu':
                     $wi.append("<ul>"+
-                        "<li><?= $menus[0]->getMenuName() ?></li>"+
+                        "<li><h2 style='font-size:20px'><?= $menus[0]->getMenuName() ?></h2></li>"+
                         "<li><a href=''>Cat 1</a></li>" +
                         "<li><a href=''>Cat 2</a></li>" +
                         "<li><a href=''>Cat 3</a></li>" +
