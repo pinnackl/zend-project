@@ -242,7 +242,6 @@ echo $this->form()->closeTag();
                 var gridster = $(".gridster ul").gridster().data('gridster');
                 gridData = gridster.serialize();
 
-                alert(gridster);
                 $('#structureform').val(JSON.stringify(gridData));
                 $('#block-element').val(JSON.stringify(elements))
                 $("#theform").submit();
