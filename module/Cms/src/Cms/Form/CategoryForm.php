@@ -22,7 +22,7 @@ class CategoryForm extends Form
             ),
         ));
 
-        //Menu Name
+        // Image Category
         $titleField = new Element\File('ctgr_image_filename');
         $titleField->setLabel('Image catégroy');
         $this->add($titleField);
