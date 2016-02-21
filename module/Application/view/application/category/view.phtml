@@ -1,6 +1,6 @@
 <h2 class="title-category"><?= $category->getCtgrName() ?></h2>
 
-<div class="card-article" style="">
+<div class="card-article">
     <div class="row">
         <h3>Articles</h3>
         <?php foreach($category->getArticles() as $article) :?>
@@ -15,28 +15,25 @@
                 </div>
                 <div class="card-action">
                     <a href="<?php echo $this->url('article',
-                        array('controller' => 'article', 'action' =>'view', 'id' => $article->getArtcId())).'/view/'.$article->getArtcId()?>">Voir plus</a>
+                        array('controller' => 'article', 'action' =>'view', 'id' => $article->getArtcId())).'/view/'.$article->getArtcId()?>">Lire l'article</a>
                 </div>
             </div>
         </div>
         <?php endforeach ?>
     </div>
-    </div>
+</div>
 <div class="card-article">
     <div class="row">
         <h3>Pages</h3>
         <?php foreach($pages as $page) :?>
             <div class="col s12 m6">
                 <div class="card blue">
-                    <div class="card-image">
-                        <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
+                    <div class="card-image" style="height: 80px">
                         <span class="card-title"><?= $page->getTitle() ?></span>
-                    </div>
-                    <div class="card-content">
                     </div>
                     <div class="card-action">
                         <a href="<?php echo $this->url('page',
-                                array('controller' => 'page', 'action' =>'view', 'id' => $page->getId())).'/view/'.$page->getId()?>">Voir plus</a>
+                                array('controller' => 'page', 'action' =>'view', 'id' => $page->getId())).'/view/'.$page->getId()?>">Voir la page</a>
                     </div>
                 </div>
             </div>
