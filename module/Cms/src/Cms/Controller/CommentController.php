@@ -70,7 +70,7 @@ class CommentController extends AbstractActionController
         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
 		if ($auth->hasIdentity()) {
             $form->remove('com_email');
-            $form->remove('com_author');
+            $form->remove('com_username');
         }
         
 		foreach ($form->getElements() as $element){
@@ -152,7 +152,7 @@ class CommentController extends AbstractActionController
         $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
 		if ($auth->hasIdentity()) {
             $form->remove('com_email');
-            $form->remove('com_author');
+            $form->remove('com_username');
         }
 
 		foreach ($form->getElements() as $element){

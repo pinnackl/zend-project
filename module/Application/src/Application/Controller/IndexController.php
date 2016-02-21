@@ -43,7 +43,10 @@ class IndexController extends AbstractActionController
         $list = new ItemList();
         foreach ($tags as $tag)
         {
-            $list[] = new Item(array('title' => $tag->getTagName(), 'weight' => count($tag->getArticles()), 'params' => array('id' => $tag->getTagId())));
+            if(count($tag->getArticles())>0)
+            {
+                $list[] = new Item(array('title' => $tag->getTagName(), 'weight' => count($tag->getArticles()), 'params' => array('id' => $tag->getTagId())));
+            }
         }
         
         $list->spreadWeightValues(array(55, 60, 65, 70, 75, 80, 85, 90, 95, 100));
