@@ -41,6 +41,28 @@ class Comment
 	 * "property": "usrName"})
      */
     private $author;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="com_email", type="string", length=64, nullable=false)
+	 * @Annotation\Filter({"name":"StringTrim"})
+     * @Annotation\Validator({"name":"StringLength", "options":{"min":1, "max":64}})
+     * @Annotation\Attributes({"type":"text"})
+     * @Annotation\Options({"label":"Email:"})	 
+     */
+    private $comEmail;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="com_username", type="string", length=64, nullable=false)
+	 * @Annotation\Filter({"name":"StringTrim"})
+     * @Annotation\Validator({"name":"StringLength", "options":{"min":1, "max":128}})
+     * @Annotation\Attributes({"type":"text"})
+     * @Annotation\Options({"label":"Email:"})	 
+     */
+    private $comUsername;
 
     /**
      * @var Cms\Entity\Article
@@ -153,6 +175,52 @@ class Comment
     {
         return $this->author;
     }	
+    
+    /**
+     * Get comEmail
+     *
+     * @return string 
+     */
+    public function getComEmail()
+    {
+        return $this->comEmail;
+    }
+
+    /**
+     * Set comEmail
+     *
+     * @param string $comEmail
+     * @return Article
+     */
+    public function setComEmail($comEmail)
+    {
+        $this->comEmail = $comEmail;
+    
+        return $this;
+    }
+    
+    /**
+     * Get comUsername
+     *
+     * @return string 
+     */
+    public function getComUsername()
+    {
+        return $this->comUsername;
+    }
+
+    /**
+     * Set comUsername
+     *
+     * @param string $comUsername
+     * @return Article
+     */
+    public function setComUsername($comUsername)
+    {
+        $this->comUsername = $comUsername;
+    
+        return $this;
+    }
 
     /**
      * Set article

@@ -7,6 +7,8 @@ use Zend\Form\Form,
 
 use Cms\Entity\Menu;
 
+use Zend\Mvc\Controller\AbstractActionController;
+
 class CommentForm extends Form
 {
     public function __construct($name = null)
@@ -15,10 +17,12 @@ class CommentForm extends Form
         $this->setAttribute('method', 'post');
         $this->setAttribute('id', 'postmenu');
 
-
-
         $titleField = new Element\Text('com_email');
         $titleField->setLabel('Email');
+        $this->add($titleField);
+
+        $titleField = new Element\Text('com_username');
+        $titleField->setLabel('Author');
         $this->add($titleField);
 
         //Menu Name

@@ -47,7 +47,7 @@ $this->headTitle($title);
 <tr>
     <td><?php echo $this->escapeHtml($comment->getComTitle());?></td>
     <td><?php echo $this->escapeHtml($comment->getComText());?></td>
-    <td><?php if (is_object($comment->getAuthor())) echo $this->escapeHtml($comment->getAuthor()->getUsrName());?></td>
+    <td><?php echo $this->escapeHtml($comment->getComUsername());?></td>
     <td><?php if (is_object($comment->getComCreated())) echo $this->escapeHtml($comment->getComCreated()->format('Y-m-d H:i:s'));?></td><!-- Notice: getArtcCreated() returns an object convert to string -->
     <td>
         <?php if($comment->getAuthor()->getUsrId() == $user = $this->identity()->getUsrId() && $comment->getComActive() ) :?>

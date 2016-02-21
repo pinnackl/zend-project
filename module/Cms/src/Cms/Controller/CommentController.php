@@ -69,6 +69,13 @@ class CommentController extends AbstractActionController
 		$form->remove('comCreated');
 		$form->remove('author');
 		$form->remove('article');
+        
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+		if ($auth->hasIdentity()) {
+            $form->remove('com_email');
+            $form->remove('com_author');
+        }
+        
 		foreach ($form->getElements() as $element){
 			if(method_exists($element, 'getProxy')){
 				$proxy = $element->getProxy();
@@ -85,12 +92,27 @@ class CommentController extends AbstractActionController
         if ($request->isPost()) {
 			 $form->setData($request->getPost());
 			  if ($form->isValid()) {
-				$this->prepareData($comment);
+                $data = $form->getData();
+                $this->prepareData($comment);
+                if (!$auth->hasIdentity()) {
+                    $comment->setComUsername($data['com_username']);	
+                    $comment->setComEmail($data['com_email']);	
+                }
 				$entityManager->persist($comment);
 				$entityManager->flush();
 				
+                $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+                  
+                $admin_id = 3;  
+                $sql = "SELECT u.usrEmail, u.usrName FROM Auth\Entity\User u WHERE u.usrlId= ". $admin_id;
+                $query = $entityManager->createQuery($sql);
+                $admins = $query->getResult();
+                  
                 $mail = new MailController();
-                $mail->initMail('commentCreated','pataky@hotmail.fr');
+                foreach($admins as $admin)
+                {
+                    $mail->initMail('commentCreated',$admin['usrEmail'],$admin['usrName'],$article->getArtcTitle());
+                }
 
                 return $this->redirect()->toRoute('cms/default', array('controller' => 'comment', 'action' => 'index', 'id' => $id), true);
 			  }
@@ -129,6 +151,12 @@ class CommentController extends AbstractActionController
 		$form->remove('comCreated');
 		$form->remove('author');
 		$form->remove('article');
+        
+        $auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
+		if ($auth->hasIdentity()) {
+            $form->remove('com_email');
+            $form->remove('com_author');
+        }
 
 		foreach ($form->getElements() as $element){
 			if(method_exists($element, 'getProxy')){                
@@ -224,8 +252,10 @@ class CommentController extends AbstractActionController
 		$auth = $this->getServiceLocator()->get('Zend\Authentication\AuthenticationService');
 		if ($auth->hasIdentity()) {
 			$user = $auth->getIdentity();
+            $comment->setAuthor($user);	
+		    $comment->setComEmail($user->getUsrEmail());	
+		    $comment->setComUsername($user->getUsrName());	
 		}
-		$comment->setAuthor($user);	
 	}
 
 	public function getCommentsTable()
