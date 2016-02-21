@@ -1,10 +1,10 @@
-<h2><?= $category->getCtgrName() ?></h2>
+<h2 class="title-category"><?= $category->getCtgrName() ?></h2>
 
-<div style="width: 48%;display: inline-block;">
+<div class="card-article" style="">
     <div class="row">
-        <h3>Articles :</h3>
+        <h3>Articles</h3>
         <?php foreach($category->getArticles() as $article) :?>
-        <div class="col s12 m5">
+        <div class="col s12 m6">
             <div class="card brown">
                 <div class="card-image">
                     <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
@@ -22,11 +22,11 @@
         <?php endforeach ?>
     </div>
     </div>
-<div style="width: 40%;display: inline-block;vertical-align: top">
+<div class="card-article">
     <div class="row">
-        <h3>Pages :</h3>
+        <h3>Pages</h3>
         <?php foreach($pages as $page) :?>
-            <div class="col s12 m5">
+            <div class="col s12 m6">
                 <div class="card blue">
                     <div class="card-image">
                         <img src="<?php echo $this->basePath('/img/sample-1.jpg') ?>">
