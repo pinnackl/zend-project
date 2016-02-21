@@ -65,7 +65,7 @@
                     var $title = '<?= $articles[$cpt]->getArtcTitle() ?>';
                     $wi.append(
                         "<div class='row' style='height: 100%;padding:5px'>" +
-                        "<img style='width: 100%;height:35%' src='<?php echo $this->basePath('/img/sample-1.jpg') ?>'>" +
+                        "<img style='width: 100%;height:35%' src='<?php echo $this->basePath('/article/'.$articles[$cpt]->getArtcImageFilename()) ?>'>" +
                         "<span>" + $title + "</span>" +
                         "<div class='card-content'>" +
                         "<p><?php echo substr($articles[$cpt]->getArtcFullText(),0,220)?>...</p>" +
