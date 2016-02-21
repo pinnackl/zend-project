@@ -24,9 +24,6 @@ namespace Authorize\Acl;
 use Zend\Permissions\Acl\Acl as ZendAcl,
     Zend\Permissions\Acl\Role\GenericRole as Role,
     Zend\Permissions\Acl\Resource\GenericResource as Resource;
-// use Zend\Acl\Acl as ZendAcl,
-//    Zend\Acl\Role\GenericRole as Role,
-//    Zend\Acl\Resource\GenericResource as Resource;
 
 /**
  * Class to handle Acl

@@ -22,8 +22,7 @@ class Module
             ),
         );
     }
-
-	// FOR Authorization
+	
 	public function onBootstrap(\Zend\EventManager\EventInterface $e) // use it to attach event listeners
 	{
 		$application = $e->getApplication();
@@ -32,7 +31,7 @@ class Module
 	}
 	
 	// WORKING the main engine for ACL
-	public function onRoute(\Zend\EventManager\EventInterface $e) // Event manager of the app
+	public function onRoute(\Zend\EventManager\EventInterface $e)
 	{
 		$application = $e->getApplication();
 		$routeMatch = $e->getRouteMatch();
@@ -75,8 +74,6 @@ class Module
 			$response = $e->getResponse();
 
 			$response->getHeaders()->addHeaderLine('Location', $url);
-			// The HTTP response status code 302 Found is a common way of performing a redirection.
-			// http://en.wikipedia.org/wiki/HTTP_302
 			$response->setStatusCode(302);
 			$response->sendHeaders();
 			exit;
