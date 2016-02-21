@@ -11,7 +11,6 @@ return array(
         'DoctrineModule',
         'DoctrineORMModule',
         'Auth',
-        'Navigation',
         'Cms',
         'Authorize',
     ),
