@@ -84,7 +84,7 @@ return array(
                     // 'all'   => 'guest'
                     'view'	=> 'guest',
                     'index' => 'admin',
-                    'add'	=> 'admin',
+                    'add'	=> 'guest',
                     'edit'  => 'admin',
                     'delete'=> 'admin',
                 ),

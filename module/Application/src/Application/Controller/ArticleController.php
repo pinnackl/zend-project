@@ -46,7 +46,6 @@ class ArticleController extends AbstractActionController
             $article = $this->getEntityManager()->find('Cms\Entity\Article', $id);
         }
         catch(\Exception $e){
-            //Si la page n'existe pas en base on génère une erreur 404
             $response   = $this->response;
             $event	  = $this->getEvent();
             $routeMatch = $event->getRouteMatch();
@@ -56,11 +55,7 @@ class ArticleController extends AbstractActionController
             return ;
         }
 
-//        $dql ="SELECT p FROM Cms\Entity\Page p WHERE p.category = ".$id;
-//        $query = $this->getEntityManager()->createQuery($dql);
-//        $pages = $query->getResult();
-
-        $entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $entityManager = $this->getEntityManager();
         $comment = new Comment;
 
         $form = new CommentForm();
@@ -85,8 +80,6 @@ class ArticleController extends AbstractActionController
 
         $form->setHydrator(new DoctrineHydrator($entityManager,'Cms\Entity\Comment'));
         $form->bind($comment);
-
-        $request = $this->getRequest();
 
         return new ViewModel(array(
             'article' => $article,

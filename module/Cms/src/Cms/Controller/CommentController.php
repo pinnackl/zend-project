@@ -92,8 +92,8 @@ class CommentController extends AbstractActionController
                 $data = $form->getData();
                 $this->prepareData($comment);
                 if (!$auth->hasIdentity()) {
-                    $comment->setComUsername($data['com_username']);	
-                    $comment->setComEmail($data['com_email']);	
+                    $comment->setComUsername($data->getComUsername());
+                    $comment->setComEmail($data->getComEmail());
                 }
 				$entityManager->persist($comment);
 				$entityManager->flush();
