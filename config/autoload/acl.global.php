@@ -17,6 +17,10 @@ return array(
                     'all'   => 'guest'
                 ),
 
+                'Application\Controller\Tag' => array(
+                    'all'   => 'guest'
+                ),
+
                 'Application\Controller\Article' => array(
                     'all'   => 'guest'
                 ),
@@ -98,6 +102,14 @@ return array(
                 ),
 
                 'Cms\Controller\Category'=> array(
+                    'view'	=> 'guest',
+                    'index' => 'admin',
+                    'add'	=> 'admin',
+                    'edit'  => 'admin',
+                    'delete'=> 'admin',
+                ),
+
+                'Cms\Controller\Tag'=> array(
                     'view'	=> 'guest',
                     'index' => 'admin',
                     'add'	=> 'admin',

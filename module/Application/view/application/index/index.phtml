@@ -1,6 +1,20 @@
 <p style="text-align: center">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cupiditate dolorem, doloribus eius error expedita fuga in iure nam omnis possimus provident tempora unde ut vitae. Explicabo perferendis sapiente sint!
 </p>
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php foreach($list as $item) :?>
+                <span style="font-size:<?php echo $item->getParam('weightValue'); ?>%">
+                    <a href="<?php echo $this->url('tag',
+                                                   array('controller' => 'tag', 'action' =>'view', 'id' => $item->getParam('id'))).'/view/'.$item->getParam('id') ;?>">
+                        <?php echo $this->escapeHtml($item->getTitle());?>
+                    </a>
+                </span>
+            <?php endforeach ?>
+        </div>
+    </div>
+</nav>
 <div class="row">
     <?php foreach($categories as $category) :?>
         <div class="col s12 m4">

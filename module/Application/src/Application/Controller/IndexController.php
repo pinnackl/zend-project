@@ -16,6 +16,9 @@ use Zend\Form\Element;
 
 use Zend\Stdlib\Hydrator;
 
+use Zend\Tag\ItemList;
+use Zend\Tag\Item;
+
 class IndexController extends AbstractActionController
 {
 
@@ -35,10 +38,20 @@ class IndexController extends AbstractActionController
         $query = $entityManager->createQuery($dql);
         $query->setMaxResults(30);
         $articles = $query->getResult();
-
+        
+        $tags = $this->getEntityManager()->getRepository('Cms\Entity\Tag')->findAll();
+        $list = new ItemList();
+        foreach ($tags as $tag)
+        {
+            $list[] = new Item(array('title' => $tag->getTagName(), 'weight' => count($tag->getArticles()), 'params' => array('id' => $tag->getTagId())));
+        }
+        
+        $list->spreadWeightValues(array(55, 60, 65, 70, 75, 80, 85, 90, 95, 100));
+        
         $resultSet = $this->getEntityManager()->getRepository('Cms\Entity\Category')->findAll();
             return new ViewModel(array(
             'categories' => $resultSet,
+            'list' => $list,
         ));
 
         return new ViewModel(array('articles' => $articles));

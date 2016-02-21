@@ -170,6 +170,24 @@ class Article
 	 * "property": "ctgrName"})
      */
     private $categories;
+    
+    /**
+     * @var Cms\Entity\Tag
+     *
+	 * @ORM\ManyToMany(targetEntity="Cms\Entity\Tag", inversedBy="articles")
+     * @ORM\JoinTable(name="articles_tags",
+     *      joinColumns={@ORM\JoinColumn(name="art_id", referencedColumnName="art_id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="tag_id")}
+     *      )
+	 * @Annotation\Type("DoctrineModule\Form\Element\ObjectSelect")
+	 * @Annotation\Attributes({"multiple":true})
+	 * @Annotation\Options({
+	 * "label":"Tags:",
+	 * "empty_option": "Please, choose the tags",
+	 * "target_class":"Cms\Entity\Tag",
+	 * "property": "tagName"})
+     */
+    private $tags;
 
     /**
      * @var Comment[]
@@ -480,6 +498,86 @@ class Article
 	{
 		$this->categories->removeElement($category);
 		$category->removeArticle($this); // update the other site
+		return $this;
+	}
+    
+    /**
+     * Get tags
+     *
+     * @return Array
+     */
+    public function getTags()
+    {
+		return $this->tags;
+    }
+
+    /**
+     * Set tags
+     *
+     * @param array $tags
+     * @return Article
+     */
+    public function setTags($tags)
+    {
+		$this->tags = $tags; // NOT neccessary
+    
+        return $this;
+    }
+	
+    /**
+     * Add Tags
+     *
+     * @param Collection $tags
+     * @return Article
+     */
+    public function addTags(Collection $tags)
+	{
+		foreach ($tags as $tag) {
+			$this->addTag($tag);
+		}
+		
+		return $this;
+	}
+
+    /**
+     * Add Tag
+     *
+     * @param Cms\Entity\Tag $tag
+     * @return Article
+     */
+	public function addTag(\Cms\Entity\Tag $tag)
+	{
+		$tag->addArticle($this); // synchronously updating inverse side
+		$this->tags[] = $tag;
+		
+		return $this;
+	}
+	
+    /**
+     * Remove Tags
+     *
+     * @param DateTime $artcCreated
+     * @return Article
+     */
+    public function removeTags(Collection $tags)
+	{
+		foreach ($tags as $tag) {
+			$this->removeTag($tag);
+		}		
+	
+		return $this;
+	}
+	
+    /**
+     * Remove Tag
+     *
+     * @param DateTime $artcCreated
+     * @return Article
+     */
+	public function removeTag(\Cms\Entity\Tag $tag)
+	{
+		$this->tags->removeElement($tag);
+		$tag->removeArticle($this); // update the other site
 		return $this;
 	}
 

@@ -27,7 +27,7 @@ class IndexController extends AbstractActionController
     public function indexAction()
 	{
 		$entityManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-		$dql = "SELECT a, u, l, c FROM Cms\Entity\Article a LEFT JOIN a.author u LEFT JOIN a.language l LEFT JOIN a.categories c WHERE a.parent IS NULL";
+		$dql = "SELECT a, u, l, c FROM Cms\Entity\Article a LEFT JOIN a.author u LEFT JOIN a.language l LEFT JOIN a.categories c LEFT JOIN a.tags t WHERE a.parent IS NULL";
 		$query = $entityManager->createQuery($dql);
 		$query->setMaxResults(30);
 		$articles = $query->getResult();
@@ -46,6 +46,7 @@ class IndexController extends AbstractActionController
 		$form->get('language')->setAttribute('class', 'browser-default');
 		$form->get('resource')->setAttribute('class', 'browser-default');
 		$form->get('categories')->setAttributes(array('class'=> 'browser-default', 'style'=> 'height:100px'));
+		$form->get('tags')->setAttributes(array('class'=> 'browser-default', 'style'=> 'height:100px'));
 		
         $request = $this->getRequest();
 
@@ -97,7 +98,9 @@ class IndexController extends AbstractActionController
 		
 		$form = $this->getForm($article, $entityManager, 'Update');
 		$form->get('language')->setAttribute('class', 'browser-default');
-		
+		$form->get('categories')->setAttributes(array('class'=> 'browser-default', 'style'=> 'height:100px'));
+        $form->get('tags')->setAttributes(array('class'=> 'browser-default', 'style'=> 'height:100px'));
+
 		$form->bind($article);
 		
         $request = $this->getRequest();

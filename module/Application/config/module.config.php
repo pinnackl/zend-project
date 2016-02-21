@@ -67,6 +67,35 @@ return array(
 
             ),
 
+            'tag' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/tag',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tag',
+                        'action'     => 'view',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '[/:action[/:id]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Tag',
+                                'action'     => 'view',
+                            ),
+                        ),
+                    ),
+                ),
+
+            ),
+
             'article' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -147,6 +176,7 @@ return array(
         'invokables' => array(
             'Application\Controller\Index' => Controller\IndexController::class,
             'Application\Controller\Category' => Controller\CategoryController::class,
+            'Application\Controller\Tag' => Controller\TagController::class,
             'Application\Controller\Article' => Controller\ArticleController::class,
             'Application\Controller\Page' => Controller\PageController::class
         ),

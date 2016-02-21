@@ -11,6 +11,7 @@ return array(
 			'Cms\Controller\User' => 'Cms\Controller\UserController',
 			'Cms\Controller\Page' => 'Cms\Controller\PageController',
 			'Cms\Controller\Category' => 'Cms\Controller\CategoryController',
+			'Cms\Controller\Tag' => 'Cms\Controller\TagController',
 			'Cms\Controller\Theme' => 'Cms\Controller\ThemeController',
 			'Cms\Controller\Menu' => 'Cms\Controller\MenuController',
         ),
@@ -75,6 +76,19 @@ return array(
 						'type'    => 'Literal',
 						'options' => array(
 							'route'    => '/category',
+							'defaults' => array(
+								'__NAMESPACE__' => 'Cms\Controller',
+								'controller'    => 'Index',
+								'action'        => 'index',
+							),
+						),
+						'may_terminate' => true,
+					),
+
+					'tag' => array(
+						'type'    => 'Literal',
+						'options' => array(
+							'route'    => '/tag',
 							'defaults' => array(
 								'__NAMESPACE__' => 'Cms\Controller',
 								'controller'    => 'Index',

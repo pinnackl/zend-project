@@ -1,0 +1,34 @@
+<?php
+$title = 'Liste des Tags';
+$this->headTitle($title);
+?>
+
+<nav class="nav-breadcrumb">
+    <div class="nav-wrapper">
+        <div class="col s12">
+            <?php echo $this->escapeHtml($title); ?>
+        </div>
+    </div>
+</nav>
+
+<a class="waves-effect waves-light btn" href="<?php echo $this->url('cms/default', array('controller' => 'tag', 'action'=>'add'));?>">Ajouter un tag</a>
+
+<table class="striped">
+    <tr>
+        <th>Nom</th>
+        <th>Nb Articles</th>
+        <th></th>
+    </tr>
+    <?php foreach($tags as $tag):?>
+        <tr>
+            <td><?=$this->escapeHtml($tag->getTagName())?>
+            </td>
+            <td>
+                <?= $this->escapeHtml(count($tag->getArticles())) ?>
+            </td>
+            <td>
+                <a href="<?php echo $this->url('cms/default', array('controller' => 'tag', 'action' => 'delete','id' => $tag->getTagId() )) ?>">Supprimer</a>
+            </td>
+        </tr>
+    <?php endforeach?>
+</table>

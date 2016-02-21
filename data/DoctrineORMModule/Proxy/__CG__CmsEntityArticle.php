@@ -64,10 +64,10 @@ class Article extends \Cms\Entity\Article implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'children', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'parent', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'language', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'author', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'resource', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcTitle', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcSlug', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcIntrotext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'art_image_filename', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcFulltext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcCreated', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'categories', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'comments', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcId');
+            return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'children', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'parent', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'language', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'author', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'resource', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcTitle', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcSlug', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcIntrotext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'art_image_filename', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcFulltext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcCreated', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'categories', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'tags', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'comments', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcId');
         }
 
-        return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'children', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'parent', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'language', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'author', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'resource', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcTitle', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcSlug', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcIntrotext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'art_image_filename', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcFulltext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcCreated', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'categories', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'comments', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcId');
+        return array('__isInitialized__', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'children', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'parent', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'language', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'author', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'resource', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcTitle', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcSlug', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcIntrotext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'art_image_filename', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcFulltext', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcCreated', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'categories', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'tags', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'comments', '' . "\0" . 'Cms\\Entity\\Article' . "\0" . 'artcId');
     }
 
     /**
@@ -435,6 +435,72 @@ class Article extends \Cms\Entity\Article implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCategory', array($category));
 
         return parent::removeCategory($category);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTags()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTags', array());
+
+        return parent::getTags();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setTags($tags)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTags', array($tags));
+
+        return parent::setTags($tags);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addTags(\Doctrine\Common\Collections\Collection $tags)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addTags', array($tags));
+
+        return parent::addTags($tags);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addTag(\Cms\Entity\Tag $tag)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addTag', array($tag));
+
+        return parent::addTag($tag);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeTags(\Doctrine\Common\Collections\Collection $tags)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeTags', array($tags));
+
+        return parent::removeTags($tags);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeTag(\Cms\Entity\Tag $tag)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeTag', array($tag));
+
+        return parent::removeTag($tag);
     }
 
     /**
