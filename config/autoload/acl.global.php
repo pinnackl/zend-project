@@ -69,8 +69,8 @@ return array(
                 'Cms\Controller\Index' => array(
                     // 'all'   => 'guest'
                     'view'	=> 'guest',
-                    'index' => 'admin',
-                    'add'	=> 'admin',
+                    'index' => 'member',
+                    'add'	=> 'member',
                     'edit'  => 'admin',
                     'delete'=> 'admin',
                 ),

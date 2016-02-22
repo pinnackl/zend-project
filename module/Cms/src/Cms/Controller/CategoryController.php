@@ -60,9 +60,10 @@ class CategoryController extends AbstractActionController
 
             $files =  $request->getFiles()->toArray();
             $httpadapter = new \Zend\File\Transfer\Adapter\Http();
-            $filesize  = new \Zend\Validator\File\Size(array('min' => 1000 )); //1KB
-            $extension = new \Zend\Validator\File\Extension(array('extension' => array('png')));
+            $filesize  = new \Zend\Validator\File\Size(array('min' => 2000 )); //1KB
+            $extension = new \Zend\Validator\File\Extension(array('extension' => array('png', 'jpg')));
             $httpadapter->setValidators(array($filesize, $extension), $files['ctgr_image_filename']['name']);
+
             if($httpadapter->isValid()) {
                 $route = $httpadapter->setDestination('public/uploads/');
 

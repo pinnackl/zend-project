@@ -76,13 +76,17 @@
     <?php if ($user = $this->identity()) :?>
         <div class="col s2 blue-grey lighten-5">
             <div class="collection">
-                <a class="collection-item" href="<?php echo $this->url('cms') ?>"><?php echo $this->translate('Articles') ?></a>
-                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'));?>">Catégories</a>
-                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'tag', 'action'=>'index'));?>">Tags</a>
-                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'menu', 'action'=>'index'));?>">Menus</a>
-                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Pages</a>
-                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'theme', 'action'=>'index'));?>">Themes</a>
-                <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'index'));?>">Users</a>
+                <?php if($user->getUsrlId() ==  2): ?>
+                    <a class="collection-item" href="<?php echo $this->url('cms') ?>"><?php echo $this->translate('Articles') ?></a>
+                <?php else : ?>
+                    <a class="collection-item" href="<?php echo $this->url('cms') ?>"><?php echo $this->translate('Articles') ?></a>
+                    <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'category', 'action'=>'index'));?>">Catégories</a>
+                    <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'tag', 'action'=>'index'));?>">Tags</a>
+                    <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'menu', 'action'=>'index'));?>">Menus</a>
+                    <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'page', 'action'=>'index'));?>">Pages</a>
+                    <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'theme', 'action'=>'index'));?>">Themes</a>
+                    <a class="collection-item" href="<?php echo $this->url('cms/default', array('controller' => 'user', 'action'=>'index'));?>">Users</a>
+                <?php endif ?>
             </div>
         </div>
         <div class="col s10" style="margin: auto">

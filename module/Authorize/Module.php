@@ -22,7 +22,7 @@ class Module
             ),
         );
     }
-	
+
 	public function onBootstrap(\Zend\EventManager\EventInterface $e) // use it to attach event listeners
 	{
 		$application = $e->getApplication();

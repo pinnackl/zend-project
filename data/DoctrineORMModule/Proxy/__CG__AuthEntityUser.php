@@ -330,50 +330,6 @@ class User extends \Auth\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
-    public function setUsrQuestion($usrQuestion)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsrQuestion', array($usrQuestion));
-
-        return parent::setUsrQuestion($usrQuestion);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUsrQuestion()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsrQuestion', array());
-
-        return parent::getUsrQuestion();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setUsrAnswer($usrAnswer)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsrAnswer', array($usrAnswer));
-
-        return parent::setUsrAnswer($usrAnswer);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getUsrAnswer()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsrAnswer', array());
-
-        return parent::getUsrAnswer();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function setUsrPicture($usrPicture)
     {
 

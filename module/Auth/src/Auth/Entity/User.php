@@ -290,52 +290,6 @@ class User
     }
 
     /**
-     * Set usrQuestion
-     *
-     * @param string $usrQuestion
-     * @return Users
-     */
-    public function setUsrQuestion($usrQuestion)
-    {
-        $this->usrQuestion = $usrQuestion;
-
-        return $this;
-    }
-
-    /**
-     * Get usrQuestion
-     *
-     * @return string
-     */
-    public function getUsrQuestion()
-    {
-        return $this->usrQuestion;
-    }
-
-    /**
-     * Set usrAnswer
-     *
-     * @param string $usrAnswer
-     * @return Users
-     */
-    public function setUsrAnswer($usrAnswer)
-    {
-        $this->usrAnswer = $usrAnswer;
-
-        return $this;
-    }
-
-    /**
-     * Get usrAnswer
-     *
-     * @return string
-     */
-    public function getUsrAnswer()
-    {
-        return $this->usrAnswer;
-    }
-
-    /**
      * Set usrPicture
      *
      * @param string $usrPicture
