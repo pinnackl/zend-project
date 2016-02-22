@@ -211,6 +211,7 @@ class Article
         $this->children = new ArrayCollection; // \Doctrine\Common\Collections\ArrayCollection();
 		$this->categories = new ArrayCollection;
 		$this->comments = new ArrayCollection;
+		$this->tags = new ArrayCollection;
 		$this->artcCreated = new \DateTime();
     }
 	
