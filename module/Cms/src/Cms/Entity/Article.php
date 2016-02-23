@@ -1,27 +1,13 @@
 <?php
 
-namespace Cms\Entity; //
-// If somethign doesn't work after git merge copy the Articles from the key drive or another working copy of the file
+namespace Cms\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
-//
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 use Zend\Form\Annotation;
-
-// SUPER important is to remove      @ORM\Column(name="rl_id", type="integer", nullable=true) from the role in order to make it work
-// http://stackoverflow.com/questions/6899335/doctrine-class-has-no-association-named
-// setters and getters - Zend\Stdlib\Hydrator\ClassMethods, for public properties - Zend\Stdlib\Hydrator\ObjectProperty, array 
-// Zend\Stdlib\Hydrator\ArraySerializable
-// Follows the definition of ArrayObject. 
-// Objects must implement either the exchangeArray() or populate() methods to support hydration, 
-// and the getArrayCopy() method to support extraction.
-// https://bitbucket.org/todor_velichkov/homeworkuniversity/src/935b37b87e3f211a72ee571142571089dffbf82d/module/University/src/University/Form/StudentForm.php?at=master
-
-// read here http://framework.zend.com/manual/2.1/en/modules/zend.form.quick-start.html
-
-// children - are the transaltions
-// parent - is the original article
 
 /**
  * Article
@@ -100,7 +86,6 @@ class Article
      * @ORM\Column(name="art_title", type="string", length=100, nullable=false)
 	 * @Annotation\Filter({"name":"StringTrim"})
      * @Annotation\Validator({"name":"StringLength", "options":{"min":1, "max":100}})
-     * @Annotation\Validator({"name":"Regex", "options":{"pattern":"/^[a-zA-Z][a-zA-Z0-9_-]{0,100}$/"}})
      * @Annotation\Attributes({"type":"text"})
      * @Annotation\Options({"label":"Title:"})	 
      */
