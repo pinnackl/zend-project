@@ -38,8 +38,8 @@ class MailController extends AbstractActionController
     public function sendMail($message)
     {
         $smtpOptions = new SmtpOptions();
-		$smtpOptions->setHost('smtp.numericable.fr')
-			->setName('smtp.numericable.fr');
+		$smtpOptions->setHost('smtp.celeste.fr')
+			->setName('smtp.celeste.fr');
 
 		$transport = new Smtp($smtpOptions);
 		
