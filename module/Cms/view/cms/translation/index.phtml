@@ -1,16 +1,5 @@
 <?php
-echo '<h1>I am in index.phtml GraceDrops Translation Controller</h1>';
-/*
-foreach($articles AS $article) {
-    echo $user->getDescription()." - ".$user->getCreated()->format('d.m.Y')."\n";
-    echo "    Reported by: ".$user->getReporter()->name."\n";
-    echo "    Assigned to: ".$user->getEngineer()->name."\n";
-    foreach($user->getProducts() AS $product) {
-        echo "    Platform: ".$product->name."\n";
-    }
-    echo "\n";
-}
-*/
+
 $title = 'My tranlsations';
 $this->headTitle($title);
 ?>
@@ -22,7 +11,6 @@ $this->headTitle($title);
         </div>
     </div>
 </nav>
-
 
 <!-- <a href="<?php echo $this->url('cms/default', array('controller' => 'translation', 'action'=>'add')); /*NOtice without true no param is send*/?>">Add new translation</a> -->
     <a href="<?php echo $this->url('cms/default', array('controller' => 'index', 'action'=>'index'), false);?>">&lt; Back to the articles | </a>
